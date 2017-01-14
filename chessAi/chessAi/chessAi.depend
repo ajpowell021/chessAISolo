@@ -1,0 +1,30 @@
+# depslib dependency file v1.0
+1484430069 source:c:\users\chany\desktop\chessai\chessai\main.cpp
+	<iostream>
+
+1484015747 source:c:\users\chany\desktop\chessai\chessai\pawn.cpp
+	<iostream>
+	"pieceClass.cpp"
+
+1484015669 c:\users\chany\desktop\chessai\chessai\piececlass.cpp
+	<iostream>
+
+1484015669 source:c:\users\chany\desktop\chessai\chessai\piececlass.cpp
+	<iostream>
+
+1484430385 source:c:\users\chany\desktop\chessai\chessai\movegenerator.cpp
+	<iostream>
+	<cmath>
+	<algorithm>
+
+1484022215 c:\users\chany\desktop\chessai\chessai\board.cpp
+	<iostream>
+
+1484022752 c:\users\chany\desktop\chessai\chessai\movegenerator.cpp
+	<iostream>
+
+1484021615 c:\users\chany\desktop\chessai\chessai\board.h
+
+1484088219 source:c:\users\chany\desktop\chessai\chessai\board.cpp
+	<iostream>
+
