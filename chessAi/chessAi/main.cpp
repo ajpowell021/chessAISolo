@@ -13,10 +13,13 @@ void removePiece(int pieceLocation);
 bool piecePresent(int pieceLocation);
 int getTopColor();
 void newGameSetup(int top);
+int getPieceType(int pieceLocation);
+bool capturablePiece(int destination, int capturePiece);
 
 // Functions from moveGenerator.cpp
 int *getLegalMoves(int pieceType, int pieceLocation);
 void pawnGen(int pieceLocation, int pieceType);
+void rookGen(int pieceLocation, int pieceType);
 
 int main(){
 
@@ -24,9 +27,15 @@ int main(){
     // 0 meaning white is on top, 1 meaning black is on top.
     newGameSetup(1);
     displayBoard();
+    removePiece(48);
+    addPiece(1, 24);
+    removePiece(56);
+    addPiece(2,35);
+    displayBoard();
+
 
     int *legalMovesArr;
-    legalMovesArr = getLegalMoves(-1, 8);
+    legalMovesArr = getLegalMoves(2, 35);
 
     // Displays all legal moves for a specific piece.
     cout << endl << "legal squares to move to: " << endl;

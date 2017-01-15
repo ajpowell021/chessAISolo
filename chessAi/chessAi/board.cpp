@@ -52,13 +52,42 @@ bool piecePresent(int pieceLocation){
     int xPos = (pieceLocation / 8);
     int yPos = (pieceLocation % 8);
 
-    if(boardArray[xPos][yPos] > 0){
+    if(boardArray[xPos][yPos] != 0){
         return true;
     }
     else{
         return false;
     }
 }
+
+// Returns which type of piece is in a given square.
+// Will return 0 if it's empty.
+int getPieceType(int pieceLocation){
+
+    int xPos = pieceLocation / 8;
+    int yPos = pieceLocation % 8;
+    int temp = boardArray[xPos][yPos];
+    return temp;
+}
+
+// Destination is the square that the piece being captured is on,
+// capture piece is the type of the piece doing the capturing.
+// Returns true if pieces are different colors.
+bool capturablePiece(int destination, int capturePiece){
+
+    int defender = getPieceType(destination);
+
+    if(capturePiece < 0 && defender > 0){
+        return true;
+    }
+    else if(capturePiece > 0 && defender < 0){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+
 
 
 // Displays the board to the console for viewing.
