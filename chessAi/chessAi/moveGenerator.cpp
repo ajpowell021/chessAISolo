@@ -26,6 +26,7 @@ static int topColor;
 // Functions that generate legal moves for each piece.
 void pawnGen(int pieceLocation, int pieceType);
 void rookGen(int pieceLocation, int pieceType);
+void knightGen(int pieceLocation, int pieceType);
 
 // Function that is called to find all legal moves of a specific piece.
 int *getLegalMoves(int pieceType, int pieceLocation){
@@ -41,6 +42,7 @@ int *getLegalMoves(int pieceType, int pieceLocation){
     switch(tempPieceId){
         case 1: pawnGen(pieceLocation, pieceType);
         case 2: rookGen(pieceLocation, pieceType);
+        case 3: knightGen(pieceLocation, pieceType);
 
     }
 
@@ -213,4 +215,194 @@ void rookGen(int pieceLocation, int pieceType){
         }
     }
 }
+
+void knightGen(int pieceLocation, int pieceType){
+
+    // Legal moves of knight.
+    //
+    // 1. Left moves if legal.
+    // 2. Right moves if legal.
+    // 3. Up moves if legal.
+    // 4. Down moves if legal.
+
+    int row = pieceLocation / 8;
+    int col = pieceLocation % 8;
+    int currArrPos = 0;
+
+    // 1. Left moves if legal.
+    if(col != 0 && col != 1){
+        // Left moves are legal.
+        // Left up.
+        if(piecePresent(pieceLocation - 10) == true){
+            if(capturablePiece(pieceLocation - 10, pieceType) == true){
+                if((pieceLocation - 10) > -1){
+                    legalMovesArr[currArrPos] = (pieceLocation - 10);
+                    currArrPos++;
+                }
+            }
+            else{
+                // Cannot move here as there is already a piece of the same color present.
+            }
+        }
+        else{
+            // Square is empty.
+            if((pieceLocation - 10) > -1){
+                legalMovesArr[currArrPos] = (pieceLocation - 10);
+                currArrPos++;
+            }
+        }
+        // Left down.
+        if(piecePresent(pieceLocation + 6) == true){
+            if(capturablePiece(pieceLocation + 6, pieceType) == true){
+                if((pieceLocation + 6) < 64){
+                    legalMovesArr[currArrPos] = (pieceLocation + 6);
+                    currArrPos++;
+                }
+            }
+            else{
+                // Cannot move here as there is already a piece of the same color present.
+            }
+        }
+        else{
+            // Square is empty.
+            if((pieceLocation + 6) < 64){
+                legalMovesArr[currArrPos] = (pieceLocation + 6);
+                currArrPos++;
+            }
+        }
+    }
+
+    // 2. Right moves if legal.
+    if(col != 6 && col != 7){
+        // Right moves are legal.
+        // Right up.
+        if(piecePresent(pieceLocation + 10) == true){
+            if(capturablePiece(pieceLocation + 10, pieceType) == true){
+                if((pieceLocation + 10) < 64){
+                    legalMovesArr[currArrPos] = (pieceLocation + 10);
+                    currArrPos++;
+                }
+            }
+            else{
+                // Cannot move here as there is already a piece of the same color present.
+            }
+        }
+        else{
+            // Square is empty.
+            if((pieceLocation + 10) < 64){
+                legalMovesArr[currArrPos] = (pieceLocation + 10);
+                currArrPos++;
+            }
+        }
+        // Right down.
+        if(piecePresent(pieceLocation - 6) == true){
+            if(capturablePiece(pieceLocation - 6, pieceType) == true){
+                if((pieceLocation - 6) > -1){
+                    legalMovesArr[currArrPos] = (pieceLocation - 6);
+                    currArrPos++;
+                }
+            }
+            else{
+                // Cannot move here as there is already a piece of the same color present.
+            }
+        }
+        else{
+            // Square is empty.
+            if((pieceLocation - 6) > -1){
+                legalMovesArr[currArrPos] = (pieceLocation - 6);
+                currArrPos++;
+            }
+        }
+    }
+
+    // 3. Up moves if legal.
+    if(row != 0 && row != 1){
+    // Up left.
+            if(piecePresent(pieceLocation - 17) == true){
+                if(capturablePiece(pieceLocation - 17, pieceType) == true){
+                    if((pieceLocation - 17) > -1){
+                        legalMovesArr[currArrPos] = (pieceLocation -17);
+                        currArrPos++;
+                    }
+                }
+                else{
+                    // Cannot move here as there is already a piece of the same color present.
+                }
+            }
+            else{
+                // Square is empty.
+                if((pieceLocation - 17) > -1){
+                    legalMovesArr[currArrPos] = (pieceLocation - 17);
+                    currArrPos++;
+                }
+            }
+
+            // Up right
+            if(piecePresent(pieceLocation - 15) == true){
+                if(capturablePiece(pieceLocation - 15, pieceType) == true){
+                    if((pieceLocation - 15) > -1){
+                        legalMovesArr[currArrPos] = (pieceLocation -15);
+                        currArrPos++;
+                    }
+                }
+                else{
+                    // Cannot move here as there is already a piece of the same color present.
+                }
+            }
+            else{
+                // Square is empty.
+                if((pieceLocation - 15) > -1){
+                    legalMovesArr[currArrPos] = (pieceLocation - 15);
+                    currArrPos++;
+                }
+            }
+    }
+
+    // 4. Down moves if legal.
+    if(row != 6 && row != 7){
+    // Down left.
+            if(piecePresent(pieceLocation + 15) == true){
+                if(capturablePiece(pieceLocation + 15, pieceType) == true){
+                    if((pieceLocation + 15) < 64){
+                        legalMovesArr[currArrPos] = (pieceLocation + 15);
+                        currArrPos++;
+                    }
+                }
+                else{
+                    // Cannot move here as there is already a piece of the same color present.
+                }
+            }
+            else{
+                // Square is empty.
+                if((pieceLocation + 15) < 64){
+                    legalMovesArr[currArrPos] = (pieceLocation + 15);
+                    currArrPos++;
+                }
+            }
+
+            // Down right
+            if(piecePresent(pieceLocation + 17) == true){
+                if(capturablePiece(pieceLocation + 17, pieceType) == true){
+                    if((pieceLocation + 17) < 64){
+                        legalMovesArr[currArrPos] = (pieceLocation + 17);
+                        currArrPos++;
+                    }
+                }
+                else{
+                    // Cannot move here as there is already a piece of the same color present.
+                }
+            }
+            else{
+                // Square is empty.
+                if((pieceLocation + 17) < 64){
+                    legalMovesArr[currArrPos] = (pieceLocation + 17);
+                    currArrPos++;
+                }
+            }
+    }
+
+
+}
+
+
 

@@ -20,6 +20,7 @@ bool capturablePiece(int destination, int capturePiece);
 int *getLegalMoves(int pieceType, int pieceLocation);
 void pawnGen(int pieceLocation, int pieceType);
 void rookGen(int pieceLocation, int pieceType);
+void knightGen(int pieceLocation, int pieceType);
 
 int main(){
 
@@ -27,20 +28,16 @@ int main(){
     // 0 meaning white is on top, 1 meaning black is on top.
     newGameSetup(1);
     displayBoard();
-    removePiece(48);
-    addPiece(1, 24);
-    removePiece(56);
-    addPiece(2,35);
     displayBoard();
 
 
     int *legalMovesArr;
-    legalMovesArr = getLegalMoves(2, 35);
+    legalMovesArr = getLegalMoves(3, 27);
 
     // Displays all legal moves for a specific piece.
     cout << endl << "legal squares to move to: " << endl;
     for(int i = 0; i < 64; i++){
-            if((*(legalMovesArr + i)) > 0){
+            if((*(legalMovesArr + i)) > -1){
                 cout << *(legalMovesArr + i) << endl;
             }
     }
