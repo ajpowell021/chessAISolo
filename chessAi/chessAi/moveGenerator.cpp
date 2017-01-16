@@ -27,6 +27,7 @@ static int topColor;
 void pawnGen(int pieceLocation, int pieceType);
 void rookGen(int pieceLocation, int pieceType);
 void knightGen(int pieceLocation, int pieceType);
+void bishopGen(int pieceLocation, int pieceType);
 
 // Function that is called to find all legal moves of a specific piece.
 int *getLegalMoves(int pieceType, int pieceLocation){
@@ -43,7 +44,7 @@ int *getLegalMoves(int pieceType, int pieceLocation){
         case 1: pawnGen(pieceLocation, pieceType);
         case 2: rookGen(pieceLocation, pieceType);
         case 3: knightGen(pieceLocation, pieceType);
-
+        case 4: bishopGen(pieceLocation, pieceType);
     }
 
     return legalMovesArr;
@@ -401,6 +402,129 @@ void knightGen(int pieceLocation, int pieceType){
             }
     }
 
+
+}
+
+void bishopGen(int pieceLocation, int pieceType){
+
+    // Legal moves of bishop.
+    //
+    // 1. Move diagonal up left.
+    // 2. Move diagonal up right.
+    // 3. Move diagonal down left.
+    // 4. Move diagonal down right.
+
+    int currArrPos = 0;
+    int distFromEdgeLeft = pieceLocation % 8;
+    int distFromEdgeTop = pieceLocation / 8;
+    int distFromEdgeRight = 8 - distFromEdgeLeft;
+    int distFromEdgeBot = 8 - distFromEdgeTop;
+
+    // 1. Move diagonal up left.
+    int tempDist;
+    if(distFromEdgeLeft > distFromEdgeTop){
+        tempDist = distFromEdgeTop;
+    }
+    else{
+        tempDist = distFromEdgeLeft;
+    }
+
+    for(int i = 1; i < tempDist + 1; i++){
+        if(piecePresent(pieceLocation - 9 * i) == false){
+            legalMovesArr[currArrPos] = (pieceLocation - 9 * i);
+            currArrPos++;
+        }
+        else{
+            // There is a piece there, can it be captured or not?
+            if(capturablePiece(pieceLocation - 9 * i, pieceType) == true){
+                legalMovesArr[currArrPos] = (pieceLocation - 9 * i);
+                currArrPos++;
+                i = tempDist;
+            }
+            else{
+                i = tempDist;
+            }
+        }
+    }
+
+    // 2. Move diagonal up right.
+    if(distFromEdgeRight > distFromEdgeTop){
+        tempDist = distFromEdgeTop;
+    }
+    else{
+        tempDist = distFromEdgeRight;
+    }
+
+    for(int i = 1; i < tempDist + 1; i++){
+        if(piecePresent(pieceLocation - 7 * i) == false){
+            legalMovesArr[currArrPos] = (pieceLocation - 7 * i);
+            currArrPos++;
+        }
+        else{
+            // There is a piece there, can it be captured or not?
+            if(capturablePiece(pieceLocation - 7 * i, pieceType) == true){
+                legalMovesArr[currArrPos] = (pieceLocation - 7 * i);
+                currArrPos++;
+                i = tempDist;
+            }
+            else{
+                i = tempDist;
+            }
+        }
+    }
+
+    // 3. Move down left.
+    if(distFromEdgeLeft > distFromEdgeBot){
+        tempDist = distFromEdgeBot;
+    }
+    else{
+        tempDist = distFromEdgeLeft;
+    }
+
+    for(int i = 1; i < tempDist + 1; i++){
+        if(piecePresent(pieceLocation + 7 * i) == false){
+            legalMovesArr[currArrPos] = (pieceLocation + 7 * i);
+            currArrPos++;
+        }
+        else{
+            // There is a piece there, can it be captured or not?
+            if(capturablePiece(pieceLocation + 7 * i, pieceType) == true){
+                legalMovesArr[currArrPos] = (pieceLocation + 7 * i);
+                currArrPos++;
+                i = tempDist;
+            }
+            else{
+                i = tempDist;
+            }
+        }
+    }
+
+
+        // 3. Move down right.
+    if(distFromEdgeRight > distFromEdgeBot){
+        tempDist = distFromEdgeBot;
+    }
+    else{
+        tempDist = distFromEdgeRight;
+    }
+
+    for(int i = 1; i < tempDist + 1; i++){
+        if(piecePresent(pieceLocation + 9 * i) == false){
+            legalMovesArr[currArrPos] = (pieceLocation + 9 * i);
+            currArrPos++;
+        }
+        else{
+            // There is a piece there, can it be captured or not?
+            if(capturablePiece(pieceLocation + 9 * i, pieceType) == true){
+                legalMovesArr[currArrPos] = (pieceLocation + 9 * i);
+                currArrPos++;
+                i = tempDist;
+            }
+            else{
+                i = tempDist;
+            }
+        }
+    }
 
 }
 
