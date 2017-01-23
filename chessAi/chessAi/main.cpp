@@ -22,6 +22,7 @@ void pawnGen(int pieceLocation, int pieceType);
 void rookGen(int pieceLocation, int pieceType);
 void knightGen(int pieceLocation, int pieceType);
 void bishopGen(int pieceLocation, int pieceType);
+void queenGen(int pieceLocation, int pieceType);
 
 int main(){
 
@@ -29,12 +30,10 @@ int main(){
     // 0 meaning white is on top, 1 meaning black is on top.
     newGameSetup(1);
     displayBoard();
-    addPiece(4, 35);
-    displayBoard();
 
 
     int *legalMovesArr;
-    legalMovesArr = getLegalMoves(4, 35);
+    legalMovesArr = getLegalMoves(5, 59);
 
     // Displays all legal moves for a specific piece.
     cout << endl << "legal squares to move to: " << endl;
@@ -46,5 +45,3 @@ int main(){
 
     return 0;
 }
-
-

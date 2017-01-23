@@ -28,13 +28,13 @@
 1484088219 source:c:\users\chany\desktop\chessai\chessai\board.cpp
 	<iostream>
 
-1484528399 source:c:\users\chany\desktop\chessaisolo\chessai\chessai\main.cpp
+1485143662 source:c:\users\chany\desktop\chessaisolo\chessai\chessai\main.cpp
 	<iostream>
 
 1484434586 source:c:\users\chany\desktop\chessaisolo\chessai\chessai\board.cpp
 	<iostream>
 
-1484528629 source:c:\users\chany\desktop\chessaisolo\chessai\chessai\movegenerator.cpp
+1485143532 source:c:\users\chany\desktop\chessaisolo\chessai\chessai\movegenerator.cpp
 	<iostream>
 	<cmath>
 	<algorithm>
