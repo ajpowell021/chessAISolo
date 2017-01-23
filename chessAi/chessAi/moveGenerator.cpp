@@ -30,6 +30,9 @@ void knightGen(int pieceLocation, int pieceType);
 void bishopGen(int pieceLocation, int pieceType);
 void queenGen(int pieceLocation, int pieceType);
 
+// Other Functions
+bool inRange(int destination);
+
 // Function that is called to find all legal moves of a specific piece.
 int *getLegalMoves(int pieceType, int pieceLocation){
 
@@ -52,6 +55,17 @@ int *getLegalMoves(int pieceType, int pieceLocation){
     return legalMovesArr;
 }
 
+// Returns true if a legal move,
+// false otherwise.
+bool inRange(int destination){
+    if(destination > -1 && destination < 64){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+
 void pawnGen(int pieceLocation, int pieceType){
     // Legal moves of a pawn.
     // 1. One forward if nothing is in way.
@@ -68,24 +82,32 @@ void pawnGen(int pieceLocation, int pieceType){
 
         // 1. One Forward if nothing is in it's way.
         if(piecePresent(pieceLocation + 8) == false){
-            legalMovesArr[currArrPos] = (pieceLocation + 8);
-            currArrPos++;
+            if(inRange(pieceLocation + 8) == true){
+                legalMovesArr[currArrPos] = (pieceLocation + 8);
+                currArrPos++;
+            }
 
             // 2. Two Forward if nothing is in it's way.
             if(piecePresent(pieceLocation + 16) == false && pieceLocation / 8 == 1){
-                legalMovesArr[currArrPos] = (pieceLocation + 16);
-                currArrPos++;
+                if(inRange(pieceLocation + 8) == true){
+                    legalMovesArr[currArrPos] = (pieceLocation + 16);
+                    currArrPos++;
+                }
             }
         }
 
         // 3. Capture if possible.
         if(piecePresent(pieceLocation + 9) == true && capturablePiece(pieceLocation + 9, pieceType) == true){
-            legalMovesArr[currArrPos] = (pieceLocation + 9);
-            currArrPos++;
+            if(inRange(pieceLocation + 9) == true){
+                legalMovesArr[currArrPos] = (pieceLocation + 9);
+                currArrPos++;
+            }
         }
         if(piecePresent(pieceLocation + 7) == true && capturablePiece(pieceLocation + 7, pieceType) == true){
-            legalMovesArr[currArrPos] = (pieceLocation + 7);
-            currArrPos++;
+            if(inRange(pieceLocation + 7) == true){
+                legalMovesArr[currArrPos] = (pieceLocation + 7);
+                currArrPos++;
+            }
         }
 
     }
@@ -93,29 +115,34 @@ void pawnGen(int pieceLocation, int pieceType){
     else{
          // 1. One Forward if nothing is in it's way.
         if(piecePresent(pieceLocation - 8) == false){
-            legalMovesArr[currArrPos] = (pieceLocation - 8);
-            currArrPos++;
+            if(inRange(pieceLocation - 8) == true){
+                legalMovesArr[currArrPos] = (pieceLocation - 8);
+                currArrPos++;
+            }
 
             // 2. Two Forward if nothing is in it's way.
             if(piecePresent(pieceLocation - 16) == false && pieceLocation / 8 == 6){
-                legalMovesArr[currArrPos] = (pieceLocation - 16);
-                currArrPos++;
+                if(inRange(pieceLocation - 16) == true){
+                    legalMovesArr[currArrPos] = (pieceLocation - 16);
+                    currArrPos++;
+                }
             }
         }
 
         // 3. Capture if possible.
         if(piecePresent(pieceLocation - 9) == true && capturablePiece(pieceLocation - 9, pieceType) == true){
-            legalMovesArr[currArrPos] = (pieceLocation - 9);
-            currArrPos++;
+            if(inRange(pieceLocation - 9) == true){
+                legalMovesArr[currArrPos] = (pieceLocation - 9);
+                currArrPos++;
+            }
         }
         if(piecePresent(pieceLocation - 7) == true && capturablePiece(pieceLocation - 7, pieceType) == true){
-            legalMovesArr[currArrPos] = (pieceLocation - 7);
-            currArrPos++;
+            if(inRange(pieceLocation - 7) == true){
+                legalMovesArr[currArrPos] = (pieceLocation - 7);
+                currArrPos++;
+            }
         }
     }
-
-
-
 }
 
 void rookGen(int pieceLocation, int pieceType){
@@ -135,9 +162,8 @@ void rookGen(int pieceLocation, int pieceType){
 
     for(int i = 1; i < distFromEdge + 1; i++){
         if(piecePresent(pieceLocation - (8 * i)) == true){
-
             if(capturablePiece((pieceLocation - (8 * i)), pieceType) == true){
-                if(pieceLocation - (8 * i) > -1){
+                if(inRange(pieceLocation - (8 * i)) == true){
                     legalMovesArr[currArrPos] = (pieceLocation - (8 * i));
                     currArrPos++;
                 }
@@ -149,7 +175,7 @@ void rookGen(int pieceLocation, int pieceType){
             }
         }
         else{
-            if(pieceLocation - (8 * i) > -1){
+            if(inRange(pieceLocation - (8 * i)) == true){
                 legalMovesArr[currArrPos] = (pieceLocation - (8 * i));
                 currArrPos++;
             }
@@ -163,7 +189,7 @@ void rookGen(int pieceLocation, int pieceType){
         if(piecePresent(pieceLocation + (8 * i)) == true){
 
             if(capturablePiece((pieceLocation + (8 * i)), pieceType) == true){
-                if(pieceLocation + (8 * i) < 64){
+                if(inRange(pieceLocation + (8 * i)) == true){
                     legalMovesArr[currArrPos] = (pieceLocation + (8 * i));
                     currArrPos++;
                 }
@@ -175,7 +201,7 @@ void rookGen(int pieceLocation, int pieceType){
             }
         }
         else{
-            if(pieceLocation + (8 * i) < 64){
+            if(inRange(pieceLocation + (8 * i)) == true){
                 legalMovesArr[currArrPos] = (pieceLocation + (8 * i));
                 currArrPos++;
             }
@@ -187,9 +213,8 @@ void rookGen(int pieceLocation, int pieceType){
 
     for(int i = 1; i < distFromEdge + 1; i++){
         if(piecePresent(pieceLocation - i) == true){
-
-            if(capturablePiece((pieceLocation + (8 * i)), pieceType) == true){
-                if(pieceLocation + (8 * i) > -1){
+            if(capturablePiece((pieceLocation - i), pieceType) == true){
+                if(inRange(pieceLocation - i) == true){
                     legalMovesArr[currArrPos] = (pieceLocation - i);
                     currArrPos++;
                 }
@@ -201,7 +226,7 @@ void rookGen(int pieceLocation, int pieceType){
             }
         }
         else{
-            if(pieceLocation + (8 * i) > -1){
+            if(inRange(pieceLocation - i) == true){
                 legalMovesArr[currArrPos] = (pieceLocation - i);
                 currArrPos++;
             }
@@ -214,8 +239,8 @@ void rookGen(int pieceLocation, int pieceType){
     for(int i = 1; i < distFromEdge; i++){
         if(piecePresent(pieceLocation + i) == true){
 
-            if(capturablePiece((pieceLocation + (8 * i)), pieceType) == true){
-                if(pieceLocation + (8 * i) < 64){
+            if(capturablePiece((pieceLocation + i), pieceType) == true){
+                if(inRange(pieceLocation + i) == true){
                     legalMovesArr[currArrPos] = (pieceLocation + i);
                     currArrPos++;
                 }
@@ -227,7 +252,7 @@ void rookGen(int pieceLocation, int pieceType){
             }
         }
         else{
-            if(pieceLocation + (8 * i) < 64){
+            if(inRange(pieceLocation + i) == true){
                 legalMovesArr[currArrPos] = (pieceLocation + i);
                 currArrPos++;
             }
@@ -254,7 +279,7 @@ void knightGen(int pieceLocation, int pieceType){
         // Left up.
         if(piecePresent(pieceLocation - 10) == true){
             if(capturablePiece(pieceLocation - 10, pieceType) == true){
-                if((pieceLocation - 10) > -1){
+                if(inRange(pieceLocation - 10) == true){
                     legalMovesArr[currArrPos] = (pieceLocation - 10);
                     currArrPos++;
                 }
@@ -265,7 +290,7 @@ void knightGen(int pieceLocation, int pieceType){
         }
         else{
             // Square is empty.
-            if((pieceLocation - 10) > -1){
+            if(inRange(pieceLocation - 10) == true){
                 legalMovesArr[currArrPos] = (pieceLocation - 10);
                 currArrPos++;
             }
@@ -273,7 +298,7 @@ void knightGen(int pieceLocation, int pieceType){
         // Left down.
         if(piecePresent(pieceLocation + 6) == true){
             if(capturablePiece(pieceLocation + 6, pieceType) == true){
-                if((pieceLocation + 6) < 64){
+                if(inRange(pieceLocation + 6) == true){
                     legalMovesArr[currArrPos] = (pieceLocation + 6);
                     currArrPos++;
                 }
@@ -284,7 +309,7 @@ void knightGen(int pieceLocation, int pieceType){
         }
         else{
             // Square is empty.
-            if((pieceLocation + 6) < 64){
+            if(inRange(pieceLocation + 6) == true){
                 legalMovesArr[currArrPos] = (pieceLocation + 6);
                 currArrPos++;
             }
@@ -297,7 +322,7 @@ void knightGen(int pieceLocation, int pieceType){
         // Right up.
         if(piecePresent(pieceLocation + 10) == true){
             if(capturablePiece(pieceLocation + 10, pieceType) == true){
-                if((pieceLocation + 10) < 64){
+                if(inRange(pieceLocation + 10) == true){
                     legalMovesArr[currArrPos] = (pieceLocation + 10);
                     currArrPos++;
                 }
@@ -308,7 +333,7 @@ void knightGen(int pieceLocation, int pieceType){
         }
         else{
             // Square is empty.
-            if((pieceLocation + 10) < 64){
+            if(inRange(pieceLocation + 10) == true){
                 legalMovesArr[currArrPos] = (pieceLocation + 10);
                 currArrPos++;
             }
@@ -316,7 +341,7 @@ void knightGen(int pieceLocation, int pieceType){
         // Right down.
         if(piecePresent(pieceLocation - 6) == true){
             if(capturablePiece(pieceLocation - 6, pieceType) == true){
-                if((pieceLocation - 6) > -1){
+                if(inRange(pieceLocation - 6) == true){
                     legalMovesArr[currArrPos] = (pieceLocation - 6);
                     currArrPos++;
                 }
@@ -327,7 +352,7 @@ void knightGen(int pieceLocation, int pieceType){
         }
         else{
             // Square is empty.
-            if((pieceLocation - 6) > -1){
+            if(inRange(pieceLocation - 6) == true){
                 legalMovesArr[currArrPos] = (pieceLocation - 6);
                 currArrPos++;
             }
@@ -339,8 +364,8 @@ void knightGen(int pieceLocation, int pieceType){
     // Up left.
             if(piecePresent(pieceLocation - 17) == true){
                 if(capturablePiece(pieceLocation - 17, pieceType) == true){
-                    if((pieceLocation - 17) > -1){
-                        legalMovesArr[currArrPos] = (pieceLocation -17);
+                    if(inRange(pieceLocation - 17) == true){
+                        legalMovesArr[currArrPos] = (pieceLocation - 17);
                         currArrPos++;
                     }
                 }
@@ -350,7 +375,7 @@ void knightGen(int pieceLocation, int pieceType){
             }
             else{
                 // Square is empty.
-                if((pieceLocation - 17) > -1){
+                if(inRange(pieceLocation - 17) == true){
                     legalMovesArr[currArrPos] = (pieceLocation - 17);
                     currArrPos++;
                 }
@@ -359,7 +384,7 @@ void knightGen(int pieceLocation, int pieceType){
             // Up right
             if(piecePresent(pieceLocation - 15) == true){
                 if(capturablePiece(pieceLocation - 15, pieceType) == true){
-                    if((pieceLocation - 15) > -1){
+                    if(inRange(pieceLocation - 15) == true){
                         legalMovesArr[currArrPos] = (pieceLocation -15);
                         currArrPos++;
                     }
@@ -370,7 +395,7 @@ void knightGen(int pieceLocation, int pieceType){
             }
             else{
                 // Square is empty.
-                if((pieceLocation - 15) > -1){
+                if(inRange(pieceLocation - 15) == true){
                     legalMovesArr[currArrPos] = (pieceLocation - 15);
                     currArrPos++;
                 }
@@ -382,7 +407,7 @@ void knightGen(int pieceLocation, int pieceType){
     // Down left.
             if(piecePresent(pieceLocation + 15) == true){
                 if(capturablePiece(pieceLocation + 15, pieceType) == true){
-                    if((pieceLocation + 15) < 64){
+                    if(inRange(pieceLocation + 15) == true){
                         legalMovesArr[currArrPos] = (pieceLocation + 15);
                         currArrPos++;
                     }
@@ -393,7 +418,7 @@ void knightGen(int pieceLocation, int pieceType){
             }
             else{
                 // Square is empty.
-                if((pieceLocation + 15) < 64){
+                if(inRange(pieceLocation + 15) == true){
                     legalMovesArr[currArrPos] = (pieceLocation + 15);
                     currArrPos++;
                 }
@@ -402,7 +427,7 @@ void knightGen(int pieceLocation, int pieceType){
             // Down right
             if(piecePresent(pieceLocation + 17) == true){
                 if(capturablePiece(pieceLocation + 17, pieceType) == true){
-                    if((pieceLocation + 17) < 64){
+                    if(inRange(pieceLocation + 17) == true){
                         legalMovesArr[currArrPos] = (pieceLocation + 17);
                         currArrPos++;
                     }
@@ -413,7 +438,7 @@ void knightGen(int pieceLocation, int pieceType){
             }
             else{
                 // Square is empty.
-                if((pieceLocation + 17) < 64){
+                if(inRange(pieceLocation + 17) == true){
                     legalMovesArr[currArrPos] = (pieceLocation + 17);
                     currArrPos++;
                 }
@@ -449,15 +474,19 @@ void bishopGen(int pieceLocation, int pieceType){
 
     for(int i = 1; i < tempDist + 1; i++){
         if(piecePresent(pieceLocation - 9 * i) == false){
-            legalMovesArr[currArrPos] = (pieceLocation - 9 * i);
-            currArrPos++;
+            if(inRange(pieceLocation - (9 * i)) == true){
+                legalMovesArr[currArrPos] = (pieceLocation - (9 * i));
+                currArrPos++;
+            }
         }
         else{
             // There is a piece there, can it be captured or not?
-            if(capturablePiece(pieceLocation - 9 * i, pieceType) == true){
-                legalMovesArr[currArrPos] = (pieceLocation - 9 * i);
-                currArrPos++;
-                i = tempDist;
+            if(capturablePiece(pieceLocation - (9 * i), pieceType) == true){
+                if(inRange(pieceLocation - (9 * i)) == true){
+                    legalMovesArr[currArrPos] = (pieceLocation - (9 * i));
+                    currArrPos++;
+                    i = tempDist;
+                }
             }
             else{
                 i = tempDist;
@@ -474,16 +503,20 @@ void bishopGen(int pieceLocation, int pieceType){
     }
 
     for(int i = 1; i < tempDist + 1; i++){
-        if(piecePresent(pieceLocation - 7 * i) == false){
-            legalMovesArr[currArrPos] = (pieceLocation - 7 * i);
-            currArrPos++;
+        if(piecePresent(pieceLocation - (7 * i)) == false){
+            if(inRange(pieceLocation - (7 * i)) == true){
+                legalMovesArr[currArrPos] = (pieceLocation - (7 * i));
+                currArrPos++;
+            }
         }
         else{
             // There is a piece there, can it be captured or not?
             if(capturablePiece(pieceLocation - 7 * i, pieceType) == true){
-                legalMovesArr[currArrPos] = (pieceLocation - 7 * i);
-                currArrPos++;
-                i = tempDist;
+                if(inRange(pieceLocation - (7 * i)) == true){
+                    legalMovesArr[currArrPos] = (pieceLocation - 7 * i);
+                    currArrPos++;
+                    i = tempDist;
+                }
             }
             else{
                 i = tempDist;
@@ -500,16 +533,20 @@ void bishopGen(int pieceLocation, int pieceType){
     }
 
     for(int i = 1; i < tempDist + 1; i++){
-        if(piecePresent(pieceLocation + 7 * i) == false){
-            legalMovesArr[currArrPos] = (pieceLocation + 7 * i);
-            currArrPos++;
+        if(piecePresent(pieceLocation + (7 * i)) == false){
+            if(inRange(pieceLocation + (7 * i)) == true){
+                legalMovesArr[currArrPos] = (pieceLocation + (7 * i));
+                currArrPos++;
+            }
         }
         else{
             // There is a piece there, can it be captured or not?
-            if(capturablePiece(pieceLocation + 7 * i, pieceType) == true){
-                legalMovesArr[currArrPos] = (pieceLocation + 7 * i);
-                currArrPos++;
-                i = tempDist;
+            if(capturablePiece(pieceLocation + (7 * i), pieceType) == true){
+                if(inRange(pieceLocation + (7 * i)) == true){
+                    legalMovesArr[currArrPos] = (pieceLocation + (7 * i));
+                    currArrPos++;
+                    i = tempDist;
+                }
             }
             else{
                 i = tempDist;
@@ -526,16 +563,20 @@ void bishopGen(int pieceLocation, int pieceType){
     }
 
     for(int i = 1; i < tempDist + 1; i++){
-        if(piecePresent(pieceLocation + 9 * i) == false){
-            legalMovesArr[currArrPos] = (pieceLocation + 9 * i);
-            currArrPos++;
+        if(piecePresent(pieceLocation + (9 * i)) == false){
+            if(inRange(pieceLocation + (9 * i)) == true){
+                legalMovesArr[currArrPos] = (pieceLocation + (9 * i));
+                currArrPos++;
+            }
         }
         else{
             // There is a piece there, can it be captured or not?
-            if(capturablePiece(pieceLocation + 9 * i, pieceType) == true){
-                legalMovesArr[currArrPos] = (pieceLocation + 9 * i);
-                currArrPos++;
-                i = tempDist;
+            if(capturablePiece(pieceLocation + (9 * i), pieceType) == true){
+                if(inRange(pieceLocation + (9 * i)) == true){
+                    legalMovesArr[currArrPos] = (pieceLocation + (9 * i));
+                    currArrPos++;
+                    i = tempDist;
+                }
             }
             else{
                 i = tempDist;
@@ -573,16 +614,20 @@ void queenGen(int pieceLocation, int pieceType){
     }
 
     for(int i = 1; i < tempDist + 1; i++){
-        if(piecePresent(pieceLocation - 9 * i) == false){
-            legalMovesArr[currArrPos] = (pieceLocation - 9 * i);
-            currArrPos++;
+        if(piecePresent(pieceLocation - (9 * i)) == false){
+            if(inRange(pieceLocation - (9 * i)) == true){
+                legalMovesArr[currArrPos] = (pieceLocation - (9 * i));
+                currArrPos++;
+            }
         }
         else{
             // There is a piece there, can it be captured or not?
             if(capturablePiece(pieceLocation - 9 * i, pieceType) == true){
-                legalMovesArr[currArrPos] = (pieceLocation - 9 * i);
-                currArrPos++;
-                i = tempDist;
+                if(inRange(pieceLocation - (9 * i)) == true){
+                    legalMovesArr[currArrPos] = (pieceLocation - 9 * i);
+                    currArrPos++;
+                    i = tempDist;
+                }
             }
             else{
                 i = tempDist;
@@ -599,16 +644,20 @@ void queenGen(int pieceLocation, int pieceType){
     }
 
     for(int i = 1; i < tempDist + 1; i++){
-        if(piecePresent(pieceLocation - 7 * i) == false){
-            legalMovesArr[currArrPos] = (pieceLocation - 7 * i);
-            currArrPos++;
+        if(piecePresent(pieceLocation - (7 * i)) == false){
+            if(inRange(pieceLocation - (7 * i)) == true){
+                legalMovesArr[currArrPos] = (pieceLocation - 7 * i);
+                currArrPos++;
+            }
         }
         else{
             // There is a piece there, can it be captured or not?
-            if(capturablePiece(pieceLocation - 7 * i, pieceType) == true){
-                legalMovesArr[currArrPos] = (pieceLocation - 7 * i);
-                currArrPos++;
-                i = tempDist;
+            if(capturablePiece(pieceLocation - (7 * i), pieceType) == true){
+                if(inRange(pieceLocation - (7 * i)) == true){
+                    legalMovesArr[currArrPos] = (pieceLocation - (7 * i));
+                    currArrPos++;
+                    i = tempDist;
+                }
             }
             else{
                 i = tempDist;
@@ -625,16 +674,20 @@ void queenGen(int pieceLocation, int pieceType){
     }
 
     for(int i = 1; i < tempDist + 1; i++){
-        if(piecePresent(pieceLocation + 7 * i) == false){
-            legalMovesArr[currArrPos] = (pieceLocation + 7 * i);
-            currArrPos++;
+        if(piecePresent(pieceLocation + (7 * i)) == false){
+            if(inRange(pieceLocation + (7 * i)) == true){
+                legalMovesArr[currArrPos] = (pieceLocation + (7 * i));
+                currArrPos++;
+            }
         }
         else{
             // There is a piece there, can it be captured or not?
-            if(capturablePiece(pieceLocation + 7 * i, pieceType) == true){
-                legalMovesArr[currArrPos] = (pieceLocation + 7 * i);
-                currArrPos++;
-                i = tempDist;
+            if(capturablePiece(pieceLocation + (7 * i), pieceType) == true){
+                if(inRange(pieceLocation + (7 * i)) == true){
+                    legalMovesArr[currArrPos] = (pieceLocation + (7 * i));
+                    currArrPos++;
+                    i = tempDist;
+                }
             }
             else{
                 i = tempDist;
@@ -651,16 +704,20 @@ void queenGen(int pieceLocation, int pieceType){
     }
 
     for(int i = 1; i < tempDist + 1; i++){
-        if(piecePresent(pieceLocation + 9 * i) == false){
-            legalMovesArr[currArrPos] = (pieceLocation + 9 * i);
-            currArrPos++;
+        if(piecePresent(pieceLocation + (9 * i)) == false){
+            if(inRange(pieceLocation + (9 * i)) == true){
+                legalMovesArr[currArrPos] = (pieceLocation + (9 * i));
+                currArrPos++;
+            }
         }
         else{
             // There is a piece there, can it be captured or not?
-            if(capturablePiece(pieceLocation + 9 * i, pieceType) == true){
-                legalMovesArr[currArrPos] = (pieceLocation + 9 * i);
-                currArrPos++;
-                i = tempDist;
+            if(capturablePiece(pieceLocation + (9 * i), pieceType) == true){
+                if(inRange(pieceLocation + (9 * i)) == true){
+                    legalMovesArr[currArrPos] = (pieceLocation + (9 * i));
+                    currArrPos++;
+                    i = tempDist;
+                }
             }
             else{
                 i = tempDist;
@@ -673,7 +730,7 @@ void queenGen(int pieceLocation, int pieceType){
         if(piecePresent(pieceLocation - (8 * i)) == true){
 
             if(capturablePiece((pieceLocation - (8 * i)), pieceType) == true){
-                if(pieceLocation - (8 * i) > -1){
+                if(inRange(pieceLocation - (8 * i)) == true){
                     legalMovesArr[currArrPos] = (pieceLocation - (8 * i));
                     currArrPos++;
                 }
@@ -685,7 +742,7 @@ void queenGen(int pieceLocation, int pieceType){
             }
         }
         else{
-            if(pieceLocation - (8 * i) > -1){
+            if(inRange(pieceLocation - (8 * i)) == true){
                 legalMovesArr[currArrPos] = (pieceLocation - (8 * i));
                 currArrPos++;
             }
@@ -699,7 +756,7 @@ void queenGen(int pieceLocation, int pieceType){
         if(piecePresent(pieceLocation + (8 * i)) == true){
 
             if(capturablePiece((pieceLocation + (8 * i)), pieceType) == true){
-                if(pieceLocation + (8 * i) < 64){
+                if(inRange(pieceLocation + (8 * i)) == true){
                     legalMovesArr[currArrPos] = (pieceLocation + (8 * i));
                     currArrPos++;
                 }
@@ -711,7 +768,7 @@ void queenGen(int pieceLocation, int pieceType){
             }
         }
         else{
-            if(pieceLocation + (8 * i) < 64){
+            if(inRange(pieceLocation + (8 * i)) == true){
                 legalMovesArr[currArrPos] = (pieceLocation + (8 * i));
                 currArrPos++;
             }
@@ -722,8 +779,8 @@ void queenGen(int pieceLocation, int pieceType){
     for(int i = 1; i < distFromEdgeLeft + 1; i++){
         if(piecePresent(pieceLocation - i) == true){
 
-            if(capturablePiece((pieceLocation + (8 * i)), pieceType) == true){
-                if(pieceLocation + (8 * i) > -1){
+            if(capturablePiece((pieceLocation - i), pieceType) == true){
+                if(inRange(pieceLocation - i) == true){
                     legalMovesArr[currArrPos] = (pieceLocation - i);
                     currArrPos++;
                 }
@@ -736,8 +793,10 @@ void queenGen(int pieceLocation, int pieceType){
         }
         else{
             if(pieceLocation + (8 * i) > -1){
-                legalMovesArr[currArrPos] = (pieceLocation - i);
-                currArrPos++;
+                if(inRange(pieceLocation - i) == true){
+                    legalMovesArr[currArrPos] = (pieceLocation - i);
+                    currArrPos++;
+                }
             }
         }
     }
@@ -746,8 +805,8 @@ void queenGen(int pieceLocation, int pieceType){
     for(int i = 1; i < distFromEdgeRight; i++){
         if(piecePresent(pieceLocation + i) == true){
 
-            if(capturablePiece((pieceLocation + (8 * i)), pieceType) == true){
-                if(pieceLocation + (8 * i) < 64){
+            if(capturablePiece((pieceLocation + i), pieceType) == true){
+                if(inRange(pieceLocation + i)== true){
                     legalMovesArr[currArrPos] = (pieceLocation + i);
                     currArrPos++;
                 }
@@ -760,11 +819,11 @@ void queenGen(int pieceLocation, int pieceType){
         }
         else{
             if(pieceLocation + (8 * i) < 64){
-                legalMovesArr[currArrPos] = (pieceLocation + i);
-                currArrPos++;
+                if(inRange(pieceLocation + i)== true){
+                    legalMovesArr[currArrPos] = (pieceLocation + i);
+                    currArrPos++;
+                }
             }
         }
     }
 }
-
-// Fix diagonal fail safes!!!!!
