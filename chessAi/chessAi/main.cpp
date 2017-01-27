@@ -29,11 +29,12 @@ int main(){
     boardInit();
     // 0 meaning white is on top, 1 meaning black is on top.
     newGameSetup(1);
+    addPiece(2, 37);
     displayBoard();
 
 
     int *legalMovesArr;
-    legalMovesArr = getLegalMoves(5, 59);
+    legalMovesArr = getLegalMoves(2, 37);
 
     // Displays all legal moves for a specific piece.
     cout << endl << "legal squares to move to: " << endl;

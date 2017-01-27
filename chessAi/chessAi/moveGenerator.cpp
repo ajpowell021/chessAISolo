@@ -43,13 +43,18 @@ int *getLegalMoves(int pieceType, int pieceLocation){
     topColor = getTopColor();
 
     int tempPieceId = abs(pieceType);
-
+    cout << tempPieceId << endl;
     switch(tempPieceId){
         case 1: pawnGen(pieceLocation, pieceType);
+            break;
         case 2: rookGen(pieceLocation, pieceType);
+           break;
         case 3: knightGen(pieceLocation, pieceType);
+           break;
         case 4: bishopGen(pieceLocation, pieceType);
+           break;
         case 5: queenGen(pieceLocation, pieceType);
+           break;
     }
 
     return legalMovesArr;
@@ -157,7 +162,7 @@ void rookGen(int pieceLocation, int pieceType){
     int currArrPos = 0;
 
     // 1. Moving up until edge of board or piece is hit.
-
+    cout << "eh";
     int distFromEdge = pieceLocation / 8;
 
     for(int i = 1; i < distFromEdge + 1; i++){
@@ -604,6 +609,7 @@ void queenGen(int pieceLocation, int pieceType){
     int distFromEdgeRight = 8 - distFromEdgeLeft;
     int distFromEdgeBot = 8 - distFromEdgeTop;
 
+    cout << "why" << endl;
     // 1. Move diagonal up left.
     int tempDist;
     if(distFromEdgeLeft > distFromEdgeTop){
@@ -803,6 +809,7 @@ void queenGen(int pieceLocation, int pieceType){
 
     // 8. Move right.
     for(int i = 1; i < distFromEdgeRight; i++){
+            cout << distFromEdgeRight;
         if(piecePresent(pieceLocation + i) == true){
 
             if(capturablePiece((pieceLocation + i), pieceType) == true){
@@ -818,11 +825,9 @@ void queenGen(int pieceLocation, int pieceType){
             }
         }
         else{
-            if(pieceLocation + (8 * i) < 64){
-                if(inRange(pieceLocation + i)== true){
-                    legalMovesArr[currArrPos] = (pieceLocation + i);
-                    currArrPos++;
-                }
+            if(inRange(pieceLocation + i)== true){
+                legalMovesArr[currArrPos] = (pieceLocation + i);
+                currArrPos++;
             }
         }
     }
