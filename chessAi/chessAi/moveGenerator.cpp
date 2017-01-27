@@ -29,6 +29,7 @@ void rookGen(int pieceLocation, int pieceType);
 void knightGen(int pieceLocation, int pieceType);
 void bishopGen(int pieceLocation, int pieceType);
 void queenGen(int pieceLocation, int pieceType);
+void kingGen(int pieceLocation, int pieceType);
 
 // Other Functions
 bool inRange(int destination);
@@ -43,7 +44,6 @@ int *getLegalMoves(int pieceType, int pieceLocation){
     topColor = getTopColor();
 
     int tempPieceId = abs(pieceType);
-    cout << tempPieceId << endl;
     switch(tempPieceId){
         case 1: pawnGen(pieceLocation, pieceType);
             break;
@@ -55,6 +55,8 @@ int *getLegalMoves(int pieceType, int pieceLocation){
            break;
         case 5: queenGen(pieceLocation, pieceType);
            break;
+        case 6: kingGen(pieceLocation, pieceType);
+            break;
     }
 
     return legalMovesArr;
@@ -77,7 +79,7 @@ void pawnGen(int pieceLocation, int pieceType){
     // 2. Two forward if on row 1 or 6.
     // 3. Capture if possible.
     // 4. En passant. ???
-    // 5. Turn into something else if on row 0 or 7.
+    // 5. Turn into something else if on 0 or 7.
 
     // Starting position of array of legal moves.
     int currArrPos = 0;
@@ -162,7 +164,6 @@ void rookGen(int pieceLocation, int pieceType){
     int currArrPos = 0;
 
     // 1. Moving up until edge of board or piece is hit.
-    cout << "eh";
     int distFromEdge = pieceLocation / 8;
 
     for(int i = 1; i < distFromEdge + 1; i++){
@@ -609,7 +610,6 @@ void queenGen(int pieceLocation, int pieceType){
     int distFromEdgeRight = 8 - distFromEdgeLeft;
     int distFromEdgeBot = 8 - distFromEdgeTop;
 
-    cout << "why" << endl;
     // 1. Move diagonal up left.
     int tempDist;
     if(distFromEdgeLeft > distFromEdgeTop){
@@ -809,7 +809,6 @@ void queenGen(int pieceLocation, int pieceType){
 
     // 8. Move right.
     for(int i = 1; i < distFromEdgeRight; i++){
-            cout << distFromEdgeRight;
         if(piecePresent(pieceLocation + i) == true){
 
             if(capturablePiece((pieceLocation + i), pieceType) == true){
@@ -832,3 +831,90 @@ void queenGen(int pieceLocation, int pieceType){
         }
     }
 }
+
+void kingGen(int pieceLocation, int pieceType){
+
+    // Legal moves of King
+    //
+    // 1. One up.
+    // 2. One down.
+    // 3. One left.
+    // 4. One right.
+    // 5. Can't move to any of these if the square is threatened.
+    // 6. Castling?
+
+    int currArrPos = 0;
+
+    // 1. One up.
+    if((pieceLocation / 8) > 0){
+        if(piecePresent(pieceLocation - 8) == false){
+            if(inRange(pieceLocation - 8) == true){
+                legalMovesArr[currArrPos] = (pieceLocation - 8);
+                currArrPos++;
+            }
+        }
+        else{
+            if(capturablePiece(pieceLocation - 8, pieceType) == true){
+                if(inRange(pieceLocation - 8) == true){
+                    legalMovesArr[currArrPos] = (pieceLocation - 8);
+                    currArrPos++;
+                }
+            }
+        }
+    }
+
+    // 2. One down.
+    if((pieceLocation / 8) < 7){
+        if(piecePresent(pieceLocation + 8) == false){
+            if(inRange(pieceLocation + 8) == true){
+                legalMovesArr[currArrPos] = (pieceLocation + 8);
+                currArrPos++;
+            }
+        }
+        else{
+            if(capturablePiece(pieceLocation + 8, pieceType) == true){
+                if(inRange(pieceLocation + 8) == true){
+                    legalMovesArr[currArrPos] = (pieceLocation + 8);
+                    currArrPos++;
+                }
+            }
+        }
+    }
+
+    // 3. One left.
+    if((pieceLocation % 8) > 0){
+        if(piecePresent(pieceLocation - 1) == false){
+            if(inRange(pieceLocation - 1) == true){
+                legalMovesArr[currArrPos] = (pieceLocation - 1);
+                currArrPos++;
+            }
+        }
+        else{
+            if(capturablePiece(pieceLocation - 1, pieceType) == true){
+                if(inRange(pieceLocation - 1) == true){
+                    legalMovesArr[currArrPos] = (pieceLocation - 1);
+                    currArrPos++;
+                }
+            }
+        }
+    }
+
+    // 4. One right.
+    if((pieceLocation % 8) < 7){
+        if(piecePresent(pieceLocation + 1) == false){
+            if(inRange(pieceLocation + 1) == true){
+                legalMovesArr[currArrPos] = (pieceLocation + 1);
+                currArrPos++;
+            }
+        }
+        else{
+            if(capturablePiece(pieceLocation + 1, pieceType) == true){
+                if(inRange(pieceLocation + 1) == true){
+                    legalMovesArr[currArrPos] = (pieceLocation + 1);
+                    currArrPos++;
+                }
+            }
+        }
+    }
+}
+
