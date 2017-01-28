@@ -88,8 +88,6 @@ bool capturablePiece(int destination, int capturePiece){
     }
 }
 
-
-
 // Displays the board to the console for viewing.
 void displayBoard(){
 

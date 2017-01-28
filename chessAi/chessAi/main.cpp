@@ -25,13 +25,18 @@ void bishopGen(int pieceLocation, int pieceType);
 void queenGen(int pieceLocation, int pieceType);
 void kingGen(int pieceLocation, int pieceType);
 
+// Functions from threatChecker.cpp
+void displayAttackBoard(int color);
+void buildWhiteAttackBoard();
+void buildBlackAttackBoard();
 
 int main(){
 
     boardInit();
     // 0 meaning white is on top, 1 meaning black is on top.
     newGameSetup(1);
-    addPiece(6, 37);
+    removePiece(59);
+    addPiece(5, 35);
     displayBoard();
 
 
@@ -45,6 +50,9 @@ int main(){
                 cout << *(legalMovesArr + i) << endl;
             }
     }
+
+    buildBlackAttackBoard();
+    displayAttackBoard(1);
 
     return 0;
 }
