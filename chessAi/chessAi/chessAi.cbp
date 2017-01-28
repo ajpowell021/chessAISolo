@@ -28,6 +28,7 @@
 		<Unit filename="moveGenerator.cpp" />
 		<Unit filename="pawn.cpp" />
 		<Unit filename="pieceClass.cpp" />
+		<Unit filename="threatChecker.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />

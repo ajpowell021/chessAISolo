@@ -28,6 +28,7 @@ void kingGen(int pieceLocation, int pieceType);
 // Functions from threatChecker.cpp
 void displayAttackBoard(int color);
 void buildWhiteAttackBoard();
+void buildBlackAttackBoard();
 
 int main(){
 
@@ -50,8 +51,8 @@ int main(){
             }
     }
 
-    buildWhiteAttackBoard();
-    displayAttackBoard(0);
+    buildBlackAttackBoard();
+    displayAttackBoard(1);
 
     return 0;
 }

@@ -54,6 +54,29 @@ void buildWhiteAttackBoard(){
     }
 }
 
+// Builds the black attack board.
+void buildBlackAttackBoard(){
+
+    int tempPiece;
+    int *legalMovesArr;
+    int tempXPos;
+    int tempYPos;
+
+    for(int i = 0; i < 64; i++){
+        tempPiece = getPieceType(i);
+        if(tempPiece < 0){
+            legalMovesArr = getLegalMoves(tempPiece, i);
+            for(int j = 0; j < 64; j++){
+                if((*(legalMovesArr + j)) > -1){
+                    tempXPos = (*(legalMovesArr + j) / 8);
+                    tempYPos = (*(legalMovesArr + j) % 8);
+                    blackAttackBoard[tempXPos][tempYPos] = 1;
+                }
+            }
+        }
+    }
+}
+
 // Displays one of the color's attack boards.
 // 0 for white, 1 for black.
 void displayAttackBoard(int color){
