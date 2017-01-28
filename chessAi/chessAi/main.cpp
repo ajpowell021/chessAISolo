@@ -3,6 +3,8 @@
 
 #include <iostream>
 #include <string>
+#include <cmath>
+#include <algorithm>
 
 using namespace std;
 
@@ -35,6 +37,9 @@ void buildBlackAttackBoard();
 void returnLegalMoves();
 void movePiece();
 
+// Array of legal moves pulled from move generator.
+int legalMoves[64];
+
 int main(){
 
     string command = "";
@@ -50,24 +55,33 @@ int main(){
         if(command == "move"){
             movePiece();
         }
+        else if(command == "show"){
+            displayBoard();
+        }
     }
 
     return 0;
 }
 
 // Gets an array of legal moves for a specific
-// piece.  Returned as a pointer array.
-void returnLegalMoves(){
+// piece.  Fills in array: legalMoves.
+void fillLegalMoves(int pieceType, int pieceLocation){
     int *legalMovesArr;
-    legalMovesArr = getLegalMoves(6, 37);
+    legalMovesArr = getLegalMoves(pieceType, pieceLocation);
+
+    for(int i = 0; i < 64; i++){
+        if((*(legalMovesArr + i)) > -1){
+            legalMoves[i] = *(legalMovesArr + i);
+        }
+    }
 
     // Displays all legal moves for a specific piece.
-    cout << endl << "legal squares to move to: " << endl;
-    for(int i = 0; i < 64; i++){
-            if((*(legalMovesArr + i)) > -1){
-                cout << *(legalMovesArr + i) << endl;
-            }
-    }
+    //cout << endl << "legal squares to move to: " << endl;
+    //for(int i = 0; i < 64; i++){
+        //if((*(legalMovesArr + i)) > -1){
+        //    cout << *(legalMovesArr + i) << endl;
+        //}
+    //}
 }
 
 // Moves a piece from one square to another.
@@ -75,14 +89,32 @@ void returnLegalMoves(){
 void movePiece(){
     int origin;
     int destination;
+    int tempPiece;
+    int destPiece;
 
     cout <<endl << "From: ";
     cin >> origin;
     cout << "To: ";
     cin >> destination;
 
-    // Handle the move here, maybe history too.    
+    tempPiece = getPieceType(origin);
+    fillLegalMoves(tempPiece, origin);
 
+    // Check to see if destination is in this list!
 
-    cout << endl << "Piece has been moved.";
+    // Handle the move here, maybe history too.
+    removePiece(origin);
+    destPiece = getPieceType(destination);
+    addPiece(tempPiece, destination);
+    if(destPiece != 0){
+        // A capture took place.
+        cout << "Capture" << endl;
+    }
+
+    cout << endl << "Piece has been moved." << endl;
+}
+
+// Emptys legal move array.
+void emptyLegalMoves(){
+    fill_n(legalMovesArr, 65,-1);
 }

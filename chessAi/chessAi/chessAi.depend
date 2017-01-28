@@ -47,8 +47,9 @@
 	<cmath>
 	<algorithm>
 
-1485486142 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\main.cpp
+1485624564 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\main.cpp
 	<iostream>
+	<string>
 
 1485568189 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\threatchecker.cpp
 	<iostream>
