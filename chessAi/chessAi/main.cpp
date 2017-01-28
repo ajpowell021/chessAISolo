@@ -2,6 +2,7 @@
 // It tells every other file when to run and what to run.
 
 #include <iostream>
+#include <string>
 
 using namespace std;
 
@@ -30,16 +31,33 @@ void displayAttackBoard(int color);
 void buildWhiteAttackBoard();
 void buildBlackAttackBoard();
 
+// Functions from main.cpp
+void returnLegalMoves();
+void movePiece();
+
 int main(){
+
+    string command = "";
 
     boardInit();
     // 0 meaning white is on top, 1 meaning black is on top.
     newGameSetup(1);
-    removePiece(59);
-    addPiece(5, 35);
-    displayBoard();
 
+    // Get user input.
+    while(command != "quit"){
+        cin >> command;
 
+        if(command == "move"){
+            movePiece();
+        }
+    }
+
+    return 0;
+}
+
+// Gets an array of legal moves for a specific
+// piece.  Returned as a pointer array.
+void returnLegalMoves(){
     int *legalMovesArr;
     legalMovesArr = getLegalMoves(6, 37);
 
@@ -50,9 +68,21 @@ int main(){
                 cout << *(legalMovesArr + i) << endl;
             }
     }
+}
 
-    buildBlackAttackBoard();
-    displayAttackBoard(1);
+// Moves a piece from one square to another.
+// Handles legality of move as well as capture.
+void movePiece(){
+    int origin;
+    int destination;
 
-    return 0;
+    cout <<endl << "From: ";
+    cin >> origin;
+    cout << "To: ";
+    cin >> destination;
+
+    // Handle the move here, maybe history too.    
+
+
+    cout << endl << "Piece has been moved.";
 }
