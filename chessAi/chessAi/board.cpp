@@ -97,7 +97,7 @@ void displayBoard(){
                 cout << boardArray[i][j] << "  ";
         }
     }
-    cout << endl;
+    cout << endl << endl;
 }
 
 // Function defining which color is on top of screen.
@@ -148,9 +148,3 @@ void newGameSetup(int top){
         j++;
     }
 }
-
-
-
-
-
-

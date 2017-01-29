@@ -2,6 +2,9 @@
 // It tells every other file when to run and what to run.
 
 #include <iostream>
+#include <string>
+#include <cmath>
+#include <algorithm>
 
 using namespace std;
 
@@ -30,29 +33,104 @@ void displayAttackBoard(int color);
 void buildWhiteAttackBoard();
 void buildBlackAttackBoard();
 
+// Functions from main.cpp
+void returnLegalMoves();
+void movePiece();
+void emptyLegalMoves();
+
+// Array of legal moves pulled from move generator.
+int legalMoves[64];
+
 int main(){
 
+    string command = "";
+
     boardInit();
+    emptyLegalMoves();
     // 0 meaning white is on top, 1 meaning black is on top.
     newGameSetup(1);
-    removePiece(59);
-    addPiece(5, 35);
-    displayBoard();
 
+    // Get user input.
+    while(command != "quit"){
+        cin >> command;
 
-    int *legalMovesArr;
-    legalMovesArr = getLegalMoves(6, 37);
-
-    // Displays all legal moves for a specific piece.
-    cout << endl << "legal squares to move to: " << endl;
-    for(int i = 0; i < 64; i++){
-            if((*(legalMovesArr + i)) > -1){
-                cout << *(legalMovesArr + i) << endl;
-            }
+        if(command == "move"){
+            movePiece();
+        }
+        else if(command == "show"){
+            displayBoard();
+        }
     }
 
-    buildBlackAttackBoard();
-    displayAttackBoard(1);
-
     return 0;
+}
+
+// Gets an array of legal moves for a specific
+// piece.  Fills in array: legalMoves.
+void fillLegalMoves(int pieceType, int pieceLocation){
+    int *legalMovesArr;
+    legalMovesArr = getLegalMoves(pieceType, pieceLocation);
+
+    for(int i = 0; i < 64; i++){
+        if((*(legalMovesArr + i)) > -1){
+            legalMoves[i] = *(legalMovesArr + i);
+        }
+    }
+
+    // Displays all legal moves for a specific piece.
+    //cout << endl << "legal squares to move to: " << endl;
+    //for(int i = 0; i < 64; i++){
+        //if((*(legalMovesArr + i)) > -1){
+        //    cout << *(legalMovesArr + i) << endl;
+        //}
+    //}
+}
+
+// Moves a piece from one square to another.
+// Handles legality of move as well as capture.
+void movePiece(){
+    int origin;
+    int destination;
+    int tempPiece;
+    int destPiece;
+    bool moveIsLegal = false;
+
+    cout <<endl << "From: ";
+    cin >> origin;
+    cout << "To: ";
+    cin >> destination;
+
+    tempPiece = getPieceType(origin);
+    fillLegalMoves(tempPiece, origin);
+
+    // Check to see if destination is in this list!
+    for(int i = 0; i < 64; i++){
+        if(legalMoves[i] > -1){
+            if(legalMoves[i] == destination){
+                moveIsLegal = true;
+                i = 64;
+            }
+        }
+    }
+
+    // Handle the move here, maybe history too.
+    if(moveIsLegal == true){
+        removePiece(origin);
+        destPiece = getPieceType(destination);
+        addPiece(tempPiece, destination);
+        if(destPiece != 0){
+            // A capture took place.
+            cout << "Capture" << endl;
+        }
+        cout << endl << "Piece has been moved." << endl;
+    }
+    else{
+        cout << "Move is not legal." << endl;
+    }
+    emptyLegalMoves();
+}
+
+// Empties legal move array.
+void emptyLegalMoves(){
+    fill_n(legalMoves, 65,-1);
 }
