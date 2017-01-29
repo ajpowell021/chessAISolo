@@ -36,6 +36,7 @@ void buildBlackAttackBoard();
 // Functions from main.cpp
 void returnLegalMoves();
 void movePiece();
+void emptyLegalMoves();
 
 // Array of legal moves pulled from move generator.
 int legalMoves[64];
@@ -45,6 +46,7 @@ int main(){
     string command = "";
 
     boardInit();
+    emptyLegalMoves();
     // 0 meaning white is on top, 1 meaning black is on top.
     newGameSetup(1);
 
@@ -91,6 +93,7 @@ void movePiece(){
     int destination;
     int tempPiece;
     int destPiece;
+    bool moveIsLegal = false;
 
     cout <<endl << "From: ";
     cin >> origin;
@@ -101,20 +104,33 @@ void movePiece(){
     fillLegalMoves(tempPiece, origin);
 
     // Check to see if destination is in this list!
-
-    // Handle the move here, maybe history too.
-    removePiece(origin);
-    destPiece = getPieceType(destination);
-    addPiece(tempPiece, destination);
-    if(destPiece != 0){
-        // A capture took place.
-        cout << "Capture" << endl;
+    for(int i = 0; i < 64; i++){
+        if(legalMoves[i] > -1){
+            if(legalMoves[i] == destination){
+                moveIsLegal = true;
+                i = 64;
+            }
+        }
     }
 
-    cout << endl << "Piece has been moved." << endl;
+    // Handle the move here, maybe history too.
+    if(moveIsLegal == true){
+        removePiece(origin);
+        destPiece = getPieceType(destination);
+        addPiece(tempPiece, destination);
+        if(destPiece != 0){
+            // A capture took place.
+            cout << "Capture" << endl;
+        }
+        cout << endl << "Piece has been moved." << endl;
+    }
+    else{
+        cout << "Move is not legal." << endl;
+    }
+    emptyLegalMoves();
 }
 
-// Emptys legal move array.
+// Empties legal move array.
 void emptyLegalMoves(){
-    fill_n(legalMovesArr, 65,-1);
+    fill_n(legalMoves, 65,-1);
 }
