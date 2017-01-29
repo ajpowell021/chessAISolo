@@ -5,7 +5,7 @@
 #include <string>
 #include <cmath>
 #include <algorithm>
-#include <vector>
+#include <sstream>
 
 using namespace std;
 
@@ -39,12 +39,20 @@ void returnLegalMoves();
 void movePiece();
 void emptyLegalMoves();
 void addMoveToHistory(int pieceType, int origin, int destination, int destPieceType);
+string calculateCoordinates(int location);
+void printHistory();
+void nextTurn();
+
 
 // Array of legal moves pulled from move generator.
 int legalMoves[64];
 
 // Move array for history, dynamic array of strings.
-//vector<string> history;
+string history[300];
+// Where in history array are we currently.
+int turnNumber = 0;
+// 0 is white, 1 is black.
+int turn = 0;
 
 int main(){
     string command = "";
@@ -62,6 +70,9 @@ int main(){
         }
         else if(command == "show"){
             displayBoard();
+        }
+        else if(command == "history"){
+            printHistory();
         }
     }
 
@@ -127,6 +138,7 @@ void movePiece(){
         }
         cout << endl << "Piece has been moved." << endl;
         addMoveToHistory(tempPiece, origin, destination, destPiece);
+        nextTurn();
     }
     else{
         cout << "Move is not legal." << endl;
@@ -140,12 +152,155 @@ void emptyLegalMoves(){
 }
 
 // Adds a move to the running history array.
-// Array is kept in Algebraic notation.
+// Array is kept in long algebraic notation.
 void addMoveToHistory(int pieceType, int origin, int destination, int destPieceType){
-    // If destPieceType != 0, then there was a capture.
-    cout << "here" << endl;
-    //history.push_back("test1");
-    //history.push_back("test2");
 
-    //cout << history[0] << endl << history[1] << endl;
+    int tempPieceType = abs(pieceType);
+    string one;
+    string two;
+    string three;
+    string four;
+    string total;
+
+    // First part of history.
+    // Originating piece.
+    switch(tempPieceType){
+        case 1:
+            one = "";
+            break;
+        case 2:
+            one = "R";
+            break;
+        case 3:
+            one = "N";
+            break;
+        case 4:
+            one = "B";
+            break;
+        case 5:
+            one = "Q";
+            break;
+        case 6:
+            one = "K";
+            break;
+    }
+
+    // Second part of history.
+    // The originating square.
+    two = calculateCoordinates(origin);
+
+    // Third part of history.
+    // Capture or move.
+    if(destPieceType == 0){
+        three = "-";
+    }
+    else{
+        three = "x";
+    }
+
+    // Fourth part of history.
+    // Destination square.
+    four = calculateCoordinates(destination);
+
+    // Whole move together.
+    total = one + two + three + four;
+
+    // Whites turn, start new line.
+    if(turn == 0){
+        turnNumber++;
+        string tempTurnNumber;
+        ostringstream Convert;
+        Convert << turnNumber;
+        tempTurnNumber = Convert.str();
+        history[turnNumber] = tempTurnNumber + ". " + total + " ";
+    }
+    // Blacks turn, add to old line.
+    else{
+        string temp = history[turnNumber];
+        history[turnNumber] = temp + total;
+    }
+}
+
+// Turns square number into common algebraic notation.
+string calculateCoordinates(int location){
+    string first;
+    string second;
+    string total;
+    int row = location / 8;
+    int col = location % 8;
+
+    switch (col) {
+        case 0:
+            first = "a";
+            break;
+        case 1:
+            first = "b";
+            break;
+        case 2:
+            first = "c";
+            break;
+        case 3:
+            first = "d";
+            break;
+        case 4:
+            first = "e";
+            break;
+        case 5:
+            first = "f";
+            break;
+        case 6:
+            first = "g";
+            break;
+        case 7:
+            first = "h";
+            break;
+        }
+
+        switch (row) {
+            case 0:
+                second = "8";
+                break;
+            case 1:
+                second = "7";
+                break;
+            case 2:
+                second = "6";
+                break;
+            case 3:
+                second = "5";
+                break;
+            case 4:
+                second = "4";
+                break;
+            case 5:
+                second = "3";
+                break;
+            case 6:
+                second = "2";
+                break;
+            case 7:
+                second = "1";
+                break;
+            }
+
+        total = first + second;
+        return total;
+}
+
+void printHistory(){
+    for(int i = 0; i < turnNumber + 1; i++){
+        cout << history[i] << endl;
+    }
+}
+
+void nextTurn(){
+    if(turn == 0){
+        turn++;
+    }
+    else if(turn == 1){
+        turn--;
+    }
+    else{
+        cout << endl << "TURN ERROR" << endl;
+    }
 }
