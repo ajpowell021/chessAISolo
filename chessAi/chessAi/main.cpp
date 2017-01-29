@@ -5,6 +5,7 @@
 #include <string>
 #include <cmath>
 #include <algorithm>
+#include <vector>
 
 using namespace std;
 
@@ -37,14 +38,16 @@ void buildBlackAttackBoard();
 void returnLegalMoves();
 void movePiece();
 void emptyLegalMoves();
+void addMoveToHistory(int pieceType, int origin, int destination, int destPieceType);
 
 // Array of legal moves pulled from move generator.
 int legalMoves[64];
 
+// Move array for history, dynamic array of strings.
+//vector<string> history;
+
 int main(){
-
     string command = "";
-
     boardInit();
     emptyLegalMoves();
     // 0 meaning white is on top, 1 meaning black is on top.
@@ -92,7 +95,7 @@ void movePiece(){
     int origin;
     int destination;
     int tempPiece;
-    int destPiece;
+    int destPiece = 0;
     bool moveIsLegal = false;
 
     cout <<endl << "From: ";
@@ -123,6 +126,7 @@ void movePiece(){
             cout << "Capture" << endl;
         }
         cout << endl << "Piece has been moved." << endl;
+        addMoveToHistory(tempPiece, origin, destination, destPiece);
     }
     else{
         cout << "Move is not legal." << endl;
@@ -133,4 +137,15 @@ void movePiece(){
 // Empties legal move array.
 void emptyLegalMoves(){
     fill_n(legalMoves, 65,-1);
+}
+
+// Adds a move to the running history array.
+// Array is kept in Algebraic notation.
+void addMoveToHistory(int pieceType, int origin, int destination, int destPieceType){
+    // If destPieceType != 0, then there was a capture.
+    cout << "here" << endl;
+    //history.push_back("test1");
+    //history.push_back("test2");
+
+    //cout << history[0] << endl << history[1] << endl;
 }
