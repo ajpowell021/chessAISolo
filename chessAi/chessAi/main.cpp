@@ -115,33 +115,40 @@ void movePiece(){
     cin >> destination;
 
     tempPiece = getPieceType(origin);
-    fillLegalMoves(tempPiece, origin);
+    // Check turn for legality.
+    if((tempPiece > 0 && turn == 0) || (tempPiece < 0 && turn == 1)){
 
-    // Check to see if destination is in this list!
-    for(int i = 0; i < 64; i++){
-        if(legalMoves[i] > -1){
-            if(legalMoves[i] == destination){
-                moveIsLegal = true;
-                i = 64;
+        fillLegalMoves(tempPiece, origin);
+
+        // Check to see if destination is in this list!
+        for(int i = 0; i < 64; i++){
+            if(legalMoves[i] > -1){
+                if(legalMoves[i] == destination){
+                    moveIsLegal = true;
+                    i = 64;
+                }
             }
         }
-    }
 
-    // Handle the move here, maybe history too.
-    if(moveIsLegal == true){
-        removePiece(origin);
-        destPiece = getPieceType(destination);
-        addPiece(tempPiece, destination);
-        if(destPiece != 0){
-            // A capture took place.
-            cout << "Capture" << endl;
+        // Handle the move here, maybe history too.
+        if(moveIsLegal == true){
+            removePiece(origin);
+            destPiece = getPieceType(destination);
+            addPiece(tempPiece, destination);
+            if(destPiece != 0){
+                // A capture took place.
+                cout << "Capture" << endl;
+            }
+            cout << endl << "Piece has been moved." << endl;
+            addMoveToHistory(tempPiece, origin, destination, destPiece);
+            nextTurn();
         }
-        cout << endl << "Piece has been moved." << endl;
-        addMoveToHistory(tempPiece, origin, destination, destPiece);
-        nextTurn();
+        else{
+            cout << "Move is not legal." << endl;
+        }
     }
     else{
-        cout << "Move is not legal." << endl;
+        cout << "It is not this players turn." << endl;
     }
     emptyLegalMoves();
 }
