@@ -148,3 +148,10 @@ void newGameSetup(int top){
         j++;
     }
 }
+
+// Sets up a board with just a white king and a
+// black queen, for check testing purposes.
+void kingTestSetUp(){
+    addPiece(6, 44);
+    addPiece(-5, 27);
+}

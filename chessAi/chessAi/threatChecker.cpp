@@ -17,6 +17,7 @@ int getTopColor();
 void newGameSetup(int top);
 int getPieceType(int pieceLocation);
 bool capturablePiece(int destination, int capturePiece);
+void kingTestSetUp();
 
 // Functions from moveGenerator.cpp
 int *getLegalMoves(int pieceType, int pieceLocation);
@@ -81,6 +82,7 @@ void buildBlackAttackBoard(){
 // 0 for white, 1 for black.
 void displayAttackBoard(int color){
     if(color == 0){
+        buildWhiteAttackBoard();
         for(int i = 0; i < 8; i++){
             cout << endl;
             for(int j = 0; j < 8; j++){
@@ -90,6 +92,7 @@ void displayAttackBoard(int color){
         cout << endl;
     }
     else{
+        buildBlackAttackBoard();
         for(int i = 0; i < 8; i++){
             cout << endl;
             for(int j = 0; j < 8; j++){
@@ -97,5 +100,40 @@ void displayAttackBoard(int color){
             }
         }
         cout << endl;
+    }
+}
+
+// Returns true if the location is threatened,
+// color is 0 if threatened piece is white, 1
+// if black.
+bool checkThreat(int tempPiece, int location){
+    int color;
+    if(tempPiece > 0){
+        color = 0;
+    }
+    else{
+        color = 1;
+    }
+    if(color == 0){
+        int row = location / 8;
+        int col = location % 8;
+        buildBlackAttackBoard();
+        if(blackAttackBoard[row][col] != 0){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    else{
+        int row = location / 8;
+        int col = location % 8;
+        buildWhiteAttackBoard();
+        if(whiteAttackBoard[row][col] != 0){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 }
