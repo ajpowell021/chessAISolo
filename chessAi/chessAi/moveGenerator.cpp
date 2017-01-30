@@ -17,6 +17,7 @@ int getTopColor();
 void newGameSetup(int top);
 int getPieceType(int pieceLocation);
 bool capturablePiece(int destination, int capturePiece);
+void kingTestSetUp();
 
 static int legalMovesArr[64];
 
@@ -917,4 +918,3 @@ void kingGen(int pieceLocation, int pieceType){
         }
     }
 }
-

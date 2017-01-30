@@ -19,6 +19,7 @@ int getTopColor();
 void newGameSetup(int top);
 int getPieceType(int pieceLocation);
 bool capturablePiece(int destination, int capturePiece);
+void kingTestSetUp();
 
 // Functions from moveGenerator.cpp
 int *getLegalMoves(int pieceType, int pieceLocation);
@@ -33,6 +34,7 @@ void kingGen(int pieceLocation, int pieceType);
 void displayAttackBoard(int color);
 void buildWhiteAttackBoard();
 void buildBlackAttackBoard();
+bool checkThreat(int color, int location);
 
 // Functions from main.cpp
 void returnLegalMoves();
@@ -59,8 +61,8 @@ int main(){
     boardInit();
     emptyLegalMoves();
     // 0 meaning white is on top, 1 meaning black is on top.
-    newGameSetup(1);
-
+    //newGameSetup(1);
+    kingTestSetUp();
     // Get user input.
     while(command != "quit"){
         cin >> command;
@@ -73,6 +75,12 @@ int main(){
         }
         else if(command == "history"){
             printHistory();
+        }
+        else if(command == "wthreat"){
+            displayAttackBoard(0);
+        }
+        else if(command == "bthreat"){
+            displayAttackBoard(1);
         }
     }
 
@@ -118,6 +126,7 @@ void movePiece(){
     // Check turn for legality.
     if((tempPiece > 0 && turn == 0) || (tempPiece < 0 && turn == 1)){
 
+        // Creats array of legal moves the piece can take.
         fillLegalMoves(tempPiece, origin);
 
         // Check to see if destination is in this list!
@@ -127,6 +136,14 @@ void movePiece(){
                     moveIsLegal = true;
                     i = 64;
                 }
+            }
+        }
+
+        // If moving the king, checks to see if any squares are
+        // threatened.
+        if(tempPiece == 6 || tempPiece == -6){
+            if(checkThreat(tempPiece, destination) == true){
+                moveIsLegal = false;
             }
         }
 
