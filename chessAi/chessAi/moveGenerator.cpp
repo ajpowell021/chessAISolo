@@ -32,8 +32,84 @@ void bishopGen(int pieceLocation, int pieceType);
 void queenGen(int pieceLocation, int pieceType);
 void kingGen(int pieceLocation, int pieceType);
 
+// Any extra functions for finding threatened
+// squares.
+void pawnThreatGen(int pieceLocation, int pieceType);
+
 // Other Functions
 bool inRange(int destination);
+
+// Function that returns only threatened squares.
+// Called by threat checker, mostly for pawns.
+int *getThreatenedSquares(int pieceType, int pieceLocation){
+
+    // Fills array with -1 for viewing purposes.
+    fill_n(legalMovesArr, 65,-1);
+
+    // Find out which color started game on top.
+    topColor = getTopColor();
+
+    int tempPieceId = abs(pieceType);
+    switch(tempPieceId){
+        case 1: pawnThreatGen(pieceLocation, pieceType);
+            break;
+        case 2: rookGen(pieceLocation, pieceType);
+           break;
+        case 3: knightGen(pieceLocation, pieceType);
+           break;
+        case 4: bishopGen(pieceLocation, pieceType);
+           break;
+        case 5: queenGen(pieceLocation, pieceType);
+           break;
+        case 6: kingGen(pieceLocation, pieceType);
+            break;
+    }
+
+    return legalMovesArr;
+}
+
+// Only diagonal captures are added.
+void pawnThreatGen(int pieceLocation, int pieceType){
+
+    // Starting position of array of legal moves.
+    int currArrPos = 0;
+    int col = pieceLocation % 8;
+
+    // Piece is moving down.
+    if((topColor == 0 && pieceType == 1) || (topColor == 1 && pieceType == -1)){
+
+        // Capture if possible.
+        if(col != 7){
+            if(inRange(pieceLocation + 9) == true){
+                legalMovesArr[currArrPos] = (pieceLocation + 9);
+                currArrPos++;
+            }
+        }
+
+        if(col != 0){
+            if(inRange(pieceLocation + 7) == true){
+                legalMovesArr[currArrPos] = (pieceLocation + 7);
+                currArrPos++;
+            }
+        }
+    }
+    // Piece is moving up.
+    else{
+        // Capture if possible.
+        if(col != 0){
+            if(inRange(pieceLocation - 9) == true){
+                legalMovesArr[currArrPos] = (pieceLocation - 9);
+                currArrPos++;
+            }
+        }
+        if(col != 7){
+            if(inRange(pieceLocation - 7) == true){
+                legalMovesArr[currArrPos] = (pieceLocation - 7);
+                currArrPos++;
+            }
+        }
+    }
+}
 
 // Function that is called to find all legal moves of a specific piece.
 int *getLegalMoves(int pieceType, int pieceLocation){

@@ -61,8 +61,8 @@ int main(){
     boardInit();
     emptyLegalMoves();
     // 0 meaning white is on top, 1 meaning black is on top.
-    //newGameSetup(1);
-    kingTestSetUp();
+    newGameSetup(1);
+    //kingTestSetUp();
     // Get user input.
     while(command != "quit"){
         cin >> command;
