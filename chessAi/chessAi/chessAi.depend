@@ -42,12 +42,12 @@
 1485743161 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\board.cpp
 	<iostream>
 
-1485843680 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\movegenerator.cpp
+1486014895 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\movegenerator.cpp
 	<iostream>
 	<cmath>
 	<algorithm>
 
-1485842809 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\main.cpp
+1486015093 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\main.cpp
 	<iostream>
 	<string>
 	<cmath>

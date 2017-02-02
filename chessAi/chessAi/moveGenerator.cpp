@@ -73,6 +73,7 @@ void pawnThreatGen(int pieceLocation, int pieceType){
 
     // Starting position of array of legal moves.
     int currArrPos = 0;
+
     int col = pieceLocation % 8;
 
     // Piece is moving down.
@@ -543,8 +544,8 @@ void bishopGen(int pieceLocation, int pieceType){
     int currArrPos = 0;
     int distFromEdgeLeft = pieceLocation % 8;
     int distFromEdgeTop = pieceLocation / 8;
-    int distFromEdgeRight = 8 - distFromEdgeLeft;
-    int distFromEdgeBot = 8 - distFromEdgeTop;
+    int distFromEdgeRight = 7 - distFromEdgeLeft;
+    int distFromEdgeBot = 7 - distFromEdgeTop;
 
     // 1. Move diagonal up left.
     int tempDist;
@@ -583,6 +584,7 @@ void bishopGen(int pieceLocation, int pieceType){
     }
     else{
         tempDist = distFromEdgeRight;
+        cout << "tempDIst " << tempDist << endl;
     }
 
     for(int i = 1; i < tempDist + 1; i++){

@@ -44,6 +44,7 @@ void addMoveToHistory(int pieceType, int origin, int destination, int destPieceT
 string calculateCoordinates(int location);
 void printHistory();
 void nextTurn();
+void displayLegalMoves();
 
 
 // Array of legal moves pulled from move generator.
@@ -62,6 +63,7 @@ int main(){
     emptyLegalMoves();
     // 0 meaning white is on top, 1 meaning black is on top.
     newGameSetup(1);
+    addPiece(2, 26);
     //kingTestSetUp();
     // Get user input.
     while(command != "quit"){
@@ -82,6 +84,8 @@ int main(){
         else if(command == "bthreat"){
             displayAttackBoard(1);
         }
+        else if(command == "getMoves")
+            displayLegalMoves();
     }
 
     return 0;
@@ -98,16 +102,33 @@ void fillLegalMoves(int pieceType, int pieceLocation){
             legalMoves[i] = *(legalMovesArr + i);
         }
     }
-
-    // Displays all legal moves for a specific piece.
-    //cout << endl << "legal squares to move to: " << endl;
-    //for(int i = 0; i < 64; i++){
-        //if((*(legalMovesArr + i)) > -1){
-        //    cout << *(legalMovesArr + i) << endl;
-        //}
-    //}
 }
 
+// Displays all legal moves for a specific piece.
+void displayLegalMoves(){
+    int pieceLocation;
+    int pieceType;
+    cout << "Move Location: ";
+    cin >> pieceLocation;
+    cout << "Piece Type: ";
+    cin >> pieceType;
+
+    int *legalMovesArr;
+    legalMovesArr = getLegalMoves(pieceType, pieceLocation);
+
+    for(int i = 0; i < 64; i++){
+        if((*(legalMovesArr + i)) > -1){
+            legalMoves[i] = *(legalMovesArr + i);
+        }
+    }
+
+    cout << endl << "legal squares to move to: " << endl;
+    for(int i = 0; i < 64; i++){
+        if((*(legalMovesArr + i)) > -1){
+            cout << *(legalMovesArr + i) << endl;
+        }
+    }
+}
 // Moves a piece from one square to another.
 // Handles legality of move as well as capture.
 void movePiece(){
@@ -126,7 +147,7 @@ void movePiece(){
     // Check turn for legality.
     if((tempPiece > 0 && turn == 0) || (tempPiece < 0 && turn == 1)){
 
-        // Creats array of legal moves the piece can take.
+        // Creates array of legal moves the piece can take.
         fillLegalMoves(tempPiece, origin);
 
         // Check to see if destination is in this list!
