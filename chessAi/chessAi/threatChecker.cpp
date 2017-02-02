@@ -21,12 +21,17 @@ void kingTestSetUp();
 
 // Functions from moveGenerator.cpp
 int *getLegalMoves(int pieceType, int pieceLocation);
+int *getThreatenedSquares(int pieceType, int pieceLocation);
 void pawnGen(int pieceLocation, int pieceType);
 void rookGen(int pieceLocation, int pieceType);
 void knightGen(int pieceLocation, int pieceType);
 void bishopGen(int pieceLocation, int pieceType);
 void queenGen(int pieceLocation, int pieceType);
 void kingGen(int pieceLocation, int pieceType);
+void pawnThreatGen(int pieceLocation, int pieceType);
+
+// Functions from threatChecker.cpp
+
 
 // The two attack boards.
 int whiteAttackBoard[8][8] = {};
@@ -43,7 +48,7 @@ void buildWhiteAttackBoard(){
     for(int i = 0; i < 64; i++){
         tempPiece = getPieceType(i);
         if(tempPiece > 0){
-            legalMovesArr = getLegalMoves(tempPiece, i);
+            legalMovesArr = getThreatenedSquares(tempPiece, i);
             for(int j = 0; j < 64; j++){
                 if((*(legalMovesArr + j)) > -1){
                     tempXPos = (*(legalMovesArr + j) / 8);
@@ -66,7 +71,7 @@ void buildBlackAttackBoard(){
     for(int i = 0; i < 64; i++){
         tempPiece = getPieceType(i);
         if(tempPiece < 0){
-            legalMovesArr = getLegalMoves(tempPiece, i);
+            legalMovesArr = getThreatenedSquares(tempPiece, i);
             for(int j = 0; j < 64; j++){
                 if((*(legalMovesArr + j)) > -1){
                     tempXPos = (*(legalMovesArr + j) / 8);
