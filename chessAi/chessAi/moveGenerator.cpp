@@ -584,7 +584,6 @@ void bishopGen(int pieceLocation, int pieceType){
     }
     else{
         tempDist = distFromEdgeRight;
-        cout << "tempDIst " << tempDist << endl;
     }
 
     for(int i = 1; i < tempDist + 1; i++){

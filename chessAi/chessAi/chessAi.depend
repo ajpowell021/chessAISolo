@@ -39,21 +39,21 @@
 	<cmath>
 	<algorithm>
 
-1485743161 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\board.cpp
+1486246353 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\board.cpp
 	<iostream>
 
-1486014895 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\movegenerator.cpp
+1486244916 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\movegenerator.cpp
 	<iostream>
 	<cmath>
 	<algorithm>
 
-1486015093 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\main.cpp
+1486246205 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\main.cpp
 	<iostream>
 	<string>
 	<cmath>
 	<algorithm>
 	<sstream>
 
-1485843831 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\threatchecker.cpp
+1486015355 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\threatchecker.cpp
 	<iostream>
 
