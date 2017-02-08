@@ -436,6 +436,20 @@ void checkCastle(int pieceType, int pieceLocation){
                 }
             }
         }
+        if(botLeftRook == false){
+            int temp = getPieceType(59) + getPieceType(58) + getPieceType(57);
+            if(temp == 0){
+                if(checkThreat(-6, 60) == false){
+                    if(checkThreat(-6, 59) == false){
+                        if(checkThreat(-6, 58) == false){
+                                // King can castle to top left!
+                                cout << "set to true" << endl;
+                                botLeftCastle = true;
+                        }
+                    }
+                }
+            }
+        }
         if(topRightRook == false){
             int temp = getPieceType(4) + getPieceType(5) + getPieceType(6);
             if(temp == 0){
@@ -444,6 +458,19 @@ void checkCastle(int pieceType, int pieceLocation){
                         if(checkThreat(6, 5) == false){
                             // King can castle to top left!
                             topRightCastle = true;
+                        }
+                    }
+                }
+            }
+        }
+        if(botRightRook == false){
+            int temp = getPieceType(61) + getPieceType(62);
+            if(temp == 0){
+                if(checkThreat(-6, 60) == false){
+                    if(checkThreat(-6, 61) == false){
+                        if(checkThreat(-6, 62) == false){
+                            // King can castle to top left!
+                            botRightCastle = true;
                         }
                     }
                 }
@@ -459,8 +486,20 @@ void checkCastle(int pieceType, int pieceLocation){
                     if(checkThreat(6, 59) == false){
                         if(checkThreat(6, 58) == false){
                                 // King can castle to top left!
-                                cout << "set to true" << endl;
                                 botLeftCastle = true;
+                        }
+                    }
+                }
+            }
+        }
+        if(topLeftRook == false){
+            int temp = getPieceType(1) + getPieceType(2);
+            if(temp == 0){
+                if(checkThreat(-6, 3) == false){
+                    if(checkThreat(-6, 2) == false){
+                        if(checkThreat(-6, 1) == false){
+                            // King can castle to top left!
+                            topLeftCastle = true;
                         }
                     }
                 }
@@ -479,21 +518,18 @@ void checkCastle(int pieceType, int pieceLocation){
                 }
             }
         }
-
+        if(topRightRook == false){
+            int temp = getPieceType(4) + getPieceType(5) + getPieceType(6);
+            if(temp == 0){
+                if(checkThreat(-6, 3) == false){
+                    if(checkThreat(-6, 4) == false){
+                        if(checkThreat(-6, 5) == false){
+                            // King can castle to top left!
+                            topRightCastle = true;
+                        }
+                    }
+                }
+            }
+        }
     }
-    // Black-Top
-    else if(pieceType < 0 && topColor == 0){
-
-    }
-    // Black-Bot
-    else if(pieceType < 0 && topColor == 0){
-
-    }
-
-
-
-
-
-
-
 }
