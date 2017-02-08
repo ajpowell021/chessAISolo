@@ -434,9 +434,24 @@ void checkCastle(int pieceType, int pieceLocation){
                             // King can castle to top left!
                             topLeftCastle = true;
                         }
+                        else{
+                            topLeftCastle = false;
+                        }
+                    }
+                    else{
+                        topLeftCastle = false;
                     }
                 }
+                else{
+                    topLeftCastle = false;
+                }
             }
+            else{
+                topLeftCastle = false;
+            }
+        }
+        else{
+            topLeftCastle = false;
         }
         if(botLeftRook == false){
             int temp = getPieceType(58) + getPieceType(57);
@@ -447,9 +462,24 @@ void checkCastle(int pieceType, int pieceLocation){
                                 // King can castle to top left!
                                 botLeftCastle = true;
                         }
+                        else{
+                            botLeftCastle = false;
+                        }
+                    }
+                    else{
+                        botLeftCastle = false;
                     }
                 }
+                else{
+                    botLeftCastle = false;
+                }
             }
+            else{
+                botLeftCastle = false;
+            }
+        }
+        else{
+            botLeftCastle = false;
         }
         if(topRightRook == false){
             int temp = getPieceType(4) + getPieceType(5) + getPieceType(6);
@@ -460,9 +490,24 @@ void checkCastle(int pieceType, int pieceLocation){
                             // King can castle to top left!
                             topRightCastle = true;
                         }
+                        else{
+                            topRightCastle = false;
+                        }
+                    }
+                    else{
+                        topRightCastle = false;
                     }
                 }
+                else{
+                    topRightCastle = false;
+                }
             }
+            else{
+                topRightCastle = false;
+            }
+        }
+        else{
+            topRightCastle = false;
         }
         if(botRightRook == false){
             int temp = getPieceType(60) + getPieceType(61) + getPieceType(62);
@@ -473,9 +518,24 @@ void checkCastle(int pieceType, int pieceLocation){
                             // King can castle to top left!
                             botRightCastle = true;
                         }
+                        else{
+                            botRightCastle = false;
+                        }
+                    }
+                    else{
+                        botRightCastle = false;
                     }
                 }
+                else{
+                    botRightCastle = false;
+                }
             }
+            else{
+                botRightCastle = false;
+            }
+        }
+        else{
+            botRightCastle = false;
         }
     }
     // White-Bot
@@ -489,9 +549,24 @@ void checkCastle(int pieceType, int pieceLocation){
                                 // King can castle to top left!
                                 botLeftCastle = true;
                         }
+                        else{
+                            botLeftCastle = false;
+                        }
+                    }
+                    else{
+                        botLeftCastle = false;
                     }
                 }
+                else{
+                    botLeftCastle = false;
+                }
             }
+            else{
+                botLeftCastle = false;
+            }
+        }
+        else{
+            botLeftCastle = false;
         }
         if(topLeftRook == false){
             int temp = getPieceType(1) + getPieceType(2) + getPieceType(3);
@@ -502,9 +577,24 @@ void checkCastle(int pieceType, int pieceLocation){
                             // King can castle to top left!
                             topLeftCastle = true;
                         }
+                        else{
+                            topLeftCastle = false;
+                        }
+                    }
+                    else{
+                        topLeftCastle = false;
                     }
                 }
+                else{
+                    topLeftCastle = false;
+                }
             }
+            else{
+                topLeftCastle = false;
+            }
+        }
+        else{
+            topLeftCastle = false;
         }
         if(botRightRook == false){
             int temp = getPieceType(61) + getPieceType(62);
@@ -515,9 +605,24 @@ void checkCastle(int pieceType, int pieceLocation){
                             // King can castle to top left!
                             botRightCastle = true;
                         }
+                        else{
+                            botRightCastle = false;
+                        }
+                    }
+                    else{
+                        botRightCastle = false;
                     }
                 }
+                else{
+                    botRightCastle = false;
+                }
             }
+            else{
+                botRightCastle = false;
+            }
+        }
+        else{
+            botRightCastle = false;
         }
         if(topRightRook == false){
             int temp = getPieceType(5) + getPieceType(6);
@@ -528,9 +633,24 @@ void checkCastle(int pieceType, int pieceLocation){
                             // King can castle to top left!
                             topRightCastle = true;
                         }
+                        else{
+                            topRightCastle = false;
+                        }
+                    }
+                    else{
+                        topRightCastle = false;
                     }
                 }
+                else{
+                    topRightCastle = false;
+                }
             }
+            else{
+                topRightCastle = false;
+            }
+        }
+        else{
+            topRightCastle = false;
         }
     }
 }
