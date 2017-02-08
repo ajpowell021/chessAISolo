@@ -45,7 +45,8 @@ string calculateCoordinates(int location);
 void printHistory();
 void nextTurn();
 void displayLegalMoves();
-
+void adjustRookBools(int pieceLocation, int pieceType);
+void checkCastle(int pieceType, int pieceLocation);
 
 // Array of legal moves pulled from move generator.
 int legalMoves[64];
@@ -57,13 +58,29 @@ int turnNumber = 0;
 // 0 is white, 1 is black.
 int turn = 0;
 
+// Has the rooks moved?
+bool topLeftRook = false;
+bool topRightRook = false;
+bool botLeftRook = false;
+bool botRightRook = false;
+
+// Final legality of castling.
+bool topLeftCastle = false;
+bool topRightCastle = false;
+bool botLeftCastle = false;
+bool botRightCastle = false;
+
 int main(){
     string command = "";
     boardInit();
     emptyLegalMoves();
     // 0 meaning white is on top, 1 meaning black is on top.
     newGameSetup(1);
-    addPiece(2, 26);
+    removePiece(50);
+    removePiece(57);
+    removePiece(58);
+    removePiece(5);
+    removePiece(6);
     //kingTestSetUp();
     // Get user input.
     while(command != "quit"){
@@ -150,6 +167,11 @@ void movePiece(){
         // Creates array of legal moves the piece can take.
         fillLegalMoves(tempPiece, origin);
 
+        // The castle check, piece being moved must be the king.
+        //if(tempPiece == 6 || tempPiece == -6){
+            checkCastle(tempPiece, origin);
+        //}
+
         // Check to see if destination is in this list!
         for(int i = 0; i < 64; i++){
             if(legalMoves[i] > -1){
@@ -168,8 +190,14 @@ void movePiece(){
             }
         }
 
-        // Handle the move here, maybe history too.
+        // Handle the move here.
         if(moveIsLegal == true){
+
+            // For castling.
+            if(tempPiece == 6 || tempPiece == -6 || tempPiece == 2 || tempPiece == -2){
+                adjustRookBools(origin, tempPiece);
+            }
+
             removePiece(origin);
             destPiece = getPieceType(destination);
             addPiece(tempPiece, destination);
@@ -188,6 +216,12 @@ void movePiece(){
     else{
         cout << "It is not this players turn." << endl;
     }
+
+    cout << "top left: " << topLeftCastle << endl;
+    cout << "top right: " << topRightCastle << endl;
+    cout << "bot left: " << botLeftCastle << endl;
+    cout << "bot right: " << botRightCastle << endl;
+
     emptyLegalMoves();
 }
 
@@ -347,5 +381,276 @@ void nextTurn(){
     }
     else{
         cout << endl << "TURN ERROR" << endl;
+    }
+}
+
+// Adjusts the bool values
+// involved with castling.
+void adjustRookBools(int pieceLocation, int pieceType){
+
+    if(pieceLocation == 0){
+        topLeftRook = true;
+        topLeftCastle = false;
+    }
+    else if(pieceLocation == 7){
+        topRightRook = true;
+        topRightCastle = false;
+    }
+    else if(pieceLocation == 56){
+        botLeftRook = true;
+        botLeftCastle = false;
+    }
+    else if(pieceLocation == 63){
+        botRightRook = true;
+        botRightCastle = false;
+    }
+    else if((pieceLocation == 3 && pieceType == 6) || pieceLocation == 4 && pieceType == -6){
+        topLeftRook = true;
+        topRightRook = true;
+        topLeftCastle = false;
+        topRightCastle = false;
+    }
+    else if((pieceLocation == 60 && pieceType == 6) || (pieceLocation == 59 && pieceType == -6)){
+        botLeftRook = true;
+        botRightRook = true;
+        botLeftCastle = false;
+        botRightCastle = false;
+    }
+}
+
+// Checks to see if a castle is a
+// legal move here or not.
+void checkCastle(int pieceType, int pieceLocation){
+    int topColor = getTopColor();
+
+    // White-Top
+    if(topColor == 0){
+        if(topLeftRook == false){
+            int temp = getPieceType(1) + getPieceType(2);
+            if(temp == 0){
+                if(checkThreat(6, 3) == false){
+                    if(checkThreat(6, 2) == false){
+                        if(checkThreat(6, 1) == false){
+                            // King can castle to top left!
+                            topLeftCastle = true;
+                        }
+                        else{
+                            topLeftCastle = false;
+                        }
+                    }
+                    else{
+                        topLeftCastle = false;
+                    }
+                }
+                else{
+                    topLeftCastle = false;
+                }
+            }
+            else{
+                topLeftCastle = false;
+            }
+        }
+        else{
+            topLeftCastle = false;
+        }
+        if(botLeftRook == false){
+            int temp = getPieceType(58) + getPieceType(57);
+            if(temp == 0){
+                if(checkThreat(-6, 67) == false){
+                    if(checkThreat(-6, 59) == false){
+                        if(checkThreat(-6, 58) == false){
+                                // King can castle to top left!
+                                botLeftCastle = true;
+                        }
+                        else{
+                            botLeftCastle = false;
+                        }
+                    }
+                    else{
+                        botLeftCastle = false;
+                    }
+                }
+                else{
+                    botLeftCastle = false;
+                }
+            }
+            else{
+                botLeftCastle = false;
+            }
+        }
+        else{
+            botLeftCastle = false;
+        }
+        if(topRightRook == false){
+            int temp = getPieceType(4) + getPieceType(5) + getPieceType(6);
+            if(temp == 0){
+                if(checkThreat(6, 3) == false){
+                    if(checkThreat(6, 4) == false){
+                        if(checkThreat(6, 5) == false){
+                            // King can castle to top left!
+                            topRightCastle = true;
+                        }
+                        else{
+                            topRightCastle = false;
+                        }
+                    }
+                    else{
+                        topRightCastle = false;
+                    }
+                }
+                else{
+                    topRightCastle = false;
+                }
+            }
+            else{
+                topRightCastle = false;
+            }
+        }
+        else{
+            topRightCastle = false;
+        }
+        if(botRightRook == false){
+            int temp = getPieceType(60) + getPieceType(61) + getPieceType(62);
+            if(temp == 0){
+                if(checkThreat(-6, 60) == false){
+                    if(checkThreat(-6, 61) == false){
+                        if(checkThreat(-6, 59) == false){
+                            // King can castle to top left!
+                            botRightCastle = true;
+                        }
+                        else{
+                            botRightCastle = false;
+                        }
+                    }
+                    else{
+                        botRightCastle = false;
+                    }
+                }
+                else{
+                    botRightCastle = false;
+                }
+            }
+            else{
+                botRightCastle = false;
+            }
+        }
+        else{
+            botRightCastle = false;
+        }
+    }
+    // White-Bot
+    else if(topColor == 1){
+        if(botLeftRook == false){
+            int temp = getPieceType(59) + getPieceType(58) + getPieceType(57);
+            if(temp == 0){
+                if(checkThreat(6, 60) == false){
+                    if(checkThreat(6, 59) == false){
+                        if(checkThreat(6, 58) == false){
+                                // King can castle to top left!
+                                botLeftCastle = true;
+                        }
+                        else{
+                            botLeftCastle = false;
+                        }
+                    }
+                    else{
+                        botLeftCastle = false;
+                    }
+                }
+                else{
+                    botLeftCastle = false;
+                }
+            }
+            else{
+                botLeftCastle = false;
+            }
+        }
+        else{
+            botLeftCastle = false;
+        }
+        if(topLeftRook == false){
+            int temp = getPieceType(1) + getPieceType(2) + getPieceType(3);
+            if(temp == 0){
+                if(checkThreat(-6, 3) == false){
+                    if(checkThreat(-6, 2) == false){
+                        if(checkThreat(-6, 4) == false){
+                            // King can castle to top left!
+                            topLeftCastle = true;
+                        }
+                        else{
+                            topLeftCastle = false;
+                        }
+                    }
+                    else{
+                        topLeftCastle = false;
+                    }
+                }
+                else{
+                    topLeftCastle = false;
+                }
+            }
+            else{
+                topLeftCastle = false;
+            }
+        }
+        else{
+            topLeftCastle = false;
+        }
+        if(botRightRook == false){
+            int temp = getPieceType(61) + getPieceType(62);
+            if(temp == 0){
+                if(checkThreat(6, 60) == false){
+                    if(checkThreat(6, 61) == false){
+                        if(checkThreat(6, 62) == false){
+                            // King can castle to top left!
+                            botRightCastle = true;
+                        }
+                        else{
+                            botRightCastle = false;
+                        }
+                    }
+                    else{
+                        botRightCastle = false;
+                    }
+                }
+                else{
+                    botRightCastle = false;
+                }
+            }
+            else{
+                botRightCastle = false;
+            }
+        }
+        else{
+            botRightCastle = false;
+        }
+        if(topRightRook == false){
+            int temp = getPieceType(5) + getPieceType(6);
+            if(temp == 0){
+                if(checkThreat(-6, 4) == false){
+                    if(checkThreat(-6, 5) == false){
+                        if(checkThreat(-6, 6) == false){
+                            // King can castle to top left!
+                            topRightCastle = true;
+                        }
+                        else{
+                            topRightCastle = false;
+                        }
+                    }
+                    else{
+                        topRightCastle = false;
+                    }
+                }
+                else{
+                    topRightCastle = false;
+                }
+            }
+            else{
+                topRightCastle = false;
+            }
+        }
+        else{
+            topRightCastle = false;
+        }
     }
 }
