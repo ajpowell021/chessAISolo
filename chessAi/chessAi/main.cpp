@@ -79,6 +79,8 @@ int main(){
     removePiece(50);
     removePiece(57);
     removePiece(58);
+    removePiece(5);
+    removePiece(6);
     //kingTestSetUp();
     // Get user input.
     while(command != "quit"){
@@ -170,11 +172,6 @@ void movePiece(){
             checkCastle(tempPiece, origin);
         //}
 
-        cout << "top left: " << topLeftCastle << endl;
-        cout << "top right: " << topRightCastle << endl;
-        cout << "bot left: " << botLeftCastle << endl;
-        cout << "bot right: " << botRightCastle << endl;
-
         // Check to see if destination is in this list!
         for(int i = 0; i < 64; i++){
             if(legalMoves[i] > -1){
@@ -219,6 +216,11 @@ void movePiece(){
     else{
         cout << "It is not this players turn." << endl;
     }
+
+    cout << "top left: " << topLeftCastle << endl;
+    cout << "top right: " << topRightCastle << endl;
+    cout << "bot left: " << botLeftCastle << endl;
+    cout << "bot right: " << botRightCastle << endl;
 
     emptyLegalMoves();
 }
@@ -437,13 +439,12 @@ void checkCastle(int pieceType, int pieceLocation){
             }
         }
         if(botLeftRook == false){
-            int temp = getPieceType(59) + getPieceType(58) + getPieceType(57);
+            int temp = getPieceType(58) + getPieceType(57);
             if(temp == 0){
-                if(checkThreat(-6, 60) == false){
+                if(checkThreat(-6, 67) == false){
                     if(checkThreat(-6, 59) == false){
                         if(checkThreat(-6, 58) == false){
                                 // King can castle to top left!
-                                cout << "set to true" << endl;
                                 botLeftCastle = true;
                         }
                     }
@@ -464,11 +465,11 @@ void checkCastle(int pieceType, int pieceLocation){
             }
         }
         if(botRightRook == false){
-            int temp = getPieceType(61) + getPieceType(62);
+            int temp = getPieceType(60) + getPieceType(61) + getPieceType(62);
             if(temp == 0){
                 if(checkThreat(-6, 60) == false){
                     if(checkThreat(-6, 61) == false){
-                        if(checkThreat(-6, 62) == false){
+                        if(checkThreat(-6, 59) == false){
                             // King can castle to top left!
                             botRightCastle = true;
                         }
@@ -493,11 +494,11 @@ void checkCastle(int pieceType, int pieceLocation){
             }
         }
         if(topLeftRook == false){
-            int temp = getPieceType(1) + getPieceType(2);
+            int temp = getPieceType(1) + getPieceType(2) + getPieceType(3);
             if(temp == 0){
                 if(checkThreat(-6, 3) == false){
                     if(checkThreat(-6, 2) == false){
-                        if(checkThreat(-6, 1) == false){
+                        if(checkThreat(-6, 4) == false){
                             // King can castle to top left!
                             topLeftCastle = true;
                         }
@@ -519,11 +520,11 @@ void checkCastle(int pieceType, int pieceLocation){
             }
         }
         if(topRightRook == false){
-            int temp = getPieceType(4) + getPieceType(5) + getPieceType(6);
+            int temp = getPieceType(5) + getPieceType(6);
             if(temp == 0){
-                if(checkThreat(-6, 3) == false){
-                    if(checkThreat(-6, 4) == false){
-                        if(checkThreat(-6, 5) == false){
+                if(checkThreat(-6, 4) == false){
+                    if(checkThreat(-6, 5) == false){
+                        if(checkThreat(-6, 6) == false){
                             // King can castle to top left!
                             topRightCastle = true;
                         }
