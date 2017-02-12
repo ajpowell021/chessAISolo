@@ -224,7 +224,40 @@ void movePiece(){
                 addMoveToHistory(tempPiece, origin, destination, destPiece);
             }
             else{
-                // MAKE HISTORY FOR CASTLING HERE!!!
+                if(destination == 58 || destination == 61 || destination == 2 || destination == 5){
+                    // Queen's side castle.
+                    // Whites turn, start new line.
+                    if(turn == 0){
+                        turnNumber++;
+                        string tempTurnNumber;
+                        ostringstream Convert;
+                        Convert << turnNumber;
+                        tempTurnNumber = Convert.str();
+                        history[turnNumber] = tempTurnNumber + ". " + "O-O-O" + " ";
+                    }
+                    // Blacks turn, add to old line.
+                    else{
+                        string temp = history[turnNumber];
+                        history[turnNumber] = temp + "O-O-O";
+                    }
+                }
+                else{
+                    // King's side castle.
+                    // Whites turn, start new line.
+                    if(turn == 0){
+                        turnNumber++;
+                        string tempTurnNumber;
+                        ostringstream Convert;
+                        Convert << turnNumber;
+                        tempTurnNumber = Convert.str();
+                        history[turnNumber] = tempTurnNumber + ". " + "O-O" + " ";
+                    }
+                    // Blacks turn, add to old line.
+                    else{
+                        string temp = history[turnNumber];
+                        history[turnNumber] = temp + "O-O";
+                    }
+                }
             }
             nextTurn();
         }
