@@ -155,3 +155,50 @@ void kingTestSetUp(){
     addPiece(6, 44);
     addPiece(-5, 27);
 }
+
+void moveRookCastle(int destination){
+    int tempPiece;
+    if(destination == 1){
+        tempPiece = getPieceType(0);
+        removePiece(0);
+        addPiece(tempPiece, 2);
+    }
+    else if(destination == 5){
+        tempPiece = getPieceType(7);
+        removePiece(7);
+        addPiece(tempPiece, 4);
+    }
+    else if(destination == 58){
+        tempPiece = getPieceType(56);
+        removePiece(56);
+        addPiece(tempPiece, 59);
+    }
+    else if(destination == 62){
+        tempPiece = getPieceType(63);
+        removePiece(63);
+        addPiece(tempPiece, 61);
+    }
+    else if(destination == 2){
+        tempPiece = getPieceType(0);
+        removePiece(0);
+        addPiece(tempPiece, 3);
+    }
+    else if(destination == 6){
+        tempPiece = getPieceType(7);
+        removePiece(7);
+        addPiece(tempPiece, 5);
+    }
+    else if(destination == 57){
+        tempPiece = getPieceType(56);
+        removePiece(56);
+        addPiece(tempPiece, 58);
+    }
+    else if(destination == 61){
+        tempPiece = getPieceType(63);
+        removePiece(63);
+        addPiece(tempPiece, 60);
+    }
+    else{
+        cout << "eror occured related to castling. << endl";
+    }
+}

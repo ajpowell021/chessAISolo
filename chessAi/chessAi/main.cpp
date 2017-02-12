@@ -20,6 +20,7 @@ void newGameSetup(int top);
 int getPieceType(int pieceLocation);
 bool capturablePiece(int destination, int capturePiece);
 void kingTestSetUp();
+void moveRookCastle(int destination);
 
 // Functions from moveGenerator.cpp
 int *getLegalMoves(int pieceType, int pieceLocation);
@@ -47,6 +48,7 @@ void nextTurn();
 void displayLegalMoves();
 void adjustRookBools(int pieceLocation, int pieceType);
 void checkCastle(int pieceType, int pieceLocation);
+void addCastleToArray(int tempPiece);
 
 // Array of legal moves pulled from move generator.
 int legalMoves[64];
@@ -154,6 +156,7 @@ void movePiece(){
     int tempPiece;
     int destPiece = 0;
     bool moveIsLegal = false;
+    bool moveIsCastle = false;
 
     cout <<endl << "From: ";
     cin >> origin;
@@ -166,11 +169,11 @@ void movePiece(){
 
         // Creates array of legal moves the piece can take.
         fillLegalMoves(tempPiece, origin);
+        checkCastle(tempPiece, origin);
 
-        // The castle check, piece being moved must be the king.
-        //if(tempPiece == 6 || tempPiece == -6){
-            checkCastle(tempPiece, origin);
-        //}
+        if(tempPiece == 6 || tempPiece == -6){
+            addCastleToArray(tempPiece);
+        }
 
         // Check to see if destination is in this list!
         for(int i = 0; i < 64; i++){
@@ -198,6 +201,17 @@ void movePiece(){
                 adjustRookBools(origin, tempPiece);
             }
 
+            // Check if rook needs to be moved in event of
+            // a castle.
+            if(tempPiece == 6 || tempPiece == -6){
+                if(origin == 3 || origin == 4 || origin == 59 || origin == 60){
+                    if( destination == 1 || destination == 5 || destination == 58 || destination == 62 || destination == 2 || destination == 6 || destination == 57 || destination == 61){
+                        moveRookCastle(destination);
+                        moveIsCastle = true;
+                    }
+                }
+            }
+
             removePiece(origin);
             destPiece = getPieceType(destination);
             addPiece(tempPiece, destination);
@@ -206,7 +220,12 @@ void movePiece(){
                 cout << "Capture" << endl;
             }
             cout << endl << "Piece has been moved." << endl;
-            addMoveToHistory(tempPiece, origin, destination, destPiece);
+            if(moveIsCastle == false){
+                addMoveToHistory(tempPiece, origin, destination, destPiece);
+            }
+            else{
+                // MAKE HISTORY FOR CASTLING HERE!!!
+            }
             nextTurn();
         }
         else{
@@ -216,11 +235,6 @@ void movePiece(){
     else{
         cout << "It is not this players turn." << endl;
     }
-
-    cout << "top left: " << topLeftCastle << endl;
-    cout << "top right: " << topRightCastle << endl;
-    cout << "bot left: " << botLeftCastle << endl;
-    cout << "bot right: " << botRightCastle << endl;
 
     emptyLegalMoves();
 }
@@ -653,4 +667,45 @@ void checkCastle(int pieceType, int pieceLocation){
             topRightCastle = false;
         }
     }
+}
+
+// Adds castle to the move array if
+// the move is legal.
+void addCastleToArray(int tempPiece){
+    int topColor = getTopColor();
+      if(tempPiece == 6){
+          if(topColor == 0){
+            if(topLeftCastle == true){
+                legalMoves[10] = 1;
+            }
+            if(topRightCastle == true){
+                legalMoves[11] = 5;
+            }
+          }
+          else{
+              if(botLeftCastle == true){
+                  legalMoves[10] = 58;
+              }
+              if(botRightCastle == true){
+                  legalMoves[11] = 62;
+              }
+          }
+      }
+      else{
+          if(topColor == 1){
+              if(topLeftCastle == true){
+                  legalMoves[10] = 2;
+              }
+              if(topRightCastle == true){
+                 legalMoves[11] = 6;
+              }
+          }
+          else{
+              if(botLeftCastle == true){
+                  legalMoves[10] = 57;
+              }
+              if(botRightCastle == true){
+                  legalMoves[11] = 61;              }
+          }
+      }
 }
