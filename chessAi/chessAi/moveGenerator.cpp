@@ -21,6 +21,8 @@ void kingTestSetUp();
 
 static int legalMovesArr[64];
 
+int passantLocation;
+
 // Which color is on top of board.
 static int topColor;
 
@@ -38,6 +40,13 @@ void pawnThreatGen(int pieceLocation, int pieceType);
 
 // Other Functions
 bool inRange(int destination);
+void makePassantTrue();
+void makePassantFalse();
+void setPassantLocation(int location);
+int getPassantLocation();
+
+// Variables
+bool lastMovePassant = false;
 
 // Function that returns only threatened squares.
 // Called by threat checker, mostly for pawns.
@@ -95,6 +104,7 @@ void pawnThreatGen(int pieceLocation, int pieceType){
         }
     }
     // Piece is moving up.
+
     else{
         // Capture if possible.
         if(col != 0){
@@ -162,6 +172,9 @@ void pawnGen(int pieceLocation, int pieceType){
     // Starting position of array of legal moves.
     int currArrPos = 0;
 
+    // Which row is the pawn currently in.
+    int row = pieceLocation / 8;
+
     // Piece is moving down.
     if((topColor == 0 && pieceType == 1) || (topColor == 1 && pieceType == -1)){
 
@@ -228,6 +241,84 @@ void pawnGen(int pieceLocation, int pieceType){
             }
         }
     }
+
+    // En passant
+    // 1. Pawn must be 3 squares above starting position.
+    // 2. Other pawn just moved two squares last turn and must be directly beside the pawn.
+    // 3. The 2-square move must have happened on the last turn.
+    if(pieceType == 1 && topColor == 1){
+        // Piece is white, started on bottom.
+        if(row == 3){
+            if(lastMovePassant == true){
+                if(passantLocation == (pieceLocation - 1)){
+                    legalMovesArr[currArrPos] = (pieceLocation - 9);
+                    currArrPos++;
+                }
+                else if(passantLocation == (pieceLocation + 1)){
+                    legalMovesArr[currArrPos] = (pieceLocation - 7);
+                    currArrPos++;
+                }
+                else{
+                    // Left blank as no en passant is possible.
+                }
+            }
+        }
+    }
+    else if(pieceType == 1 && topColor == 0){
+        // Piece is white, started on top.
+        if(row == 4){
+            if(lastMovePassant == true){
+                if(passantLocation == (pieceLocation - 1)){
+                    legalMovesArr[currArrPos] = (pieceLocation + 7);
+                    currArrPos++;
+                }
+                else if(passantLocation == (pieceLocation + 1)){
+                    legalMovesArr[currArrPos] = (pieceLocation + 9);
+                    currArrPos++;
+                }
+                else{
+                    // Left blank as no en passant is possible.
+                }
+            }
+        }
+    }
+    else if(pieceType == -1 && topColor == 1){
+        // Piece is black, started on top.
+        if(row == 4){
+            if(lastMovePassant == true){
+                if(passantLocation == (pieceLocation - 1)){
+                    legalMovesArr[currArrPos] = (pieceLocation + 7);
+                    currArrPos++;
+                }
+                else if(passantLocation == (pieceLocation + 1)){
+                    legalMovesArr[currArrPos] = (pieceLocation + 9);
+                    currArrPos++;
+                }
+                else{
+                    // Left blank as no en passant is possible.
+                }
+            }
+        }
+    }
+    else if(pieceType == -1 && topColor == 0){
+        // Piece is black, started on bottom.
+        if(row == 3){
+            if(lastMovePassant == true){
+                if(passantLocation == (pieceLocation - 1)){
+                    legalMovesArr[currArrPos] = (pieceLocation - 9);
+                    currArrPos++;
+                }
+                else if(passantLocation == (pieceLocation + 1)){
+                    legalMovesArr[currArrPos] = (pieceLocation - 7);
+                    currArrPos++;
+                }
+                else{
+                    // Left blank as no en passant is possible.
+                }
+            }
+        }
+    }
+    // Promotion
 }
 
 void rookGen(int pieceLocation, int pieceType){
@@ -919,7 +1010,6 @@ void kingGen(int pieceLocation, int pieceType){
     // 3. One left.
     // 4. One right.
     // 5. Can't move to any of these if the square is threatened.
-    // 6. Castling?
 
     int currArrPos = 0;
 
@@ -994,4 +1084,22 @@ void kingGen(int pieceLocation, int pieceType){
             }
         }
     }
+}
+
+// Last move made was a double move.
+void makePassantTrue(){
+    lastMovePassant = true;
+}
+
+// Last move made was not a double move.
+void makePassantFalse(){
+    lastMovePassant = false;
+}
+
+void setPassantLocation(int location){
+    passantLocation = location;
+}
+
+int getPassantLocation(){
+    return passantLocation;
 }
