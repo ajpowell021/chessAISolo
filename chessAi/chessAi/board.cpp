@@ -202,3 +202,15 @@ void moveRookCastle(int destination){
         cout << "eror occured related to castling. << endl";
     }
 }
+
+void castleTestSetUp(){
+    topColor = 1;
+    addPiece(2, 56);
+    addPiece(2, 63);
+    addPiece(-2, 7);
+    addPiece(-2, 0);
+    addPiece(6, 60);
+    addPiece(-6, 4);
+    addPiece(1, 50);
+    addPiece(-1, 13);
+}
