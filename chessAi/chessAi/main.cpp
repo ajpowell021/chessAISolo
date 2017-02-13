@@ -21,6 +21,7 @@ int getPieceType(int pieceLocation);
 bool capturablePiece(int destination, int capturePiece);
 void kingTestSetUp();
 void moveRookCastle(int destination);
+void castleTestSetUp();
 
 // Functions from moveGenerator.cpp
 int *getLegalMoves(int pieceType, int pieceLocation);
@@ -77,12 +78,8 @@ int main(){
     boardInit();
     emptyLegalMoves();
     // 0 meaning white is on top, 1 meaning black is on top.
-    newGameSetup(1);
-    removePiece(50);
-    removePiece(57);
-    removePiece(58);
-    removePiece(5);
-    removePiece(6);
+    //newGameSetup(1);
+    castleTestSetUp();
     //kingTestSetUp();
     // Get user input.
     while(command != "quit"){
