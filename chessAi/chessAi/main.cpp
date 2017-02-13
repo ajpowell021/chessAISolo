@@ -31,6 +31,10 @@ void knightGen(int pieceLocation, int pieceType);
 void bishopGen(int pieceLocation, int pieceType);
 void queenGen(int pieceLocation, int pieceType);
 void kingGen(int pieceLocation, int pieceType);
+void makePassantTrue();
+void makePassantFalse();
+void setPassantLocation(int location);
+int getPassantLocation();
 
 // Functions from threatChecker.cpp
 void displayAttackBoard(int color);
@@ -78,8 +82,10 @@ int main(){
     boardInit();
     emptyLegalMoves();
     // 0 meaning white is on top, 1 meaning black is on top.
-    //newGameSetup(1);
-    castleTestSetUp();
+    newGameSetup(1);
+    addPiece(1, 25);
+    addPiece(-1, 38);
+    //castleTestSetUp();
     //kingTestSetUp();
     // Get user input.
     while(command != "quit"){
@@ -216,11 +222,38 @@ void movePiece(){
                 // A capture took place.
                 cout << "Capture" << endl;
             }
+
+            // Check for en passant capture.
+            if(tempPiece == 1 || tempPiece == -1){
+                if((origin - destination == 9) || (origin - destination == 7) || (origin - destination == -9) || (origin - destination == -7)){
+                    // Move is diagonal
+                    if(destPiece == 0){
+                        // Diagonal move by pawn with no capture, must be en passant.
+                        int temp = getPassantLocation();
+                        removePiece(temp);
+                        cout << "En passant capture!" << endl;
+                    }
+                }
+            }
+
             cout << endl << "Piece has been moved." << endl;
             if(moveIsCastle == false){
                 addMoveToHistory(tempPiece, origin, destination, destPiece);
+                if(tempPiece == 1 || tempPiece == -1){
+                    if(((origin - destination) == 16) || (origin - destination == -16)){
+                        makePassantTrue();
+                        setPassantLocation(destination);
+                    }
+                    else{
+                        makePassantFalse();
+                    }
+                }
+                else{
+                    makePassantFalse();
+                }
             }
             else{
+                makePassantFalse();
                 if(destination == 58 || destination == 61 || destination == 2 || destination == 5){
                     // Queen's side castle.
                     // Whites turn, start new line.
