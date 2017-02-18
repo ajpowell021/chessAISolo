@@ -39,15 +39,15 @@
 	<cmath>
 	<algorithm>
 
-1487396305 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\board.cpp
+1487397163 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\board.cpp
 	<iostream>
 
-1486952933 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\movegenerator.cpp
+1487397788 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\movegenerator.cpp
 	<iostream>
 	<cmath>
 	<algorithm>
 
-1486952227 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\main.cpp
+1487397589 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\main.cpp
 	<iostream>
 	<string>
 	<cmath>

@@ -86,6 +86,7 @@ int main(){
     // 0 meaning white is on top, 1 meaning black is on top.
     //newGameSetup(1);
     pawnPromotionSetUp();
+    addPiece(5, 4);
     //castleTestSetUp();
     //kingTestSetUp();
     // Get user input.
