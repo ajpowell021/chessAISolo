@@ -318,7 +318,6 @@ void pawnGen(int pieceLocation, int pieceType){
             }
         }
     }
-    // Promotion
 }
 
 void rookGen(int pieceLocation, int pieceType){
@@ -777,7 +776,7 @@ void queenGen(int pieceLocation, int pieceType){
     int distFromEdgeLeft = pieceLocation % 8;
     int distFromEdgeTop = pieceLocation / 8;
     int distFromEdgeRight = 8 - distFromEdgeLeft;
-    int distFromEdgeBot = 8 - distFromEdgeTop;
+    int distFromEdgeBot = 7 - distFromEdgeTop;
 
     // 1. Move diagonal up left.
     int tempDist;
@@ -878,7 +877,7 @@ void queenGen(int pieceLocation, int pieceType){
         tempDist = distFromEdgeRight;
     }
 
-    for(int i = 1; i < tempDist + 1; i++){
+    for(int i = 1; i < tempDist; i++){
         if(piecePresent(pieceLocation + (9 * i)) == false){
             if(inRange(pieceLocation + (9 * i)) == true){
                 legalMovesArr[currArrPos] = (pieceLocation + (9 * i));
@@ -925,9 +924,10 @@ void queenGen(int pieceLocation, int pieceType){
     }
 
     // 6. Move down.
-    distFromEdgeBot = 8 - distFromEdgeBot;
+    //distFromEdgeBot = 7 - distFromEdgeBot;
 
     for(int i = 1; i < distFromEdgeBot + 1; i++){
+        cout << "why" << endl;
         if(piecePresent(pieceLocation + (8 * i)) == true){
 
             if(capturablePiece((pieceLocation + (8 * i)), pieceType) == true){
