@@ -214,3 +214,44 @@ void castleTestSetUp(){
     addPiece(1, 50);
     addPiece(-1, 13);
 }
+
+// A setup that makes testin pawn promotion easier.
+void pawnPromotionSetUp(){
+    topColor = 1;
+    addPiece(1, 8);
+    addPiece(-1, 47);
+}
+
+// Checks if a pawn has made it
+// to the promotion area.
+// Returns the square number
+// the pawn is on, returns
+// 100 if no promotion.
+int pawnPromotionCheck(){
+    if(topColor == 0){
+        for(int i = 56; i < 64; i++){
+            if(getPieceType(i) == 1){
+                return i;
+            }
+        }
+        for(int i = 0; i < 8; i++){
+            if(getPieceType(i) == -1){
+                return i;
+            }
+        }
+        return 100;
+    }
+    else{
+        for(int i = 56; i < 64; i++){
+            if(getPieceType(i) == -1){
+                return i;
+            }
+        }
+        for(int i = 0; i < 8; i++){
+            if(getPieceType(i) == 1){
+                return i;
+            }
+        }
+        return 100;
+    }
+}

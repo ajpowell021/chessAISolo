@@ -22,6 +22,8 @@ bool capturablePiece(int destination, int capturePiece);
 void kingTestSetUp();
 void moveRookCastle(int destination);
 void castleTestSetUp();
+int pawnPromotionCheck();
+void pawnPromotionSetUp();
 
 // Functions from moveGenerator.cpp
 int *getLegalMoves(int pieceType, int pieceLocation);
@@ -82,9 +84,8 @@ int main(){
     boardInit();
     emptyLegalMoves();
     // 0 meaning white is on top, 1 meaning black is on top.
-    newGameSetup(1);
-    addPiece(1, 25);
-    addPiece(-1, 38);
+    //newGameSetup(1);
+    pawnPromotionSetUp();
     //castleTestSetUp();
     //kingTestSetUp();
     // Get user input.
@@ -299,6 +300,47 @@ void movePiece(){
         cout << "It is not this players turn." << endl;
     }
 
+    // Check for pawn promotion.
+    int promotedPawnLocation = pawnPromotionCheck();
+    string pieceInto;
+    bool pieceEntered = false;
+    if(promotedPawnLocation != 100){
+        int pieceColor = getPieceType(promotedPawnLocation);
+        while (pieceEntered == false){
+
+            cout << "Please type the name of the piece you would like the pawn in " << promotedPawnLocation
+            << " to be promoted into: ";
+            cin >> pieceInto;
+            cout << endl;
+
+            if(pieceInto == "queen"){
+                removePiece(promotedPawnLocation);
+                addPiece((5 * pieceColor), promotedPawnLocation);
+                pieceEntered = true;
+            }
+            else if(pieceInto == "rook"){
+                removePiece(promotedPawnLocation);
+                addPiece((2 * pieceColor), promotedPawnLocation);
+                pieceEntered = true;
+            }
+            else if(pieceInto == "knight"){
+                removePiece(promotedPawnLocation);
+                addPiece((3 * pieceColor), promotedPawnLocation);
+                pieceEntered = true;
+            }
+            else if(pieceInto == "bishop"){
+                removePiece(promotedPawnLocation);
+                addPiece((4 * pieceColor), promotedPawnLocation);
+                pieceEntered = true;
+            }
+            else{
+                cout << "Please enter a valid name. For example, queen." << endl;
+            }
+        }
+    }
+    else{
+        // No promotion.
+    }
     emptyLegalMoves();
 }
 
