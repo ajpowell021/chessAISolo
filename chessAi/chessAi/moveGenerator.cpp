@@ -927,7 +927,6 @@ void queenGen(int pieceLocation, int pieceType){
     //distFromEdgeBot = 7 - distFromEdgeBot;
 
     for(int i = 1; i < distFromEdgeBot + 1; i++){
-        cout << "why" << endl;
         if(piecePresent(pieceLocation + (8 * i)) == true){
 
             if(capturablePiece((pieceLocation + (8 * i)), pieceType) == true){

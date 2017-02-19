@@ -94,7 +94,7 @@ void displayAttackBoard(int color){
                 cout << whiteAttackBoard[i][j] << "  ";
             }
         }
-        cout << endl;
+        cout << endl << endl;
     }
     else{
         buildBlackAttackBoard();
@@ -140,5 +140,78 @@ bool checkThreat(int tempPiece, int location){
         else{
             return false;
         }
+    }
+}
+
+// Returns an int that lists all of the pieces that
+// threaten a specific square.
+// Parameter is the location of the piece that we are
+// checking the threat of.
+int getPiecesThatThreaten(int location){
+
+    // Find the color of the threatened piece.
+    int pieceType = getPieceType(location);
+    int *threatList;
+    int returnValue = 0;
+    // Piece is white.
+    if(pieceType > 0){
+
+        for(int i = 0; i < 63; i++){
+            int tempPiece = getPieceType(i);
+            if(tempPiece < 0){
+                threatList =  getThreatenedSquares(tempPiece, i);
+                for(int j = 0; j < 60; j++){
+                    if(*(threatList + j) == location){
+                        // The original piece is threatened by this piece
+                        // so we need to add the piece to the return value.
+                        switch(tempPiece){
+                            case -1: returnValue += 1;
+                                break;
+                            case -2: returnValue += 10;
+                                break;
+                            case -3: returnValue += 100;
+                                break;
+                            case -4: returnValue += 1000;
+                                break;
+                            case -5: returnValue += 10000;
+                                break;
+                            case -6: returnValue += 100000;
+                                break;
+                        }
+                    }
+                }
+            }
+        }
+        return returnValue;
+    }
+    // Piece is black.
+    else{
+        for(int i = 0; i < 63; i++){
+            int tempPiece = getPieceType(i);
+            if(tempPiece > 0){
+                threatList =  getThreatenedSquares(tempPiece, i);
+                for(int j = 0; j < 60; j++){
+                    if(*(threatList + j) == location){
+                        // The original piece is threatened by this piece
+                        // so we need to add the piece to the return value.
+                        switch(tempPiece){
+                            case 1: returnValue += 1;
+                                break;
+                            case 2: returnValue += 10;
+                                break;
+                            case 3: returnValue += 100;
+                                break;
+                            case 4: returnValue += 1000;
+                                break;
+                            case 5: returnValue += 10000;
+                                break;
+                            case 6: returnValue += 100000;
+                                break;
+                        }
+                    }
+                }
+            }
+        }
+        return returnValue;
     }
 }

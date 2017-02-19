@@ -43,6 +43,7 @@ void displayAttackBoard(int color);
 void buildWhiteAttackBoard();
 void buildBlackAttackBoard();
 bool checkThreat(int color, int location);
+int getPiecesThatThreaten(int location);
 
 // Functions from main.cpp
 void returnLegalMoves();
@@ -84,9 +85,8 @@ int main(){
     boardInit();
     emptyLegalMoves();
     // 0 meaning white is on top, 1 meaning black is on top.
-    //newGameSetup(1);
-    pawnPromotionSetUp();
-    addPiece(5, 4);
+    newGameSetup(1);
+    //pawnPromotionSetUp();
     //castleTestSetUp();
     //kingTestSetUp();
     // Get user input.
@@ -108,8 +108,9 @@ int main(){
         else if(command == "bthreat"){
             displayAttackBoard(1);
         }
-        else if(command == "getMoves")
+        else if(command == "getMoves"){
             displayLegalMoves();
+        }
     }
 
     return 0;
