@@ -42,18 +42,18 @@
 1487397163 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\board.cpp
 	<iostream>
 
-1487482248 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\movegenerator.cpp
+1487485899 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\movegenerator.cpp
 	<iostream>
 	<cmath>
 	<algorithm>
 
-1487485251 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\main.cpp
+1487554002 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\main.cpp
 	<iostream>
 	<string>
 	<cmath>
 	<algorithm>
 	<sstream>
 
-1487485496 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\threatchecker.cpp
+1487554019 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\threatchecker.cpp
 	<iostream>
 

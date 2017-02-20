@@ -44,6 +44,7 @@ void buildWhiteAttackBoard();
 void buildBlackAttackBoard();
 bool checkThreat(int color, int location);
 int getPiecesThatThreaten(int location);
+int getPiecesThatProtect(int location);
 
 // Functions from main.cpp
 void returnLegalMoves();
