@@ -12,7 +12,7 @@ int getPositionScore(int location, int color);
 int getTopColor();
 
 // Sets the top color.
-int topColor = getTopColor();
+int tColor = getTopColor();
 
 // The main function that gets called by the
 // board score generator.  Location is the
@@ -30,8 +30,7 @@ int generatePawnScore(int location, int color){
 
 int getPositionScore(int location, int color){
 
-    //int scoreTable[8][8] = {0};
-    if(color == topColor){
+    if(color == tColor){
          int updatedScoreTable[8][8] = {
                             0, 0, 0, 0, 0, 0, 0, 0,
                             5, 10, 10, -25, -25, 10, 10, 5,
@@ -42,11 +41,6 @@ int getPositionScore(int location, int color){
                             50, 50, 50, 50, 50, 50, 50, 50,
                             0, 0, 0, 0, 0, 0, 0, 0
                             };
-        //for(int i = 0; i < 8; i++){
-          //  for(int j = 0; j < 8; j++){
-            //    scoreTable[i][j] = updatedScoreTable][i][j];
-              //}
-        //}
         int row = location / 8;
         int col = location % 8;
         return updatedScoreTable[row][col];
@@ -62,8 +56,8 @@ int getPositionScore(int location, int color){
                             5, 10, 10, -25, -25, 10, 10, 5,
                             0, 0, 0, 0, 0, 0, 0, 0
                             };
-                            int row = location / 8;
-                            int col = location % 8;
-                            return updatedScoreTable[row][col];
+            int row = location / 8;
+            int col = location % 8;
+            return updatedScoreTable[row][col];
     }
 }

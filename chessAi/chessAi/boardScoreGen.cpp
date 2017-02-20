@@ -18,27 +18,28 @@ int calcBoardScore(int color){
 
     int boardScore = 0;
     int colorModifier;
+    int tempColor;
 
     if(color == 0){
-        colorModifier = 1;
-    }
-    else{
-        colorModifier = -1;
-    }
+        // For white board check.
+        for(int i = 0; i < 64; i++){
 
-    for(int i = 0; i < 64; i++){
-
-        int tempPiece = getPieceType(i);
-        if(tempPiece == 1 || tempPiece == -1){
-            switch (tempPiece){
-                case -1:
-                    boardScore += (colorModifier * generatePawnScore(i, color));
-                    break;
-                case 1:
-                    boardScore += (colorModifier * generatePawnScore(i, color));
-                    break;
+            int tempPiece = getPieceType(i);
+            if(tempPiece == 1 || tempPiece == -1){
+                switch (tempPiece){
+                    case -1:
+                        boardScore -= (generatePawnScore(i, 1));
+                        break;
+                    case 1:
+                        boardScore += (generatePawnScore(i, 0));
+                        break;
+                }
             }
         }
+    }
+    else{
+        // For black board check.
+
     }
 
     return boardScore;
