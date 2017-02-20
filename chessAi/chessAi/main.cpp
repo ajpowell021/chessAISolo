@@ -62,6 +62,9 @@ void addCastleToArray(int tempPiece);
 // Functions from boardScoreGen.cpp
 int calcBoardScore(int color);
 
+// From pawnScoreGen, testing only.
+int generatePawnScore(int location, int color);
+
 // Array of legal moves pulled from move generator.
 int legalMoves[64];
 
@@ -115,8 +118,12 @@ int main(){
         else if(command == "getMoves"){
             displayLegalMoves();
         }
+        // These two are for testing.
         else if(command == "score"){
             cout << calcBoardScore(0) << endl;
+        }
+        else if(command == "pawn"){
+            cout << generatePawnScore(52, 0);
         }
     }
 
