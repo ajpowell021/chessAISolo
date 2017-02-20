@@ -59,6 +59,9 @@ void adjustRookBools(int pieceLocation, int pieceType);
 void checkCastle(int pieceType, int pieceLocation);
 void addCastleToArray(int tempPiece);
 
+// Functions from boardScoreGen.cpp
+int calcBoardScore(int color);
+
 // Array of legal moves pulled from move generator.
 int legalMoves[64];
 
@@ -111,6 +114,9 @@ int main(){
         }
         else if(command == "getMoves"){
             displayLegalMoves();
+        }
+        else if(command == "score"){
+            cout << calcBoardScore(0) << endl;
         }
     }
 

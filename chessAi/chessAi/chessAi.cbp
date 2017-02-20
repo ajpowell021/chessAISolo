@@ -23,11 +23,13 @@
 		</Compiler>
 		<Unit filename="board.cpp" />
 		<Unit filename="board.h" />
+		<Unit filename="boardScoreGen.cpp" />
 		<Unit filename="main.cpp">
 			<Option weight="0" />
 		</Unit>
 		<Unit filename="moveGenerator.cpp" />
 		<Unit filename="pawn.cpp" />
+		<Unit filename="pawnScoreGen.cpp" />
 		<Unit filename="pieceClass.cpp" />
 		<Unit filename="threatChecker.cpp" />
 		<Extensions>
