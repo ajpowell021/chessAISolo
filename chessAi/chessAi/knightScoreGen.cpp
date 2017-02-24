@@ -1,4 +1,4 @@
-// pawnScoreGen.cpp tallies the score of a pawn on a specific square, and returns that score
+// knightScoreGen.cpp tallies the score of a knight on a specific square, and returns that score
 // as an int to a total board score.
 
 #include <iostream>
@@ -6,9 +6,9 @@
 using namespace std;
 
 // Function declarations.
-int getPawnPositionScore(int location, int color);
-int getPawnDefendedValue(int location);
-int getPawnAttackedValue(int location);
+int getKnightPositionScore(int location, int color);
+int getKnightDefendedValue(int location);
+int getKnightAttackedValue(int location);
 
 // Functions from board.cpp
 int getTopColor();
@@ -18,62 +18,63 @@ int getPiecesThatProtect(int location);
 int getPiecesThatThreaten(int location);
 
 // Sets the top color.
-int tColor = getTopColor();
 
-// The main function that gets called by the
-// board score generator.  Location is the
-// square number of the piece.  Color is the color
-// of the pawn that is in the square.
-int generatePawnScore(int location, int color){
+// Main function that is called by the
+// board score generator.  Location is
+// the square number of the piece.
+// Color is the color of the knight that is
+// in the square.
+int generateKnightScore(int location, int color){
 
     int score = 0;
-    int pawnScore = 100;
+    int knightScore = 320;
 
-    score += pawnScore;
-    score += getPawnPositionScore(location, color);
-    score += getPawnDefendedValue(location);
-    score -+ getPawnAttackedValue(location);
+    score += knightScore;
+    score += getKnightPositionScore(location, color);
+    score += getKnightDefendedValue(location);
+    score -= getKnightAttackedValue(location);
 
     return score;
 }
 
-int getPawnPositionScore(int location, int color){
+int getKnightPositionScore(int location, int color){
+
+    int tColor = getTopColor();
 
     if(color != tColor){
-         int updatedScoreTable[8][8] = {
-                            0, 0, 0, 0, 0, 0, 0, 0,
-                            5, 10, 10, -25, -25, 10, 10, 5,
-                            5, -5, -10, 0, 0, -10, -5, 5,
-                            0, 0, 0, 25, 25, 0, 0, 0,
-                            5, 5, 10, 27, 27, 10, 5, 5,
-                            10, 10, 20, 30, 30, 20, 10, 10,
-                            50, 50, 50, 50, 50, 50, 50, 50,
-                            0, 0, 0, 0, 0, 0, 0, 0
+        int updatedScoreTable[8][8] = {
+                            -50, -40, -20, -30, -30, -20, -40, -50,
+                            -40, -20, 0, 5, 5, 0, -20, -40,
+                            -30, 5, 10, 15, 15, 10, 5, -30,
+                            -30, 0, 15, 20, 20, 15, 0, -30,
+                            -30, 5, 15, 20, 20, 15, 5, -30,
+                            -30, 0, 10, 15, 15, 10, 0, -30,
+                            -40, -20, 0, 0, 0, 0, -20, -40,
+                            -50, -40, -30, -30, -30, -30, -40, -50
                             };
         int row = location / 8;
         int col = location % 8;
+
         return updatedScoreTable[row][col];
     }
     else{
         int updatedScoreTable[8][8] = {
-                            0, 0, 0, 0, 0, 0, 0, 0,
-                            50, 50, 50, 50, 50, 50, 50, 50,
-                            10, 10, 20, 30, 30, 20, 10, 10,
-                            5, 5, 10, 27, 27, 10, 5, 5,
-                            0, 0, 0, 25, 25, 0, 0, 0,
-                            5, -5, -10, 0, 0, -10, -5, 5,
-                            5, 10, 10, -25, -25, 10, 10, 5,
-                            0, 0, 0, 0, 0, 0, 0, 0
-                            };
-            int row = location / 8;
-            int col = location % 8;
-            return updatedScoreTable[row][col];
+                            -50, -40, -30, -30, -30, -30, -40, -50,
+                            -40, -20, 0, 0, 0, 0, -20, -40,
+                            -30, 0, 10, 15, 15, 10, 0, -30,
+                            -30, 5, 15, 20, 20, 15, 5, -30,
+                            -30, 0, 15, 20, 20, 15, 0, -30,
+                            -30, 5, 10, 15, 15, 10, 5, -30,
+                            -40, -20, 0, 5, 5, 0, -20, -40,
+                            -50, -40, -20, -30, -30, -20, -40, -50
+                        };
+        int row = location / 8;
+        int col = location % 8;
+        return updatedScoreTable[row][col];
     }
 }
 
-// Returns the value gained by the piece being defended by
-// specific pieces.
-int getPawnDefendedValue(int location){
+int getKnightDefendedValue(int location){
 
     int defendNum = getPiecesThatProtect(location);
 
@@ -97,7 +98,7 @@ int getPawnDefendedValue(int location){
 
 // Returns the value gained by the piece being
 //attacked by specific pieces.
-int getPawnAttackedValue(int location){
+int getKnightAttackedValue(int location){
 
     int defendNum = getPiecesThatThreaten(location);
 
