@@ -7,6 +7,7 @@ using namespace std;
 
 // Piece Functions
 int generatePawnScore(int location, int color);
+int generateKnightScore(int location, int color);
 
 // Board Functions
 int getPieceType(int location);
@@ -25,7 +26,8 @@ int calcBoardScore(int color){
         for(int i = 0; i < 64; i++){
 
             int tempPiece = getPieceType(i);
-            if(tempPiece == 1 || tempPiece == -1){
+            // If statement is only here until function exists for all pieces...
+            if(tempPiece == 1 || tempPiece == -1 || tempPiece == 2 || tempPiece == -2){
                 switch (tempPiece){
                     case -1:
                         boardScore -= (generatePawnScore(i, 1));
@@ -33,6 +35,11 @@ int calcBoardScore(int color){
                     case 1:
                         boardScore += (generatePawnScore(i, 0));
                         break;
+                    case -2:
+                        boardScore -= (generateKnightScore(i, 1));
+                        break;
+                    case 2:
+                        boardScore += (generateKnightScore(i, 0));
                 }
             }
         }

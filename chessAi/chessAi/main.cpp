@@ -64,6 +64,7 @@ int calcBoardScore(int color);
 
 // From pawnScoreGen, testing only.
 int generatePawnScore(int location, int color);
+int generateKnightScore(int location, int color);
 
 // Array of legal moves pulled from move generator.
 int legalMoves[64];
@@ -124,6 +125,9 @@ int main(){
         }
         else if(command == "pawn"){
             cout << generatePawnScore(52, 0);
+        }
+        else if(command == "knight"){
+            cout << generateKnightScore(62, 0) << endl;
         }
     }
 
