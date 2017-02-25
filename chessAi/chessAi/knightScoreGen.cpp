@@ -12,6 +12,7 @@ int getKnightAttackedValue(int location);
 
 // Functions from board.cpp
 int getTopColor();
+bool getEndGame();
 
 // Functions from threatChecker.cpp
 int getPiecesThatProtect(int location);
@@ -33,6 +34,10 @@ int generateKnightScore(int location, int color){
     score += getKnightPositionScore(location, color);
     score += getKnightDefendedValue(location);
     score -= getKnightAttackedValue(location);
+
+    if(getEndGame() == true){
+        score -= 10;
+    }
 
     return score;
 }

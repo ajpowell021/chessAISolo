@@ -255,3 +255,44 @@ int pawnPromotionCheck(){
         return 100;
     }
 }
+
+// Returns true if it is endgame, false
+// otherwise.
+bool getEndGame(){
+
+    int tempPieceId;
+    int blackTotal;
+    int whiteTotal;
+
+    for(int i = 0; i < 64; i++){
+        tempPieceId = getPieceType(i);
+        switch (tempPieceId) {
+            case -1: blackTotal += 1;
+                break;
+            case 1: whiteTotal += 1;
+                break;
+            case -2: blackTotal += 5;
+                break;
+            case 2: whiteTotal += 5;
+                break;
+            case -3: blackTotal += 3;
+                break;
+            case 3: whiteTotal += 3;
+                break;
+            case -4: blackTotal += 3;
+                break;
+            case 4: whiteTotal += 3;
+                break;
+            case -5: blackTotal += 9;
+                break;
+            case 5: whiteTotal += 9;
+                break;
+        }
+    }
+    if(whiteTotal < 14 && blackTotal < 14){
+        return true;
+    }
+    else{
+        return false;
+    }
+}

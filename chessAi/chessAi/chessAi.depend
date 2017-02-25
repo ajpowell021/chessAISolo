@@ -39,7 +39,7 @@
 	<cmath>
 	<algorithm>
 
-1487397163 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\board.cpp
+1487991723 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\board.cpp
 	<iostream>
 
 1487485899 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\movegenerator.cpp
@@ -47,7 +47,7 @@
 	<cmath>
 	<algorithm>
 
-1487571256 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\main.cpp
+1487910816 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\main.cpp
 	<iostream>
 	<string>
 	<cmath>
@@ -57,10 +57,10 @@
 1487554313 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\threatchecker.cpp
 	<iostream>
 
-1487910385 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\boardscoregen.cpp
+1487910816 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\boardscoregen.cpp
 	<iostream>
 
-1487910279 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\pawnscoregen.cpp
+1487910816 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\pawnscoregen.cpp
 	<iostream>
 
 1487910513 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\knightscoregen.cpp
