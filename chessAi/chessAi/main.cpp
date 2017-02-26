@@ -24,6 +24,10 @@ void moveRookCastle(int destination);
 void castleTestSetUp();
 int pawnPromotionCheck();
 void pawnPromotionSetUp();
+void setWhiteCastle();
+void setBlackCastle();
+bool getWhiteCastle();
+bool getBlackCastle();
 
 // Functions from moveGenerator.cpp
 int *getLegalMoves(int pieceType, int pieceLocation);
@@ -232,6 +236,12 @@ void movePiece(){
                     if( destination == 1 || destination == 5 || destination == 58 || destination == 62 || destination == 2 || destination == 6 || destination == 57 || destination == 61){
                         moveRookCastle(destination);
                         moveIsCastle = true;
+                        if(tempPiece == 6){
+                            setWhiteCastle();
+                        }
+                        if(tempPiece == -6){
+                            setBlackCastle();
+                        }
                     }
                 }
             }

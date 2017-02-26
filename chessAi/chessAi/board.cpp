@@ -9,6 +9,10 @@ using namespace std;
 // Board declaration
 int boardArray[8][8] = {};
 
+// Has castling happened?
+bool whiteHasCastled = false;
+bool blackHasCastled = false;
+
 // Variable defining which color is on top of screen.
 // 0 if white.
 // 1 if black.
@@ -295,4 +299,20 @@ bool getEndGame(){
     else{
         return false;
     }
+}
+
+void setWhiteCastle(){
+    whiteHasCastled = true;
+}
+
+void setBlackCastle(){
+    blackHasCastled = true;
+}
+
+bool getWhiteCastle(){
+    return whiteHasCastled;
+}
+
+bool getBlackCastle(){
+    return blackHasCastled;
 }
