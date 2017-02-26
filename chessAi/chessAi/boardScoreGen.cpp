@@ -8,6 +8,7 @@ using namespace std;
 // Piece Functions
 int generatePawnScore(int location, int color);
 int generateKnightScore(int location, int color);
+int generateRookScore(int location, int color);
 
 // Board Functions
 int getPieceType(int location);
@@ -27,19 +28,34 @@ int calcBoardScore(int color){
 
             int tempPiece = getPieceType(i);
             // If statement is only here until function exists for all pieces...
-            if(tempPiece == 1 || tempPiece == -1 || tempPiece == 2 || tempPiece == -2){
+            // Also, all the debugging trash...
+            if(tempPiece == 1 || tempPiece == -1 || tempPiece == 3 || tempPiece == -3 || tempPiece == 2 || tempPiece == -2){
                 switch (tempPiece){
                     case -1:
                         boardScore -= (generatePawnScore(i, 1));
+                        cout << "black pawn: " << boardScore << endl;
                         break;
                     case 1:
                         boardScore += (generatePawnScore(i, 0));
+                        cout << "white pawn: " << boardScore << endl;
                         break;
                     case -2:
-                        boardScore -= (generateKnightScore(i, 1));
-                        break;
+                            boardScore -= (generateRookScore(i, 1));
+                            cout << "black rook: " << boardScore << endl;
+                            break;
                     case 2:
+                        boardScore += (generateRookScore(i, 0));
+                        cout << "white rook: " << boardScore << endl;
+                        break;
+                    case -3:
+                        boardScore -= (generateKnightScore(i, 1));
+                        cout << "black knight: " << boardScore<< endl;
+                        break;
+                    case 3:
                         boardScore += (generateKnightScore(i, 0));
+                        cout << "white knight: " << boardScore << endl;
+                        break;
+
                 }
             }
         }

@@ -18,8 +18,6 @@ bool getEndGame();
 int getPiecesThatProtect(int location);
 int getPiecesThatThreaten(int location);
 
-// Sets the top color.
-
 // Main function that is called by the
 // board score generator.  Location is
 // the square number of the piece.
