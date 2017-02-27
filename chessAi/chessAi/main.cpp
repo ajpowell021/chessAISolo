@@ -69,6 +69,8 @@ int calcBoardScore(int color);
 // From pawnScoreGen, testing only.
 int generatePawnScore(int location, int color);
 int generateKnightScore(int location, int color);
+int generateBishopScore(int location, int color);
+int generateRookScore(int location, int color);
 
 // Array of legal moves pulled from move generator.
 int legalMoves[64];

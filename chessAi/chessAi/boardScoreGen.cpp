@@ -9,6 +9,7 @@ using namespace std;
 int generatePawnScore(int location, int color);
 int generateKnightScore(int location, int color);
 int generateRookScore(int location, int color);
+int generateBishopScore(int location, int color);
 
 // Board Functions
 int getPieceType(int location);
@@ -54,6 +55,12 @@ int calcBoardScore(int color){
                     case 3:
                         boardScore += (generateKnightScore(i, 0));
                         cout << "white knight: " << boardScore << endl;
+                        break;
+                    case -4:
+                        boardScore -= (generateBishopScore(i, 1));
+                        break;
+                    case 4:
+                        boardScore += (generateBishopScore(i, 0));
                         break;
 
                 }
