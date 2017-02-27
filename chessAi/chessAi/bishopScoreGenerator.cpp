@@ -1,4 +1,4 @@
-// knightScoreGen.cpp tallies the score of a knight on a specific square, and returns that score
+// bishopScoreGen.cpp tallies the score of a bishop on a specific square, and returns that score
 // as an int to a total board score.
 
 #include <iostream>
@@ -6,13 +6,15 @@
 using namespace std;
 
 // Function declarations.
-int getKnightPositionScore(int location, int color);
-int getKnightDefendedValue(int location);
-int getKnightAttackedValue(int location);
+int getBishopPositionScore(int location, int color);
+int getBishopDefendedValue(int location);
+int getBishopAttackedValue(int location);
+int getDoubleBishops(int color);
 
 // Functions from board.cpp
 int getTopColor();
 bool getEndGame();
+int getPieceType(int location);
 
 // Functions from threatChecker.cpp
 int getPiecesThatProtect(int location);
@@ -21,39 +23,41 @@ int getPiecesThatThreaten(int location);
 // Main function that is called by the
 // board score generator.  Location is
 // the square number of the piece.
-// Color is the color of the knight that is
+// Color is the color of the bishop that is
 // in the square.
-int generateKnightScore(int location, int color){
+int generateBishopScore(int location, int color){
 
     int score = 0;
-    int knightScore = 320;
+    int bishopScore = 325;
 
-    score += knightScore;
-    score += getKnightPositionScore(location, color);
-    score += getKnightDefendedValue(location);
-    score -= getKnightAttackedValue(location);
+    score += bishopScore;
+    score += getBishopPositionScore(location, color);
+    score += getBishopDefendedValue(location);
+    score -= getBishopAttackedValue(location);
+    score += getDoubleBishops(color);
 
     if(getEndGame() == true){
-        score -= 10;
+        score += 10;
     }
 
     return score;
 }
 
-int getKnightPositionScore(int location, int color){
+int getBishopPositionScore(int location, int color){
 
     int tColor = getTopColor();
 
-    if(color == tColor){
+    if(color != tColor){
+             cout << "this one" << endl;
         int updatedScoreTable[8][8] = {
-                            -50, -40, -20, -30, -30, -20, -40, -50,
-                            -40, -20, 0, 5, 5, 0, -20, -40,
-                            -30, 5, 10, 15, 15, 10, 5, -30,
-                            -30, 0, 15, 20, 20, 15, 0, -30,
-                            -30, 5, 15, 20, 20, 15, 5, -30,
-                            -30, 0, 10, 15, 15, 10, 0, -30,
-                            -40, -20, 0, 0, 0, 0, -20, -40,
-                            -50, -40, -30, -30, -30, -30, -40, -50
+                -20,-10,-10,-10,-10,-10,-10,-20,
+                -10,  0,  0,  0,  0,  0,  0,-10,
+                -10,  0,  5, 10, 10,  5,  0,-10,
+                -10,  5,  5, 10, 10,  5,  5,-10,
+                -10,  0, 10, 10, 10, 10,  0,-10,
+                -10, 10, 10, 10, 10, 10, 10,-10,
+                -10,  5,  0,  0,  0,  0,  5,-10,
+                -20,-10,-40,-10,-10,-40,-10,-20
                             };
         int row = location / 8;
         int col = location % 8;
@@ -62,22 +66,24 @@ int getKnightPositionScore(int location, int color){
     }
     else{
         int updatedScoreTable[8][8] = {
-                            -50, -40, -30, -30, -30, -30, -40, -50,
-                            -40, -20, 0, 0, 0, 0, -20, -40,
-                            -30, 0, 10, 15, 15, 10, 0, -30,
-                            -30, 5, 15, 20, 20, 15, 5, -30,
-                            -30, 0, 15, 20, 20, 15, 0, -30,
-                            -30, 5, 10, 15, 15, 10, 5, -30,
-                            -40, -20, 0, 5, 5, 0, -20, -40,
-                            -50, -40, -20, -30, -30, -20, -40, -50
-                        };
+
+
+                -20,-10,-40,-10,-10,-40,-10,-20
+                -10,  5,  0,  0,  0,  0,  5,-10,
+                -10, 10, 10, 10, 10, 10, 10,-10,
+                -10,  0, 10, 10, 10, 10,  0,-10,
+                -10,  5,  5, 10, 10,  5,  5,-10,
+                -10,  0,  5, 10, 10,  5,  0,-10,
+                -10,  0,  0,  0,  0,  0,  0,-10,
+                -20,-10,-10,-10,-10,-10,-10,-20,
+                };
         int row = location / 8;
         int col = location % 8;
         return updatedScoreTable[row][col];
     }
 }
 
-int getKnightDefendedValue(int location){
+int getBishopDefendedValue(int location){
 
     int defendNum = getPiecesThatProtect(location);
 
@@ -101,7 +107,7 @@ int getKnightDefendedValue(int location){
 
 // Returns the value gained by the piece being
 //attacked by specific pieces.
-int getKnightAttackedValue(int location){
+int getBishopAttackedValue(int location){
 
     int defendNum = getPiecesThatThreaten(location);
 
@@ -121,4 +127,33 @@ int getKnightAttackedValue(int location){
                 (knightProtects * 3) + (pawnProtects * 6);
 
     return total;
+}
+
+// Returns 10 points if player has both bishops.
+int getDoubleBishops(int color){
+
+    int tempPieceId;
+    int bishopNumber;
+    for(int i = 0; i < 64; i++){
+        if(color == 0){
+            tempPieceId = getPieceType(i);
+            if(tempPieceId == 4){
+                bishopNumber++;
+            }
+        }
+        else{
+            tempPieceId = getPieceType(i);
+            if(tempPieceId == -4){
+                bishopNumber++;
+            }
+        }
+    }
+
+    if(bishopNumber == 2){
+        bishopNumber = 0;
+        return 10;
+    }
+    else{
+        return 0;
+    }
 }
