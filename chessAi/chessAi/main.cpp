@@ -71,6 +71,7 @@ int generatePawnScore(int location, int color);
 int generateKnightScore(int location, int color);
 int generateBishopScore(int location, int color);
 int generateRookScore(int location, int color);
+int generateQueenScore(int location, int color);
 
 // Array of legal moves pulled from move generator.
 int legalMoves[64];
@@ -134,6 +135,9 @@ int main(){
         }
         else if(command == "knight"){
             cout << generateKnightScore(62, 0) << endl;
+        }
+        else if(command == "queen"){
+            cout << generateQueenScore(60, 0) << endl;
         }
     }
 

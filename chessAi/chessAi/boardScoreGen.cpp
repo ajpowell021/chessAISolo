@@ -10,6 +10,7 @@ int generatePawnScore(int location, int color);
 int generateKnightScore(int location, int color);
 int generateRookScore(int location, int color);
 int generateBishopScore(int location, int color);
+int generateQueenScore(int location, int color);
 
 // Board Functions
 int getPieceType(int location);
@@ -30,7 +31,7 @@ int calcBoardScore(int color){
             int tempPiece = getPieceType(i);
             // If statement is only here until function exists for all pieces...
             // Also, all the debugging trash...
-            if(tempPiece == 1 || tempPiece == -1 || tempPiece == 3 || tempPiece == -3 || tempPiece == 2 || tempPiece == -2){
+            if(tempPiece < 6 && tempPiece > -6 ){
                 switch (tempPiece){
                     case -1:
                         boardScore -= (generatePawnScore(i, 1));
@@ -62,6 +63,13 @@ int calcBoardScore(int color){
                     case 4:
                         boardScore += (generateBishopScore(i, 0));
                         break;
+                    case -5:
+                        boardScore -= (generateQueenScore(i, 1));
+                        break;
+                    case 5:
+                        boardScore += (generateQueenScore(i, 0));
+                        break;
+
 
                 }
             }
