@@ -21,6 +21,7 @@
 			<Add option="-std=c++11" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="bishopScoreGenerator.cpp" />
 		<Unit filename="board.cpp" />
 		<Unit filename="board.h" />
 		<Unit filename="boardScoreGen.cpp" />
@@ -32,6 +33,7 @@
 		<Unit filename="pawn.cpp" />
 		<Unit filename="pawnScoreGen.cpp" />
 		<Unit filename="pieceClass.cpp" />
+		<Unit filename="rookScoreGenerator.cpp" />
 		<Unit filename="threatChecker.cpp" />
 		<Extensions>
 			<code_completion />
