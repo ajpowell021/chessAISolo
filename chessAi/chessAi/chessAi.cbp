@@ -33,6 +33,7 @@
 		<Unit filename="pawn.cpp" />
 		<Unit filename="pawnScoreGen.cpp" />
 		<Unit filename="pieceClass.cpp" />
+		<Unit filename="queenScoreGen.cpp" />
 		<Unit filename="rookScoreGenerator.cpp" />
 		<Unit filename="threatChecker.cpp" />
 		<Extensions>

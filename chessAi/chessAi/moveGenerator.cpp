@@ -166,7 +166,7 @@ void pawnGen(int pieceLocation, int pieceType){
     // 1. One forward if nothing is in way.
     // 2. Two forward if on row 1 or 6.
     // 3. Capture if possible.
-    // 4. En passant. ???
+    // 4. En passant.
     // 5. Turn into something else if on 0 or 7.
 
     // Starting position of array of legal moves.
@@ -1101,4 +1101,45 @@ void setPassantLocation(int location){
 
 int getPassantLocation(){
     return passantLocation;
+}
+
+// returns the number of moves that a
+// piece at a specific location has available.
+int numMovesAvailable(int location){
+
+    // Fills array with -1 for viewing purposes.
+    fill_n(legalMovesArr, 65,-1);
+
+    int tempPieceId = getPieceType(location);
+    int movesAvailable = 0;
+    int absId = abs(tempPieceId);
+
+    switch(absId){
+        case 1:
+            pawnGen(location, tempPieceId);
+            break;
+        case 2:
+            rookGen(location, tempPieceId);
+            break;
+        case 3:
+            knightGen(location, tempPieceId);
+            break;
+        case 4:
+            bishopGen(location, tempPieceId);
+            break;
+        case 5:
+            queenGen(location, tempPieceId);
+            break;
+        case 6:
+            kingGen(location, tempPieceId);
+            break;
+    }
+
+    for(int i = 0; i < 64; i++){
+        if(legalMovesArr[i] > -1){
+            movesAvailable++;
+        }
+    }
+
+    return movesAvailable;
 }
