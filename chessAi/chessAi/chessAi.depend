@@ -42,12 +42,12 @@
 1488148986 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\board.cpp
 	<iostream>
 
-1487485899 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\movegenerator.cpp
+1488520152 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\movegenerator.cpp
 	<iostream>
 	<cmath>
 	<algorithm>
 
-1488332987 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\main.cpp
+1488652039 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\main.cpp
 	<iostream>
 	<string>
 	<cmath>
@@ -57,7 +57,7 @@
 1487554313 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\threatchecker.cpp
 	<iostream>
 
-1488332812 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\boardscoregen.cpp
+1488651919 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\boardscoregen.cpp
 	<iostream>
 
 1487910816 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\pawnscoregen.cpp
@@ -69,9 +69,12 @@
 1488148986 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\rookscoregenerator.cpp
 	<iostream>
 
-1488162191 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\bishopscoregenerator.cpp
+1488651966 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\bishopscoregenerator.cpp
 	<iostream>
 
-1488332880 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\queenscoregen.cpp
+1488333137 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\queenscoregen.cpp
+	<iostream>
+
+1488651702 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\kingscoregen.cpp
 	<iostream>
 

@@ -41,6 +41,7 @@ void makePassantTrue();
 void makePassantFalse();
 void setPassantLocation(int location);
 int getPassantLocation();
+int numMovesAvailable(int location);
 
 // Functions from threatChecker.cpp
 void displayAttackBoard(int color);
@@ -62,6 +63,7 @@ void displayLegalMoves();
 void adjustRookBools(int pieceLocation, int pieceType);
 void checkCastle(int pieceType, int pieceLocation);
 void addCastleToArray(int tempPiece);
+void numberMovesAvailable();
 
 // Functions from boardScoreGen.cpp
 int calcBoardScore(int color);
@@ -72,6 +74,7 @@ int generateKnightScore(int location, int color);
 int generateBishopScore(int location, int color);
 int generateRookScore(int location, int color);
 int generateQueenScore(int location, int color);
+int generateKingScore(int location, int color);
 
 // Array of legal moves pulled from move generator.
 int legalMoves[64];
@@ -139,9 +142,25 @@ int main(){
         else if(command == "queen"){
             cout << generateQueenScore(60, 0) << endl;
         }
+        else if(command == "king"){
+            cout << generateKingScore(59, 0) << endl;
+        }
+        else if(command == "numMoves"){
+            numberMovesAvailable();
+        }
     }
 
     return 0;
+}
+
+void numberMovesAvailable(){
+    int location;
+
+    cout << "Please enter a location: ";
+    cin >> location;
+    cout << endl;
+
+    cout << "That piece has " << numMovesAvailable(location) << " legal moves available." << endl;
 }
 
 // Gets an array of legal moves for a specific

@@ -48,7 +48,6 @@ int getBishopPositionScore(int location, int color){
     int tColor = getTopColor();
 
     if(color != tColor){
-             cout << "this one" << endl;
         int updatedScoreTable[8][8] = {
                 -20,-10,-10,-10,-10,-10,-10,-20,
                 -10,  0,  0,  0,  0,  0,  0,-10,
