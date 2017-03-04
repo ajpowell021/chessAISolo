@@ -49,6 +49,7 @@ int getBishopPositionScore(int location, int color){
 
     if(color != tColor){
         int updatedScoreTable[8][8] = {
+            
                 -20,-10,-10,-10,-10,-10,-10,-20,
                 -10,  0,  0,  0,  0,  0,  0,-10,
                 -10,  0,  5, 10, 10,  5,  0,-10,
@@ -65,7 +66,6 @@ int getBishopPositionScore(int location, int color){
     }
     else{
         int updatedScoreTable[8][8] = {
-
 
                 -20,-10,-40,-10,-10,-40,-10,-20
                 -10,  5,  0,  0,  0,  0,  5,-10,
