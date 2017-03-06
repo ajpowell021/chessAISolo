@@ -47,14 +47,14 @@
 	<cmath>
 	<algorithm>
 
-1488758097 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\main.cpp
+1488759289 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\main.cpp
 	<iostream>
 	<string>
 	<cmath>
 	<algorithm>
 	<sstream>
 
-1487554313 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\threatchecker.cpp
+1488759289 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\threatchecker.cpp
 	<iostream>
 
 1488652426 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\boardscoregen.cpp
@@ -78,8 +78,8 @@
 1488652426 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\kingscoregen.cpp
 	<iostream>
 
-1488758041 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\checkfinder.cpp
+1488759289 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\checkfinder.cpp
 	<iostream>
 
-1488682592 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\matesearcher.cpp
+1488759289 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\matesearcher.cpp
 

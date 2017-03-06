@@ -72,8 +72,49 @@ int calcBoardScore(int color){
     }
     else{
         // For black board check.
+        for(int i = 0; i < 64; i++){
+
+            int tempPiece = getPieceType(i);
+                switch (tempPiece){
+                    case -1:
+                        boardScore += (generatePawnScore(i, 1));
+                        break;
+                    case 1:
+                        boardScore -= (generatePawnScore(i, 0));
+                        break;
+                    case -2:
+                        boardScore += (generateRookScore(i, 1));
+                        break;
+                    case 2:
+                        boardScore -= (generateRookScore(i, 0));
+                        break;
+                    case -3:
+                        boardScore += (generateKnightScore(i, 1));
+                        break;
+                    case 3:
+                        boardScore -= (generateKnightScore(i, 0));
+                        break;
+                    case -4:
+                        boardScore += (generateBishopScore(i, 1));
+                        break;
+                    case 4:
+                        boardScore -= (generateBishopScore(i, 0));
+                        break;
+                    case -5:
+                        boardScore += (generateQueenScore(i, 1));
+                        break;
+                    case 5:
+                        boardScore -= (generateQueenScore(i, 0));
+                        break;
+                    case -6:
+                        boardScore += (generateKingScore(i, 1));
+                        break;
+                    case 6:
+                        boardScore -= (generateKingScore(i, 0));
+                        break;
+                }
+        }
 
     }
-
     return boardScore;
 }
