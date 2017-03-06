@@ -68,13 +68,16 @@ void numberMovesAvailable();
 // Functions from boardScoreGen.cpp
 int calcBoardScore(int color);
 
-// From pawnScoreGen, testing only.
+// Testing functions.
 int generatePawnScore(int location, int color);
 int generateKnightScore(int location, int color);
 int generateBishopScore(int location, int color);
 int generateRookScore(int location, int color);
 int generateQueenScore(int location, int color);
 int generateKingScore(int location, int color);
+
+// From checkFinder.cpp
+bool pieceInCheck(int color);
 
 // Array of legal moves pulled from move generator.
 int legalMoves[64];
@@ -104,6 +107,8 @@ int main(){
     emptyLegalMoves();
     // 0 meaning white is on top, 1 meaning black is on top.
     newGameSetup(1);
+    removePiece(52);
+    removePiece(12);
     //pawnPromotionSetUp();
     //castleTestSetUp();
     //kingTestSetUp();
@@ -147,6 +152,9 @@ int main(){
         }
         else if(command == "numMoves"){
             numberMovesAvailable();
+        }
+        else if(command == "check"){
+            cout << pieceInCheck(0) << endl;
         }
     }
 
@@ -344,6 +352,12 @@ void movePiece(){
                         history[turnNumber] = temp + "O-O";
                     }
                 }
+            }
+            if(pieceInCheck(turn) == true && turn == 0){
+                cout << "Black is in check!" << endl;
+            }
+            else if(pieceInCheck(turn) == true && turn == 1){
+                cout << "White is in check!" << endl;
             }
             nextTurn();
         }

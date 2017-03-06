@@ -25,10 +25,12 @@
 		<Unit filename="board.cpp" />
 		<Unit filename="board.h" />
 		<Unit filename="boardScoreGen.cpp" />
+		<Unit filename="kingScoreGen.cpp" />
 		<Unit filename="knightScoreGen.cpp" />
 		<Unit filename="main.cpp">
 			<Option weight="0" />
 		</Unit>
+		<Unit filename="mateSearcher.cpp" />
 		<Unit filename="moveGenerator.cpp" />
 		<Unit filename="pawn.cpp" />
 		<Unit filename="pawnScoreGen.cpp" />
