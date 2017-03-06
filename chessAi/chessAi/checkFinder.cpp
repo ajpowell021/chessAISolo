@@ -5,6 +5,12 @@
 
 using namespace std;
 
+// Is white in check right now?
+bool whiteInCheck = false;
+
+// Is black in check right now?
+bool blackInCheck = false;
+
 // Functions from board.cpp
 int getPieceType(int pieceLocation);
 
@@ -35,5 +41,27 @@ bool pieceInCheck(int color){
 
     cout << "location: " << location << endl;
 
-    return checkThreat(tempPiece, location);
+    bool inCheck = checkThreat(tempPiece, location);
+    if(inCheck == true && color == 0){
+        blackInCheck = true;
+    }
+    else if(inCheck == true && color == 1){
+        whiteInCheck = true;
+    }
+    else if(inCheck == false && color == 0){
+        blackInCheck = false;
+    }
+    else{
+        whiteInCheck = false;
+    }
+
+    return inCheck;
+}
+
+bool getWhiteCheck(){
+    return whiteInCheck;
+}
+
+bool getBlackCheck(){
+    return blackInCheck;
 }
