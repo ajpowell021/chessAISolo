@@ -31,7 +31,7 @@ void kingGen(int pieceLocation, int pieceType);
 void pawnThreatGen(int pieceLocation, int pieceType);
 
 // Functions from threatChecker.cpp
-
+void clearAttackBoard(int color);
 
 // The two attack boards.
 int whiteAttackBoard[8][8] = {};
@@ -44,6 +44,8 @@ void buildWhiteAttackBoard(){
     int *legalMovesArr;
     int tempXPos;
     int tempYPos;
+
+    clearAttackBoard(0);
 
     for(int i = 0; i < 64; i++){
         tempPiece = getPieceType(i);
@@ -68,6 +70,8 @@ void buildBlackAttackBoard(){
     int tempXPos;
     int tempYPos;
 
+    clearAttackBoard(1);
+
     for(int i = 0; i < 64; i++){
         tempPiece = getPieceType(i);
         if(tempPiece < 0){
@@ -78,6 +82,26 @@ void buildBlackAttackBoard(){
                     tempYPos = (*(legalMovesArr + j) % 8);
                     blackAttackBoard[tempXPos][tempYPos] = 1;
                 }
+            }
+        }
+    }
+}
+
+// Wipes the attack board
+// to all zeros.
+void clearAttackBoard(int color){
+
+    if(color == 0){
+        for(int i = 0; i < 8; i++){
+            for (int j = 0; j < 8; j++){
+                whiteAttackBoard[i][j] = 0;
+            }
+        }
+    }
+    else{
+        for(int i = 0; i < 8; i++){
+            for (int j = 0; j < 8; j++){
+                blackAttackBoard[i][j] = 0;
             }
         }
     }
@@ -135,6 +159,7 @@ bool checkThreat(int tempPiece, int location){
         int col = location % 8;
         buildWhiteAttackBoard();
         if(whiteAttackBoard[row][col] != 0){
+            displayAttackBoard(0);
             return true;
         }
         else{
