@@ -47,7 +47,7 @@
 	<cmath>
 	<algorithm>
 
-1488759289 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\main.cpp
+1488778098 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\main.cpp
 	<iostream>
 	<string>
 	<cmath>
@@ -78,8 +78,9 @@
 1488652426 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\kingscoregen.cpp
 	<iostream>
 
-1488759289 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\checkfinder.cpp
+1488778166 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\checkfinder.cpp
 	<iostream>
 
-1488759289 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\matesearcher.cpp
+1488778273 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\matesearcher.cpp
+	<iostream>
 

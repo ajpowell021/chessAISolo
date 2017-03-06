@@ -79,6 +79,9 @@ int generateKingScore(int location, int color);
 // From checkFinder.cpp
 bool pieceInCheck(int color);
 
+// From mateSearcher.cpp
+bool playerCanMove(int color);
+
 // Array of legal moves pulled from move generator.
 int legalMoves[64];
 
@@ -359,6 +362,7 @@ void movePiece(){
             else if(pieceInCheck(turn) == true && turn == 1){
                 cout << "White is in check!" << endl;
             }
+            playerCanMove(turn);
             nextTurn();
         }
         else{
@@ -562,9 +566,11 @@ void printHistory(){
 
 void nextTurn(){
     if(turn == 0){
+        cout << "blacks turn" << endl;
         turn++;
     }
     else if(turn == 1){
+        cout << "whites turn" << endl;
         turn--;
     }
     else{

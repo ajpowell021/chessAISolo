@@ -39,8 +39,6 @@ bool pieceInCheck(int color){
         }
     }
 
-    cout << "location: " << location << endl;
-
     bool inCheck = checkThreat(tempPiece, location);
     if(inCheck == true && color == 0){
         blackInCheck = true;
