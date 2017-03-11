@@ -25,10 +25,10 @@ bool playerCanMove(int color){
     int tempPiece;
 
     if( color == 0 ){
-        // Checking for white.
+        // Whites turn, checking to see if black can move.
         for(int i = 0; i < 64; i++){
             tempPiece = getPieceType(i);
-            if(tempPiece > 0){
+            if(tempPiece < 0){
                 legalMovesArray = getLegalMoves(tempPiece, i);
                 for(int j = 0; j < 64; j++){
                     if((*(legalMovesArray + j)) > -1){
@@ -41,10 +41,10 @@ bool playerCanMove(int color){
         return false;
     }
     else{
-        // Checking for black.
+        // Blacks turn, checking to see if white can move.
         for(int i = 0; i < 64; i++){
             tempPiece = getPieceType(i);
-            if(tempPiece < 0){
+            if(tempPiece > 0){
                 legalMovesArray = getLegalMoves(tempPiece, i);
                 for(int j = 0; j < 64; j++){
                     if((*(legalMovesArray + j)) > -1){

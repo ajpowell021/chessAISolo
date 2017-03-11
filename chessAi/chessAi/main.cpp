@@ -112,8 +112,11 @@ int main(){
     newGameSetup(1);
     removePiece(52);
     removePiece(12);
-    removePiece(59);
-    addPiece(5, 52);
+    removePiece(3);
+    addPiece(-1, 3);
+    removePiece(5);
+    addPiece(-1, 5);
+    removePiece(6);
     //pawnPromotionSetUp();
     //castleTestSetUp();
     //kingTestSetUp();
@@ -364,7 +367,18 @@ void movePiece(){
             else if(pieceInCheck(turn) == true && turn == 1){
                 cout << "White is in check!" << endl;
             }
-            playerCanMove(turn);
+            if(playerCanMove(turn) == false && pieceInCheck(turn) == true){
+                // Current player wins the game.
+                if(turn == 0){
+                    cout << "White wins by checkmate!" << endl;
+                }
+                else{
+                    cout << "Black wins by checkmate!" << endl;
+                }
+            }
+            else if(playerCanMove(turn) == false && pieceInCheck(turn) == false){
+                cout << "Stale-mate!!!" << endl;
+            }
             nextTurn();
         }
         else{
