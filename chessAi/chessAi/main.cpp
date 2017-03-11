@@ -112,6 +112,8 @@ int main(){
     newGameSetup(1);
     removePiece(52);
     removePiece(12);
+    removePiece(59);
+    addPiece(5, 52);
     //pawnPromotionSetUp();
     //castleTestSetUp();
     //kingTestSetUp();

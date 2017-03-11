@@ -775,7 +775,7 @@ void queenGen(int pieceLocation, int pieceType){
     int currArrPos = 0;
     int distFromEdgeLeft = pieceLocation % 8;
     int distFromEdgeTop = pieceLocation / 8;
-    int distFromEdgeRight = 8 - distFromEdgeLeft;
+    int distFromEdgeRight = 7 - distFromEdgeLeft;
     int distFromEdgeBot = 7 - distFromEdgeTop;
 
     // 1. Move diagonal up left.
