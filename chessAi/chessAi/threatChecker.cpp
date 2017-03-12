@@ -159,7 +159,6 @@ bool checkThreat(int tempPiece, int location){
         int col = location % 8;
         buildWhiteAttackBoard();
         if(whiteAttackBoard[row][col] != 0){
-            displayAttackBoard(0);
             return true;
         }
         else{

@@ -13,6 +13,8 @@ bool blackInCheck = false;
 
 // Functions from board.cpp
 int getPieceType(int pieceLocation);
+void addPiece(int pieceType, int location);
+void removePiece(int location);
 
 // Function from threatChecker.cpp
 bool checkThreat(int tempPiece, int location);
@@ -54,6 +56,61 @@ bool pieceInCheck(int color){
     }
 
     return inCheck;
+}
+
+// Calculates a move into the future to see if
+// it ends with a piece still being in check.
+bool moveEndsInCheck(int origin, int destination, int color){
+
+    int tempPieceId = getPieceType(origin);
+    int kingPiece;
+    int kingPosition;
+    // True if a capture takes place this turn.
+    bool capture = false;
+    int capturedPiece = getPieceType(destination);
+
+    if(capturedPiece != 0){
+        capture = true;
+    }
+
+    removePiece(origin);
+    addPiece(tempPieceId, destination);
+
+    if(color == 0){
+        kingPiece = 6;
+    }
+    else{
+        kingPiece = -6;
+    }
+
+    for( int i = 0; i < 64; i++){
+        if(getPieceType(i) == kingPiece){
+            kingPosition = i;
+        }
+    }
+
+    if(checkThreat(kingPiece, kingPosition) == true){
+        // Move ends with check, return true.
+        removePiece(destination);
+        addPiece(tempPieceId, origin);
+
+        if(capture == true){
+            addPiece(capturedPiece, destination);
+        }
+
+        return true;
+    }
+    else{
+        // Piece is legal, return false.
+        removePiece(destination);
+        addPiece(tempPieceId, origin);
+
+        if(capture == true){
+            addPiece(capturedPiece, destination);
+        }
+
+        return false;
+    }
 }
 
 bool getWhiteCheck(){
