@@ -39,47 +39,48 @@
 	<cmath>
 	<algorithm>
 
-1488148986 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\board.cpp
+1489355340 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\board.cpp
 	<iostream>
 
-1488652426 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\movegenerator.cpp
+1489267850 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\movegenerator.cpp
 	<iostream>
 	<cmath>
 	<algorithm>
 
-1488759289 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\main.cpp
+1489357647 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\main.cpp
 	<iostream>
 	<string>
 	<cmath>
 	<algorithm>
 	<sstream>
 
-1488759289 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\threatchecker.cpp
+1489357776 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\threatchecker.cpp
 	<iostream>
 
-1488776218 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\boardscoregen.cpp
+1488779818 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\boardscoregen.cpp
 	<iostream>
 
-1487910816 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\pawnscoregen.cpp
+1487914416 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\pawnscoregen.cpp
 	<iostream>
 
-1488162191 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\knightscoregen.cpp
+1488165791 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\knightscoregen.cpp
 	<iostream>
 
-1488148986 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\rookscoregenerator.cpp
+1488152586 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\rookscoregenerator.cpp
 	<iostream>
 
-1488652448 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\bishopscoregenerator.cpp
+1488656048 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\bishopscoregenerator.cpp
 	<iostream>
 
-1488333137 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\queenscoregen.cpp
+1488336737 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\queenscoregen.cpp
 	<iostream>
 
-1488652426 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\kingscoregen.cpp
+1488656026 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\kingscoregen.cpp
 	<iostream>
 
-1488759289 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\checkfinder.cpp
+1489358160 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\checkfinder.cpp
 	<iostream>
 
-1488759289 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\matesearcher.cpp
+1489268804 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\matesearcher.cpp
+	<iostream>
 

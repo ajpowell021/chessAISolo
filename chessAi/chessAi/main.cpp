@@ -78,6 +78,12 @@ int generateKingScore(int location, int color);
 
 // From checkFinder.cpp
 bool pieceInCheck(int color);
+bool getWhiteCheck();
+bool getBlackCheck();
+
+// From mateSearcher.cpp
+bool playerCanMove(int color);
+bool moveEndsInCheck(int origin, int destination, int color);
 
 // Array of legal moves pulled from move generator.
 int legalMoves[64];
@@ -109,6 +115,11 @@ int main(){
     newGameSetup(1);
     removePiece(52);
     removePiece(12);
+    removePiece(3);
+    addPiece(-1, 3);
+    removePiece(5);
+    addPiece(-1, 5);
+    removePiece(6);
     //pawnPromotionSetUp();
     //castleTestSetUp();
     //kingTestSetUp();
@@ -254,6 +265,25 @@ void movePiece(){
             }
         }
 
+        // If player is currently in check, make sure the next move
+        // will not end with them still being in check.
+        if(turn == 0){
+            if(getWhiteCheck() == true){
+                // White is in check right now.
+                if(moveEndsInCheck(origin, destination, turn) == true){
+                    moveIsLegal = false;
+                }
+            }
+        }
+        else{
+            if(getBlackCheck() == true){
+                // Black is in check right now.
+                if(moveEndsInCheck(origin, destination, turn) == true){
+                    moveIsLegal = false;
+                }
+            }
+        }
+
         // Handle the move here.
         if(moveIsLegal == true){
 
@@ -358,6 +388,19 @@ void movePiece(){
             }
             else if(pieceInCheck(turn) == true && turn == 1){
                 cout << "White is in check!" << endl;
+            }
+            cout << "debug " << playerCanMove(turn) << " AND " << pieceInCheck(turn) << endl;
+            if(playerCanMove(turn) == false && pieceInCheck(turn) == true){
+                // Current player wins the game.
+                if(turn == 0){
+                    cout << "White wins by checkmate!" << endl;
+                }
+                else{
+                    cout << "Black wins by checkmate!" << endl;
+                }
+            }
+            else if(playerCanMove(turn) == false && pieceInCheck(turn) == false){
+                cout << "Stale-mate!!!" << endl;
             }
             nextTurn();
         }
@@ -562,9 +605,11 @@ void printHistory(){
 
 void nextTurn(){
     if(turn == 0){
+        cout << "blacks turn" << endl;
         turn++;
     }
     else if(turn == 1){
+        cout << "whites turn" << endl;
         turn--;
     }
     else{
