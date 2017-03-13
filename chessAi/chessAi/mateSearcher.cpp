@@ -17,12 +17,16 @@ bool getBlackCheck();
 // Functions from board.cpp
 int getPieceType(int location);
 
+// Functions from threatChecker.cpp
+bool checkThreat(int tempPiece, int location);
+
 // Returns true if a player has at least on legal
 // move left to make.
 bool playerCanMove(int color){
 
     int *legalMovesArray;
     int tempPiece;
+    bool canMove = true;
 
     if( color == 0 ){
         // Whites turn, checking to see if black can move.
@@ -32,13 +36,25 @@ bool playerCanMove(int color){
                 legalMovesArray = getLegalMoves(tempPiece, i);
                 for(int j = 0; j < 64; j++){
                     if((*(legalMovesArray + j)) > -1){
-                        return true;
+                        // This covers a king not being able to move into check.
+                        if(tempPiece == -6){
+                            if(checkThreat(tempPiece, (*(legalMovesArray + j))) == false){
+                                return true;
+                            }
+                            else{
+                                canMove = false;
+                            }
+                        }
+                        else{
+
+                        }
+                        return false;
                     }
                 }
             }
         }
         cout << "No moves for white" << endl;
-        return false;
+        return canMove;
     }
     else{
         // Blacks turn, checking to see if white can move.
@@ -48,7 +64,19 @@ bool playerCanMove(int color){
                 legalMovesArray = getLegalMoves(tempPiece, i);
                 for(int j = 0; j < 64; j++){
                     if((*(legalMovesArray + j)) > -1){
-                        return true;
+                        // This covers a king not being able to move into check.
+                        if(tempPiece == 6){
+                            if(checkThreat(tempPiece, (*(legalMovesArray + j))) == false){
+                                return true;
+                            }
+                            else{
+                                canMove = false;
+                            }
+                        }
+                        else{
+
+                        }
+                        return false;
                     }
                 }
             }

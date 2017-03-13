@@ -167,6 +167,9 @@ int main(){
         else if(command == "check"){
             cout << pieceInCheck(0) << endl;
         }
+        else{
+
+        }
     }
 
     return 0;
@@ -389,7 +392,6 @@ void movePiece(){
             else if(pieceInCheck(turn) == true && turn == 1){
                 cout << "White is in check!" << endl;
             }
-            cout << "debug " << playerCanMove(turn) << " AND " << pieceInCheck(turn) << endl;
             if(playerCanMove(turn) == false && pieceInCheck(turn) == true){
                 // Current player wins the game.
                 if(turn == 0){
