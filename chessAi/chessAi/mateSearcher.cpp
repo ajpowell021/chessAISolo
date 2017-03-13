@@ -65,7 +65,7 @@ bool playerCanMove(int color){
                 for(int j = 0; j < 64; j++){
                     if((*(legalMovesArray + j)) > -1){
                         // This covers a king not being able to move into check.
-                        if(tempPiece == 6){
+                        if(tempPiece ==  6){
                             if(checkThreat(tempPiece, (*(legalMovesArray + j))) == false){
                                 return true;
                             }

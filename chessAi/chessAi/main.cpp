@@ -6,6 +6,7 @@
 #include <cmath>
 #include <algorithm>
 #include <sstream>
+#include <cstdlib>
 
 using namespace std;
 
@@ -64,6 +65,7 @@ void adjustRookBools(int pieceLocation, int pieceType);
 void checkCastle(int pieceType, int pieceLocation);
 void addCastleToArray(int tempPiece);
 void numberMovesAvailable();
+void gameIsFinished (int outcome);
 
 // Functions from boardScoreGen.cpp
 int calcBoardScore(int color);
@@ -395,14 +397,14 @@ void movePiece(){
             if(playerCanMove(turn) == false && pieceInCheck(turn) == true){
                 // Current player wins the game.
                 if(turn == 0){
-                    cout << "White wins by checkmate!" << endl;
+                    gameIsFinished(0);
                 }
                 else{
-                    cout << "Black wins by checkmate!" << endl;
+                    gameIsFinished(1);
                 }
             }
             else if(playerCanMove(turn) == false && pieceInCheck(turn) == false){
-                cout << "Stale-mate!!!" << endl;
+                gameIsFinished(2);
             }
             nextTurn();
         }
@@ -929,4 +931,51 @@ void addCastleToArray(int tempPiece){
                   legalMoves[11] = 61;              }
           }
       }
+}
+
+// The menu that is displayed to the player when a game
+// has finished.
+void gameIsFinished(int outcome){
+
+    int userInput;
+    int finish = 0;
+
+    switch (outcome){
+
+        case 0:
+            // White wins
+            cout << endl << "White wins the game!" << endl;
+            break;
+        case 1:
+            // Black wins
+            cout << endl << "Black wins the game!" << endl;
+            break;
+        case 2:
+            // Stale-mate
+            cout << endl << "The game ends in a Stale-mate!" << endl;
+            break;
+    }
+
+    while(finish == 0){
+        cout << "Type an option: " << endl;
+        cout << "1: Start new game." << endl;
+        cout << "2: Exit the program." << endl;
+        cout << "3: View the history." << endl;
+
+        cin >> userInput;
+
+        switch (userInput){
+
+            case 1:
+                newGameSetup(0);
+                finish = 1;
+                break;
+            case 2:
+                exit(0);
+                break;
+            case 3:
+                printHistory();
+                break;
+        }
+    }
 }
