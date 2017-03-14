@@ -26,7 +26,6 @@ bool playerCanMove(int color){
 
     int *legalMovesArray;
     int tempPiece;
-    bool canMove = true;
 
     if( color == 0 ){
         // Whites turn, checking to see if black can move.
@@ -39,22 +38,21 @@ bool playerCanMove(int color){
                         // This covers a king not being able to move into check.
                         if(tempPiece == -6){
                             if(checkThreat(tempPiece, (*(legalMovesArray + j))) == false){
+                                cout << "king";
                                 return true;
-                            }
-                            else{
-                                canMove = false;
                             }
                         }
                         else{
-
+                            // NEED TO SEE IF THIS MOVE WOULD LEAVE KING IN CHECK
+                            // AND RETURN ACCORDINGLY
+                            return true;
                         }
-                        return false;
                     }
                 }
             }
         }
         cout << "No moves for white" << endl;
-        return canMove;
+        return false;
     }
     else{
         // Blacks turn, checking to see if white can move.
@@ -64,19 +62,18 @@ bool playerCanMove(int color){
                 legalMovesArray = getLegalMoves(tempPiece, i);
                 for(int j = 0; j < 64; j++){
                     if((*(legalMovesArray + j)) > -1){
+
+                        cout << (*(legalMovesArray + j)) << endl;
+
                         // This covers a king not being able to move into check.
                         if(tempPiece ==  6){
                             if(checkThreat(tempPiece, (*(legalMovesArray + j))) == false){
                                 return true;
                             }
-                            else{
-                                canMove = false;
-                            }
                         }
                         else{
-
+                            return true;
                         }
-                        return false;
                     }
                 }
             }

@@ -122,6 +122,7 @@ int main(){
     removePiece(5);
     addPiece(-1, 5);
     removePiece(6);
+    //removePiece(3);
     //pawnPromotionSetUp();
     //castleTestSetUp();
     //kingTestSetUp();
@@ -406,7 +407,9 @@ void movePiece(){
             else if(playerCanMove(turn) == false && pieceInCheck(turn) == false){
                 gameIsFinished(2);
             }
-            nextTurn();
+            else{
+                nextTurn();
+            }
         }
         else{
             cout << "Move is not legal." << endl;
@@ -961,13 +964,15 @@ void gameIsFinished(int outcome){
         cout << "1: Start new game." << endl;
         cout << "2: Exit the program." << endl;
         cout << "3: View the history." << endl;
+        cout << "4. Show the current board." << endl;
 
         cin >> userInput;
 
         switch (userInput){
 
             case 1:
-                newGameSetup(0);
+                newGameSetup(1);
+                turn = 1;
                 finish = 1;
                 break;
             case 2:
@@ -975,6 +980,9 @@ void gameIsFinished(int outcome){
                 break;
             case 3:
                 printHistory();
+                break;
+            case 4:
+                displayBoard();
                 break;
         }
     }
