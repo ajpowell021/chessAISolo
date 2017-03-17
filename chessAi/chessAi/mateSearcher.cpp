@@ -43,7 +43,6 @@ bool playerCanMove(int color){
                         // This covers a king not being able to move into check.
                         if(tempPiece == -6){
                             if(checkThreat(tempPiece, (*(legalMovesArray + j))) == false){
-                                cout << "king";
                                 return true;
                             }
                         }
@@ -89,8 +88,6 @@ bool playerCanMove(int color){
                 legalMovesArray = getLegalMoves(tempPiece, i);
                 for(int j = 0; j < 64; j++){
                     if((*(legalMovesArray + j)) > -1){
-
-                        cout << (*(legalMovesArray + j)) << endl;
 
                         // This covers a king not being able to move into check.
                         if(tempPiece ==  6){
