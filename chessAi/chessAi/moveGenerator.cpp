@@ -174,6 +174,7 @@ void pawnGen(int pieceLocation, int pieceType){
 
     // Which row is the pawn currently in.
     int row = pieceLocation / 8;
+    int col = pieceLocation % 8;
 
     // Piece is moving down.
     if((topColor == 0 && pieceType == 1) || (topColor == 1 && pieceType == -1)){
@@ -195,16 +196,20 @@ void pawnGen(int pieceLocation, int pieceType){
         }
 
         // 3. Capture if possible.
-        if(piecePresent(pieceLocation + 9) == true && capturablePiece(pieceLocation + 9, pieceType) == true){
-            if(inRange(pieceLocation + 9) == true){
-                legalMovesArr[currArrPos] = (pieceLocation + 9);
-                currArrPos++;
+        if(col != 7){
+            if(piecePresent(pieceLocation + 9) == true && capturablePiece(pieceLocation + 9, pieceType) == true){
+                if(inRange(pieceLocation + 9) == true){
+                    legalMovesArr[currArrPos] = (pieceLocation + 9);
+                    currArrPos++;
+                }
             }
         }
-        if(piecePresent(pieceLocation + 7) == true && capturablePiece(pieceLocation + 7, pieceType) == true){
-            if(inRange(pieceLocation + 7) == true){
-                legalMovesArr[currArrPos] = (pieceLocation + 7);
-                currArrPos++;
+        if(col != 0){
+            if(piecePresent(pieceLocation + 7) == true && capturablePiece(pieceLocation + 7, pieceType) == true){
+                if(inRange(pieceLocation + 7) == true){
+                    legalMovesArr[currArrPos] = (pieceLocation + 7);
+                    currArrPos++;
+                }
             }
         }
 
@@ -228,16 +233,20 @@ void pawnGen(int pieceLocation, int pieceType){
         }
 
         // 3. Capture if possible.
-        if(piecePresent(pieceLocation - 9) == true && capturablePiece(pieceLocation - 9, pieceType) == true){
-            if(inRange(pieceLocation - 9) == true){
-                legalMovesArr[currArrPos] = (pieceLocation - 9);
-                currArrPos++;
+        if(col != 0){
+            if(piecePresent(pieceLocation - 9) == true && capturablePiece(pieceLocation - 9, pieceType) == true){
+                if(inRange(pieceLocation - 9) == true){
+                    legalMovesArr[currArrPos] = (pieceLocation - 9);
+                    currArrPos++;
+                }
             }
         }
-        if(piecePresent(pieceLocation - 7) == true && capturablePiece(pieceLocation - 7, pieceType) == true){
-            if(inRange(pieceLocation - 7) == true){
-                legalMovesArr[currArrPos] = (pieceLocation - 7);
-                currArrPos++;
+        if(col != 7){
+            if(piecePresent(pieceLocation - 7) == true && capturablePiece(pieceLocation - 7, pieceType) == true){
+                if(inRange(pieceLocation - 7) == true){
+                    legalMovesArr[currArrPos] = (pieceLocation - 7);
+                    currArrPos++;
+                }
             }
         }
     }
