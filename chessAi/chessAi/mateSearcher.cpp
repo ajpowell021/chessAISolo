@@ -16,9 +16,14 @@ bool getBlackCheck();
 
 // Functions from board.cpp
 int getPieceType(int location);
+int addPiece(int pieceType, int pieceLocation);
+int removePiece(int pieceLocation);
 
 // Functions from threatChecker.cpp
 bool checkThreat(int tempPiece, int location);
+
+// Functions from checkFinder.cpp
+bool pieceInCheck(int color);
 
 // Returns true if a player has at least on legal
 // move left to make.
@@ -43,9 +48,31 @@ bool playerCanMove(int color){
                             }
                         }
                         else{
-                            // NEED TO SEE IF THIS MOVE WOULD LEAVE KING IN CHECK
-                            // AND RETURN ACCORDINGLY
-                            return true;
+                            int origin = i;
+                            int destination = j;
+                            int capturedPiece = getPieceType(destination);
+                            bool returnValue;
+
+                            removePiece(origin);
+
+                            if(capturedPiece != 0){
+                                removePiece(destination);
+                            }
+
+                            addPiece(tempPiece, destination);
+
+                            if(pieceInCheck(0) == true){
+                                returnValue = false;
+                            }
+                            else{
+                                returnValue = true;
+                            }
+
+                            removePiece(destination);
+                            addPiece(tempPiece, origin);
+                            addPiece(capturedPiece, destination);
+
+                            return returnValue;
                         }
                     }
                 }
@@ -72,7 +99,31 @@ bool playerCanMove(int color){
                             }
                         }
                         else{
-                            return true;
+                            int origin = i;
+                            int destination = j;
+                            int capturedPiece = getPieceType(destination);
+                            bool returnValue;
+
+                            removePiece(origin);
+
+                            if(capturedPiece != 0){
+                                removePiece(destination);
+                            }
+
+                            addPiece(tempPiece, destination);
+
+                            if(pieceInCheck(1) == true){
+                                returnValue = false;
+                            }
+                            else{
+                                returnValue = true;
+                            }
+
+                            removePiece(destination);
+                            addPiece(tempPiece, origin);
+                            addPiece(capturedPiece, destination);
+
+                            return returnValue;
                         }
                     }
                 }
