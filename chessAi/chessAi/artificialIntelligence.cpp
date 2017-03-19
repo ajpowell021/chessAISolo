@@ -7,6 +7,8 @@ using namespace std;
 void storeBoardInfo(int from, int to);
 void beginTurn(int color);
 void turnChecker(int location);
+void addToArray(int move);
+void addCastleToMoves(int pieceNumber);
 
 // Other functions that are needed.
 int getPieceType(int pieceLocation);
@@ -75,7 +77,7 @@ void turnChecker(int location) {
     }
 
     if(pieceNumber == 6 || pieceNumber == -6){
-        addCastleToArray(pieceNumber);
+        addCastleToMoves(pieceNumber);
     }
 
     // movesForPiece should now contain every legal move for that piece.
@@ -85,31 +87,31 @@ void turnChecker(int location) {
 }
 
 void addToArray(int move) {
-    movesForPiece[j] = move;
-    j++;
+    movesForPiece[arraySpot] = move;
+    arraySpot++;
 }
 
 // If a castle is possible, add it to array here.
-void addCastleToArray(int pieceNumber) {
+void addCastleToMoves(int pieceNumber) {
     int top = getTopColor();
 
     if(pieceNumber > 0){
         // Find if white can castle.
         if (top == 0) {
             // White is on top
-            if (getTopLeftCastle == true) {
+            if (getTopLeftCastle() == true) {
                 addToArray(1);
             }
-            if (getTopRightCastle == true) {
+            if (getTopRightCastle() == true) {
                 addToArray(5);
             }
         }
         else{
             // White is on bottom.
-            if(getBotLeftCastle == true){
+            if(getBotLeftCastle() == true){
                 addToArray(58);
             }
-            if(getBotRightCastle == true){
+            if(getBotRightCastle() == true){
                 addToArray(62);
             }
         }
@@ -118,19 +120,19 @@ void addCastleToArray(int pieceNumber) {
         // Find if black can castle
         if ( top == 1){
             // Black is on top.
-            if (getTopLeftCastle == true) {
+            if (getTopLeftCastle() == true) {
                 addToArray(2);
             }
-            if (getTopRightCastle == true) {
+            if (getTopRightCastle() == true) {
                 addToArray(6);
             }
         }
         else{
             // Black is on bottom
-            if(getBotLeftCastle == true){
+            if(getBotLeftCastle() == true){
                 addToArray(57);
             }
-            if(getBotRightCastle == true){
+            if(getBotRightCastle() == true){
                 addToArray(61);
             }
         }
