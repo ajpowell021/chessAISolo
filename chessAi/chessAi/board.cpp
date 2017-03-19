@@ -219,7 +219,7 @@ void castleTestSetUp(){
     addPiece(-1, 13);
 }
 
-// A setup that makes testin pawn promotion easier.
+// A setup that makes testing pawn promotion easier.
 void pawnPromotionSetUp(){
     topColor = 1;
     addPiece(1, 8);

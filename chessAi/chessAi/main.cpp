@@ -66,6 +66,10 @@ void checkCastle(int pieceType, int pieceLocation);
 void addCastleToArray(int tempPiece);
 void numberMovesAvailable();
 void gameIsFinished (int outcome);
+bool getTopLeftCastle();
+bool getTopRightCastle();
+bool getBotLeftCastle();
+bool getBotRightCastle();
 
 // Functions from boardScoreGen.cpp
 int calcBoardScore(int color);
@@ -86,6 +90,9 @@ bool getBlackCheck();
 // From mateSearcher.cpp
 bool playerCanMove(int color);
 bool moveEndsInCheck(int origin, int destination, int color);
+
+// From artificialIntelligence.cpp
+void beginTurn(int color);
 
 // Array of legal moves pulled from move generator.
 int legalMoves[64];
@@ -109,20 +116,15 @@ bool topRightCastle = false;
 bool botLeftCastle = false;
 bool botRightCastle = false;
 
+int playerColor = 0;
+int aiColor = 1;
+
 int main(){
     string command = "";
     boardInit();
     emptyLegalMoves();
     // 0 meaning white is on top, 1 meaning black is on top.
     newGameSetup(1);
-    removePiece(52);
-    removePiece(12);
-    removePiece(3);
-    addPiece(-1, 3);
-    removePiece(5);
-    addPiece(-1, 5);
-    removePiece(6);
-    //removePiece(3);
     //pawnPromotionSetUp();
     //castleTestSetUp();
     //kingTestSetUp();
@@ -614,6 +616,7 @@ void nextTurn(){
     if(turn == 0){
         cout << "blacks turn" << endl;
         turn++;
+        beginTurn(1);
     }
     else if(turn == 1){
         cout << "whites turn" << endl;
@@ -986,4 +989,20 @@ void gameIsFinished(int outcome){
                 break;
         }
     }
+}
+
+bool getTopLeftCastle() {
+    return topLeftCastle;
+}
+
+bool getTopRightCastle() {
+    return topRightCastle;
+}
+
+bool getBotLeftCastle() {
+    return botLeftCastle;
+}
+
+bool getBotRightCastle() {
+    return botRightCastle;
 }
