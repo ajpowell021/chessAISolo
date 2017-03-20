@@ -85,6 +85,8 @@
 1489725566 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\matesearcher.cpp
 	<iostream>
 
-1489892197 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\artificialintelligence.cpp
+1489974536 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\artificialintelligence.cpp
 	<iostream>
+	<cstdlib>
+	<algorithm>
 
