@@ -54,7 +54,7 @@ int getPiecesThatProtect(int location);
 
 // Functions from main.cpp
 void returnLegalMoves();
-void movePiece();
+void movePiece(int origin, int destination);
 void emptyLegalMoves();
 void addMoveToHistory(int pieceType, int origin, int destination, int destPieceType);
 string calculateCoordinates(int location);
@@ -70,6 +70,7 @@ bool getTopLeftCastle();
 bool getTopRightCastle();
 bool getBotLeftCastle();
 bool getBotRightCastle();
+void userInputForMove();
 
 // Functions from boardScoreGen.cpp
 int calcBoardScore(int color);
@@ -99,6 +100,7 @@ int legalMoves[64];
 
 // Move array for history, dynamic array of strings.
 string history[300];
+string oldHistory[300];
 // Where in history array are we currently.
 int turnNumber = 0;
 // 0 is white, 1 is black.
@@ -133,7 +135,7 @@ int main(){
         cin >> command;
 
         if(command == "move"){
-            movePiece();
+            userInputForMove();
         }
         else if(command == "show"){
             displayBoard();
@@ -228,20 +230,29 @@ void displayLegalMoves(){
         }
     }
 }
-// Moves a piece from one square to another.
-// Handles legality of move as well as capture.
-void movePiece(){
+
+void userInputForMove(){
+
     int origin;
     int destination;
-    int tempPiece;
-    int destPiece = 0;
-    bool moveIsLegal = false;
-    bool moveIsCastle = false;
 
     cout <<endl << "From: ";
     cin >> origin;
     cout << "To: ";
     cin >> destination;
+
+    movePiece(origin, destination);
+}
+
+// Moves a piece from one square to another.
+// Handles legality of move as well as capture.
+void movePiece(int from, int to){
+    int origin = from;
+    int destination = to;
+    int tempPiece;
+    int destPiece = 0;
+    bool moveIsLegal = false;
+    bool moveIsCastle = false;
 
     tempPiece = getPieceType(origin);
     // Check turn for legality.
@@ -1005,4 +1016,16 @@ bool getBotLeftCastle() {
 
 bool getBotRightCastle() {
     return botRightCastle;
+}
+
+void storeHistory(){
+    for(int i = 0; i < 300; i++){
+        oldHistory[i] = history[i];
+    }
+}
+
+void revertHistory(){
+    for(int i = 0; i < 300; i++){
+        history[i] = oldHistory[i];
+    }
 }

@@ -15,7 +15,7 @@ int getPieceType();
 int getCapturedPiece();
 int getOrigin();
 int getDestination();
-void makeMove(int location, int arrayPos);
+void makeMove(int location, int arrayPos, int arraySize);
 int findSizeOfMoveArray();
 void displayScoreArray();
 
@@ -30,6 +30,9 @@ bool getBotLeftCastle();
 bool getBotRightCastle();
 int *getLegalMoves(int pieceType, int pieceLocation);
 int calcBoardScore(int color);
+void storeHistory();
+void revertHistory();
+void movePiece(int origin, int destination);
 
 // Storing current board position.
 int origin;
@@ -72,7 +75,7 @@ int getDestination() {
 // AI finds a piece.
 void beginTurn(int color) {
 
-    fill_n(scoreArray, 10000, -999999);
+    fill_n(scoreArray, 16, -999999);
     // First, we search for a piece of the same color.
     for (int i = 0; i < 64; i++) {
         if(color == 0){
@@ -117,23 +120,20 @@ void turnChecker(int location) {
     int arraySize = findSizeOfMoveArray();
 
     for (int i = 0; i < arraySize; i++) {
-        cout << i << endl;
-        makeMove(location, i);
+        makeMove(location, i, arraySize);
     }
 }
 
 // Makes the move on the board, returns the score
 // and then resets the board.
-void makeMove(int location, int arrayPos) {
+void makeMove(int location, int arrayPos, int arraySize) {
     int score = 0;
+    int localScore[arraySize];
+    int localScorePosition = 0;
     storeBoardInfo(location, movesForPiece[arrayPos]);
 
-    if(getCapturedPiece() != 0){
-        removePiece(getDestination());
-    }
-
-    removePiece(getOrigin());
-    addPiece(getPieceType(), getDestination());
+//Replace with ai move piece.
+    //movePiece(getOrigin(), getDestination());
 
     if(getPieceType() > 0){
         score = calcBoardScore(0);
@@ -142,18 +142,15 @@ void makeMove(int location, int arrayPos) {
         score = calcBoardScore(1);
     }
 
-    scoreArray[scoreArraySpot] = score;
-    scoreArraySpot++;
+    //localScore[localScorePosition] = score;
+    //localScorePosition++;
 
-    //SORTT THIS ALL OUT
+
+    //Undo Moves
 
     removePiece(getDestination());
     addPiece(getCapturedPiece(), getDestination());
     addPiece(getPieceType(), getOrigin());
-    //cout << "1: " << scoreArray[0] << endl;
-    //cout << "2: " << scoreArray[1] << endl;
-    //cout << "3: " << scoreArray[2] << endl;
-    //displayScoreArray();
 }
 
 void displayScoreArray(){
