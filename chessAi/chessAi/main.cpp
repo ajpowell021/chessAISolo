@@ -54,7 +54,7 @@ int getPiecesThatProtect(int location);
 
 // Functions from main.cpp
 void returnLegalMoves();
-void movePiece();
+void movePiece(int origin, int destination);
 void emptyLegalMoves();
 void addMoveToHistory(int pieceType, int origin, int destination, int destPieceType);
 string calculateCoordinates(int location);
@@ -66,6 +66,11 @@ void checkCastle(int pieceType, int pieceLocation);
 void addCastleToArray(int tempPiece);
 void numberMovesAvailable();
 void gameIsFinished (int outcome);
+bool getTopLeftCastle();
+bool getTopRightCastle();
+bool getBotLeftCastle();
+bool getBotRightCastle();
+void userInputForMove();
 
 // Functions from boardScoreGen.cpp
 int calcBoardScore(int color);
@@ -87,11 +92,15 @@ bool getBlackCheck();
 bool playerCanMove(int color);
 bool moveEndsInCheck(int origin, int destination, int color);
 
+// From artificialIntelligence.cpp
+void beginTurn(int color);
+
 // Array of legal moves pulled from move generator.
 int legalMoves[64];
 
 // Move array for history, dynamic array of strings.
 string history[300];
+string oldHistory[300];
 // Where in history array are we currently.
 int turnNumber = 0;
 // 0 is white, 1 is black.
@@ -109,20 +118,15 @@ bool topRightCastle = false;
 bool botLeftCastle = false;
 bool botRightCastle = false;
 
+int playerColor = 0;
+int aiColor = 1;
+
 int main(){
     string command = "";
     boardInit();
     emptyLegalMoves();
     // 0 meaning white is on top, 1 meaning black is on top.
     newGameSetup(1);
-    removePiece(52);
-    removePiece(12);
-    removePiece(3);
-    addPiece(-1, 3);
-    removePiece(5);
-    addPiece(-1, 5);
-    removePiece(6);
-    //removePiece(3);
     //pawnPromotionSetUp();
     //castleTestSetUp();
     //kingTestSetUp();
@@ -131,7 +135,7 @@ int main(){
         cin >> command;
 
         if(command == "move"){
-            movePiece();
+            userInputForMove();
         }
         else if(command == "show"){
             displayBoard();
@@ -226,20 +230,29 @@ void displayLegalMoves(){
         }
     }
 }
-// Moves a piece from one square to another.
-// Handles legality of move as well as capture.
-void movePiece(){
+
+void userInputForMove(){
+
     int origin;
     int destination;
-    int tempPiece;
-    int destPiece = 0;
-    bool moveIsLegal = false;
-    bool moveIsCastle = false;
 
     cout <<endl << "From: ";
     cin >> origin;
     cout << "To: ";
     cin >> destination;
+
+    movePiece(origin, destination);
+}
+
+// Moves a piece from one square to another.
+// Handles legality of move as well as capture.
+void movePiece(int from, int to){
+    int origin = from;
+    int destination = to;
+    int tempPiece;
+    int destPiece = 0;
+    bool moveIsLegal = false;
+    bool moveIsCastle = false;
 
     tempPiece = getPieceType(origin);
     // Check turn for legality.
@@ -614,6 +627,7 @@ void nextTurn(){
     if(turn == 0){
         cout << "blacks turn" << endl;
         turn++;
+        beginTurn(1);
     }
     else if(turn == 1){
         cout << "whites turn" << endl;
@@ -985,5 +999,33 @@ void gameIsFinished(int outcome){
                 displayBoard();
                 break;
         }
+    }
+}
+
+bool getTopLeftCastle() {
+    return topLeftCastle;
+}
+
+bool getTopRightCastle() {
+    return topRightCastle;
+}
+
+bool getBotLeftCastle() {
+    return botLeftCastle;
+}
+
+bool getBotRightCastle() {
+    return botRightCastle;
+}
+
+void storeHistory(){
+    for(int i = 0; i < 300; i++){
+        oldHistory[i] = history[i];
+    }
+}
+
+void revertHistory(){
+    for(int i = 0; i < 300; i++){
+        history[i] = oldHistory[i];
     }
 }
