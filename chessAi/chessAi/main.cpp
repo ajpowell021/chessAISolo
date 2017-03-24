@@ -1029,3 +1029,7 @@ void revertHistory(){
         history[i] = oldHistory[i];
     }
 }
+
+int getTurn(){
+    return turn;
+}
