@@ -21,6 +21,7 @@
 			<Add option="-std=c++11" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="aiMovePiece.cpp" />
 		<Unit filename="artificialIntelligence.cpp" />
 		<Unit filename="bishopScoreGenerator.cpp" />
 		<Unit filename="board.cpp" />
