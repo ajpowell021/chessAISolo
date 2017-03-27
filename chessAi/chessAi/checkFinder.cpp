@@ -11,6 +11,10 @@ bool whiteInCheck = false;
 // Is black in check right now?
 bool blackInCheck = false;
 
+// Functions to return these values.
+bool getWhiteCheck();
+bool getBlackCheck();
+
 // Functions from board.cpp
 int getPieceType(int pieceLocation);
 void addPiece(int pieceType, int location);

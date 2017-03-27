@@ -70,6 +70,10 @@ bool getTopLeftCastle();
 bool getTopRightCastle();
 bool getBotLeftCastle();
 bool getBotRightCastle();
+bool getTopLeftRook();
+bool getTopRightRook();
+bool getBotLeftRook();
+bool getBotRightRook();
 void userInputForMove();
 
 // Functions from boardScoreGen.cpp
@@ -106,7 +110,7 @@ int turnNumber = 0;
 // 0 is white, 1 is black.
 int turn = 0;
 
-// Has the rooks moved?
+// Have the rooks moved?
 bool topLeftRook = false;
 bool topRightRook = false;
 bool botLeftRook = false;
@@ -1028,4 +1032,24 @@ void revertHistory(){
     for(int i = 0; i < 300; i++){
         history[i] = oldHistory[i];
     }
+}
+
+int getTurn(){
+    return turn;
+}
+
+bool getTopLeftRook() {
+    return topLeftRook;
+}
+
+bool getTopRightRook() {
+    return topRightRook;
+}
+
+bool getBotLeftRook() {
+    return botLeftRook;
+}
+
+bool getBotRightRook() {
+    return botRightRook;
 }

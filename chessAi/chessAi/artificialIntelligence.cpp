@@ -34,6 +34,9 @@ void storeHistory();
 void revertHistory();
 void movePiece(int origin, int destination);
 
+// aiMovePiece Functions
+void aiMovePiece(int origin, int destination);
+
 // Storing current board position.
 int origin;
 int destination;
@@ -76,6 +79,7 @@ int getDestination() {
 void beginTurn(int color) {
 
     fill_n(scoreArray, 16, -999999);
+    fill_n(movesForPiece, 40, -1);
     // First, we search for a piece of the same color.
     for (int i = 0; i < 64; i++) {
         if(color == 0){
@@ -97,6 +101,7 @@ void beginTurn(int color) {
 void turnChecker(int location) {
 
     int pieceNumber = getPieceType(location);
+    fill_n(movesForPiece, 40, -1);
 
     // Find all available moves for that piece.
     int *pointerMovesForPiece;
@@ -132,8 +137,9 @@ void makeMove(int location, int arrayPos, int arraySize) {
     int localScorePosition = 0;
     storeBoardInfo(location, movesForPiece[arrayPos]);
 
-//Replace with ai move piece.
-    //movePiece(getOrigin(), getDestination());
+    if(getOrigin() != -1 && getDestination() != -1){
+        aiMovePiece(getOrigin(), getDestination());
+    }
 
     if(getPieceType() > 0){
         score = calcBoardScore(0);
@@ -142,8 +148,8 @@ void makeMove(int location, int arrayPos, int arraySize) {
         score = calcBoardScore(1);
     }
 
-    //localScore[localScorePosition] = score;
-    //localScorePosition++;
+    localScore[localScorePosition] = score;
+    localScorePosition++;
 
 
     //Undo Moves
