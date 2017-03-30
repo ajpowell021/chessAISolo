@@ -16,10 +16,10 @@ int getCapturedPiece();
 int getOrigin();
 int getDestination();
 void makeMove(int location, int arrayPos, int arraySize);
-int findSizeOfMoveArray();
-void displayScoreArray();
 
 // Other functions that are needed.
+int findSizeOfMoveArray();
+void displayScoreArray();
 int getPieceType(int pieceLocation);
 int addPiece(int pieceType, int pieceLocation);
 int removePiece(int pieceLocation);
@@ -36,6 +36,8 @@ void movePiece(int origin, int destination);
 
 // aiMovePiece Functions
 void aiMovePiece(int origin, int destination);
+bool getCastleHasHappenedThisTurn();
+void resetCastleHasHappenedThisTurn();
 
 // Storing current board position.
 int origin;
@@ -117,14 +119,10 @@ void turnChecker(int location) {
         addCastleToMoves(pieceNumber);
     }
 
-    // movesForPiece should now contain every legal move for that piece.
-    // still concerned with moving the rook on a castle? Need to handle that
-    // logic here.
-
     // Carry out move.
     int arraySize = findSizeOfMoveArray();
 
-    for (int i = 0; i < arraySize; i++) {
+    for (int i = 0; i < arraySize + 1; i++) {
         makeMove(location, i, arraySize);
     }
 }
@@ -132,6 +130,7 @@ void turnChecker(int location) {
 // Makes the move on the board, returns the score
 // and then resets the board.
 void makeMove(int location, int arrayPos, int arraySize) {
+    arraySpot = 0;
     int score = 0;
     int localScore[arraySize];
     int localScorePosition = 0;
@@ -151,12 +150,20 @@ void makeMove(int location, int arrayPos, int arraySize) {
     localScore[localScorePosition] = score;
     localScorePosition++;
 
+    // NOW I HAVE TO DO SOMETHING WITH SCORES!!!
+
 
     //Undo Moves
 
     removePiece(getDestination());
     addPiece(getCapturedPiece(), getDestination());
     addPiece(getPieceType(), getOrigin());
+
+    if (getCastleHasHappenedThisTurn() == true){
+
+        // HANDLE CASLTE HERE I GUESS?
+        resetCastleHasHappenedThisTurn();
+    }
 }
 
 void displayScoreArray(){

@@ -50,6 +50,7 @@ bool blackAiInCheck = false;
 // Has a castle occured.
 bool whiteAiHasCastled = false;
 bool blackAiHasCastled = false;
+bool castleHappenedThisTurn = false;
 
 // Functions for getting these
 // variables.
@@ -133,7 +134,7 @@ void aiMovePiece(int origin, int destination){
         if (pieceId == 6 || pieceId == -6) {
             if( (origin == 3 && destination == 1) || (origin == 3 && destination == 5) || (origin == 4 && destination == 2) || (origin == 4 && destination == 6) ||
             (origin == 59 && destination == 61) || (origin == 59 && destination == 57) || (origin == 60 && destination == 58) || (origin == 60 && destination == 62)) {
-                cout << "castle happened: " << origin << " to " << destination << endl;
+                castleHappenedThisTurn = true;
                 moveRookCastle(destination);
                 moveIsCastle = true;
                 if (pieceId == 6){
@@ -170,6 +171,8 @@ void aiMovePiece(int origin, int destination){
             removePiece(promotedPawnLocale);
             addPiece(promotedPawnLocale, 5 * pieceColor);
         }
+
+
 
     }
     else {
@@ -629,4 +632,12 @@ bool getWhiteAiCastle() {
 
 bool getBlackAiCastle() {
     return blackAiHasCastled;
+}
+
+bool getCastleHasHappenedThisTurn() {
+    return castleHappenedThisTurn;
+}
+
+void resetCastleHasHappenedThisTurn() {
+    castleHappenedThisTurn = false;
 }
