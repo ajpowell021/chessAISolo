@@ -15,6 +15,9 @@ int getRookAttackedValue(int location);
 int getTopColor();
 bool getWhiteCastle();
 bool getBlackCastle();
+bool getWhiteAiCastle();
+bool getBlackAiCastle();
+bool getEndGame();
 
 // Functions from threatChecker.cpp
 int getPiecesThatProtect(int location);
@@ -43,7 +46,7 @@ int generateRookScore(int location, int color){
 int hasSideCastled(int color){
 
     if(color == 0){
-        if(getWhiteCastle == false){
+        if(getWhiteCastle() == false){
             return 10;
         }
         else{
@@ -51,7 +54,7 @@ int hasSideCastled(int color){
         }
     }
     else{
-        if(getBlackCastle == false){
+        if(getBlackCastle() == false){
             return 10;
         }
         else{

@@ -39,7 +39,7 @@
 	<cmath>
 	<algorithm>
 
-1490242071 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\board.cpp
+1491193643 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\board.cpp
 	<iostream>
 
 1489726157 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\movegenerator.cpp
@@ -67,7 +67,7 @@
 1488165791 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\knightscoregen.cpp
 	<iostream>
 
-1488152586 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\rookscoregenerator.cpp
+1491193580 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\rookscoregenerator.cpp
 	<iostream>
 
 1488656048 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\bishopscoregenerator.cpp
@@ -85,11 +85,11 @@
 1489725566 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\matesearcher.cpp
 	<iostream>
 
-1491189071 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\artificialintelligence.cpp
+1491193849 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\artificialintelligence.cpp
 	<iostream>
 	<cstdlib>
 	<algorithm>
 
-1491162707 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\aimovepiece.cpp
+1491191144 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\aimovepiece.cpp
 	<iostream>
 
