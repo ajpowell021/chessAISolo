@@ -173,8 +173,6 @@ void aiMovePiece(int origin, int destination){
             addPiece(promotedPawnLocale, 5 * pieceColor);
         }
 
-
-
     }
     else {
         // Move is not legal, need a way to tell the ai this, make move

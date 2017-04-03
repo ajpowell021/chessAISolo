@@ -34,6 +34,7 @@ int calcBoardScore(int color);
 void storeHistory();
 void revertHistory();
 void movePiece(int origin, int destination);
+void nextTurn();
 
 // aiMovePiece Functions
 void aiMovePiece(int origin, int destination);
@@ -99,8 +100,26 @@ void beginTurn(int color) {
 
         }
     }
+    // Pick best move from array, make it.
 
-    displayScoreArray();
+    int tempBestMove = -99999;
+    int bestMoveSpot = 0;
+    for (int i = 0; i < scoreArraySpot; i++) {
+        if(scoreArray[i][0] > tempBestMove) {
+            tempBestMove = scoreArray[i][0];
+            bestMoveSpot = i;
+        }
+    }
+    int tempOrigin = scoreArray[bestMoveSpot][1];
+    int tempDest = scoreArray[bestMoveSpot][2];
+    aiMovePiece(tempOrigin, tempDest);
+
+    cout << "AI moved from " << tempOrigin << " to " << tempDest << endl;
+    fillScoreArray();
+    scoreArraySpot = 0;
+    // ADD TO HISTORY
+    // CHECK FOR WIN?
+    nextTurn();
 }
 
 void turnChecker(int location) {
@@ -137,7 +156,7 @@ void makeMove(int location, int arrayPos, int arraySize) {
     int score = 0;
     storeBoardInfo(location, movesForPiece[arrayPos]);
 
-    if(getOrigin() != -1 && getDestination() != -1){
+    if(getOrigin() < 64 && getOrigin() > -1 && getDestination() > -1 && getDestination() < 64){
         aiMovePiece(getOrigin(), getDestination());
 
         if(getPieceType() > 0){
