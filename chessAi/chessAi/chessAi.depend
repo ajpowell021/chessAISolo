@@ -85,11 +85,11 @@
 1489725566 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\matesearcher.cpp
 	<iostream>
 
-1490843828 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\artificialintelligence.cpp
+1491189071 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\artificialintelligence.cpp
 	<iostream>
 	<cstdlib>
 	<algorithm>
 
-1490842882 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\aimovepiece.cpp
+1491162707 source:c:\users\chany\desktop\workspace\chessaisolo\chessai\chessai\aimovepiece.cpp
 	<iostream>
 

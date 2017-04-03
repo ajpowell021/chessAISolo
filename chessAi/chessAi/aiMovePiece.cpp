@@ -27,6 +27,7 @@ bool getWhiteAiCastle();
 bool getBlackAiCastle();
 void emptyMoveArray();
 void addCastleToAiArray(int tempPiece);
+bool getCastleHasHappenedThisTurn();
 
 // Gloabl Variables
 int legalAiMoves[64];
