@@ -16,6 +16,7 @@ int getCapturedPiece();
 int getOrigin();
 int getDestination();
 void makeMove(int location, int arrayPos, int arraySize);
+void fillScoreArray();
 
 // Other functions that are needed.
 int findSizeOfMoveArray();
@@ -49,7 +50,7 @@ int capturedPiece;
 // Array holding moves for a piece.
 int movesForPiece[40];
 int arraySpot = 0;
-int scoreArray[10000];
+int scoreArray[10000][3];
 int scoreArraySpot = 0;
 
 void storeBoardInfo(int from, int to) {
@@ -80,7 +81,7 @@ int getDestination() {
 // AI finds a piece.
 void beginTurn(int color) {
 
-    fill_n(scoreArray, 16, -999999);
+    fillScoreArray();
     fill_n(movesForPiece, 40, -1);
     // First, we search for a piece of the same color.
     for (int i = 0; i < 64; i++) {
@@ -98,6 +99,8 @@ void beginTurn(int color) {
 
         }
     }
+
+    displayScoreArray();
 }
 
 void turnChecker(int location) {
@@ -132,25 +135,25 @@ void turnChecker(int location) {
 void makeMove(int location, int arrayPos, int arraySize) {
     arraySpot = 0;
     int score = 0;
-    int localScore[arraySize];
-    int localScorePosition = 0;
     storeBoardInfo(location, movesForPiece[arrayPos]);
 
     if(getOrigin() != -1 && getDestination() != -1){
         aiMovePiece(getOrigin(), getDestination());
-    }
 
-    if(getPieceType() > 0){
-        score = calcBoardScore(0);
-    }
-    else{
-        score = calcBoardScore(1);
-    }
+        if(getPieceType() > 0){
+            score = calcBoardScore(0);
+        }
+        else{
+            score = calcBoardScore(1);
+        }
 
-    localScore[localScorePosition] = score;
-    localScorePosition++;
+        // Adding score to score array.
+        scoreArray[scoreArraySpot][0] = score;
+        scoreArray[scoreArraySpot][1] = getOrigin();
+        scoreArray[scoreArraySpot][2] = getDestination();
 
-    // NOW I HAVE TO DO SOMETHING WITH SCORES!!!
+        scoreArraySpot++;
+    }
 
 
     //Undo Moves
@@ -161,21 +164,64 @@ void makeMove(int location, int arrayPos, int arraySize) {
 
     if (getCastleHasHappenedThisTurn() == true){
 
-        // HANDLE CASLTE HERE I GUESS?
+        int tempDest = getDestination();
+        if (tempDest == 2) {
+            int tempRook = getPieceType(3);
+            removePiece(3);
+            addPiece(tempRook, 0);
+        }
+
+        if (tempDest == 1) {
+            int tempRook = getPieceType(2);
+            removePiece(2);
+            addPiece(tempRook, 0);
+        }
+
+        if (tempDest == 6) {
+            int tempRook = getPieceType(5);
+            removePiece(5);
+            addPiece(tempRook, 7);
+        }
+
+        if (tempDest == 5) {
+            int tempRook = getPieceType(4);
+            removePiece(4);
+            addPiece(tempRook, 7);
+        }
+
+        if (tempDest == 58) {
+            int tempRook = getPieceType(59);
+            removePiece(59);
+            addPiece(tempRook, 56);
+        }
+
+        if (tempDest == 57) {
+            int tempRook = getPieceType(58);
+            removePiece(58);
+            addPiece(tempRook, 56);
+        }
+
+        if (tempDest == 62) {
+            int tempRook = getPieceType(61);
+            removePiece(61);
+            addPiece(tempRook, 63);
+        }
+
+        if (tempDest == 61) {
+            int tempRook = getPieceType(60);
+            removePiece(60);
+            addPiece(tempRook, 63);
+        }
+
         resetCastleHasHappenedThisTurn();
     }
 }
 
 void displayScoreArray(){
 
-    cout << "START OF PIECE" << endl;
-
-    for (int i = 0; i < scoreArraySpot + 1; i++) {
-        if(scoreArray[i] != -999999){
-            cout << scoreArray[i] << endl;
-        }
+    for (int i = 0; i < scoreArraySpot; i++){
+        cout << scoreArray[i][0] << " from " << scoreArray[i][1] << " to "  << scoreArray[i][2] << endl;
     }
-    cout << "END OF PIECE" << endl;
 }
 
 void addToArray(int move) {
@@ -239,6 +285,14 @@ void addCastleToMoves(int pieceNumber) {
             if(getBotRightCastle() == true){
                 addToArray(61);
             }
+        }
+    }
+}
+
+void fillScoreArray() {
+    for(int i = 0; i < 10000; i++){
+        for(int j = 0; j < 3; j++){
+            scoreArray[i][j] = -999999;
         }
     }
 }
