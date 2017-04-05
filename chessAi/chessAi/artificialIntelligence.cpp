@@ -35,6 +35,7 @@ void storeHistory();
 void revertHistory();
 void movePiece(int origin, int destination);
 void nextTurn();
+bool getCastleHasHappenedThisTurn();
 
 // aiMovePiece Functions
 void aiMovePiece(int origin, int destination);

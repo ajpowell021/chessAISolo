@@ -271,6 +271,8 @@ void aiMovePiece(int origin, int destination){
                 addPiece(-2, 63);
             }
         }
+
+        moveIsCastle = false;
     }
 }
 

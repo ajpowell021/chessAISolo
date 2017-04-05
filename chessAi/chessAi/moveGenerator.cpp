@@ -460,41 +460,45 @@ void knightGen(int pieceLocation, int pieceType){
     if(col != 0 && col != 1){
         // Left moves are legal.
         // Left up.
-        if(piecePresent(pieceLocation - 10) == true){
-            if(capturablePiece(pieceLocation - 10, pieceType) == true){
+        if (row != 0) {
+            if(piecePresent(pieceLocation - 10) == true){
+                if(capturablePiece(pieceLocation - 10, pieceType) == true){
+                    if(inRange(pieceLocation - 10) == true){
+                        legalMovesArr[currArrPos] = (pieceLocation - 10);
+                        currArrPos++;
+                    }
+                }
+                else{
+                    // Cannot move here as there is already a piece of the same color present.
+                }
+            }
+            else{
+                // Square is empty.
                 if(inRange(pieceLocation - 10) == true){
                     legalMovesArr[currArrPos] = (pieceLocation - 10);
                     currArrPos++;
                 }
             }
-            else{
-                // Cannot move here as there is already a piece of the same color present.
-            }
-        }
-        else{
-            // Square is empty.
-            if(inRange(pieceLocation - 10) == true){
-                legalMovesArr[currArrPos] = (pieceLocation - 10);
-                currArrPos++;
-            }
         }
         // Left down.
-        if(piecePresent(pieceLocation + 6) == true){
-            if(capturablePiece(pieceLocation + 6, pieceType) == true){
+        if (row != 7) {
+            if(piecePresent(pieceLocation + 6) == true){
+                if(capturablePiece(pieceLocation + 6, pieceType) == true){
+                    if(inRange(pieceLocation + 6) == true){
+                        legalMovesArr[currArrPos] = (pieceLocation + 6);
+                        currArrPos++;
+                    }
+                }
+                else{
+                    // Cannot move here as there is already a piece of the same color present.
+                }
+            }
+            else{
+                // Square is empty.
                 if(inRange(pieceLocation + 6) == true){
                     legalMovesArr[currArrPos] = (pieceLocation + 6);
                     currArrPos++;
                 }
-            }
-            else{
-                // Cannot move here as there is already a piece of the same color present.
-            }
-        }
-        else{
-            // Square is empty.
-            if(inRange(pieceLocation + 6) == true){
-                legalMovesArr[currArrPos] = (pieceLocation + 6);
-                currArrPos++;
             }
         }
     }
@@ -502,42 +506,45 @@ void knightGen(int pieceLocation, int pieceType){
     // 2. Right moves if legal.
     if(col != 6 && col != 7){
         // Right moves are legal.
-        // Right up.
-        if(piecePresent(pieceLocation + 10) == true){
-            if(capturablePiece(pieceLocation + 10, pieceType) == true){
+        if (row != 0) {
+            if(piecePresent(pieceLocation + 10) == true){
+                if(capturablePiece(pieceLocation + 10, pieceType) == true){
+                    if(inRange(pieceLocation + 10) == true){
+                        legalMovesArr[currArrPos] = (pieceLocation + 10);
+                        currArrPos++;
+                    }
+                }
+                else{
+                    // Cannot move here as there is already a piece of the same color present.
+                }
+            }
+            else{
+                // Square is empty.
                 if(inRange(pieceLocation + 10) == true){
                     legalMovesArr[currArrPos] = (pieceLocation + 10);
                     currArrPos++;
                 }
             }
-            else{
-                // Cannot move here as there is already a piece of the same color present.
-            }
-        }
-        else{
-            // Square is empty.
-            if(inRange(pieceLocation + 10) == true){
-                legalMovesArr[currArrPos] = (pieceLocation + 10);
-                currArrPos++;
-            }
         }
         // Right down.
-        if(piecePresent(pieceLocation - 6) == true){
-            if(capturablePiece(pieceLocation - 6, pieceType) == true){
+        if (row != 7) {
+            if(piecePresent(pieceLocation - 6) == true){
+                if(capturablePiece(pieceLocation - 6, pieceType) == true){
+                    if(inRange(pieceLocation - 6) == true){
+                        legalMovesArr[currArrPos] = (pieceLocation - 6);
+                        currArrPos++;
+                    }
+                }
+                else{
+                    // Cannot move here as there is already a piece of the same color present.
+                }
+            }
+            else{
+                // Square is empty.
                 if(inRange(pieceLocation - 6) == true){
                     legalMovesArr[currArrPos] = (pieceLocation - 6);
                     currArrPos++;
                 }
-            }
-            else{
-                // Cannot move here as there is already a piece of the same color present.
-            }
-        }
-        else{
-            // Square is empty.
-            if(inRange(pieceLocation - 6) == true){
-                legalMovesArr[currArrPos] = (pieceLocation - 6);
-                currArrPos++;
             }
         }
     }
@@ -545,42 +552,45 @@ void knightGen(int pieceLocation, int pieceType){
     // 3. Up moves if legal.
     if(row != 0 && row != 1){
     // Up left.
-            if(piecePresent(pieceLocation - 17) == true){
-                if(capturablePiece(pieceLocation - 17, pieceType) == true){
+            if (col != 0) {
+                if(piecePresent(pieceLocation - 17) == true){
+                    if(capturablePiece(pieceLocation - 17, pieceType) == true){
+                        if(inRange(pieceLocation - 17) == true){
+                            legalMovesArr[currArrPos] = (pieceLocation - 17);
+                            currArrPos++;
+                        }
+                    }
+                    else{
+                        // Cannot move here as there is already a piece of the same color present.
+                    }
+                }
+                else{
+                    // Square is empty.
                     if(inRange(pieceLocation - 17) == true){
                         legalMovesArr[currArrPos] = (pieceLocation - 17);
                         currArrPos++;
                     }
                 }
-                else{
-                    // Cannot move here as there is already a piece of the same color present.
-                }
             }
-            else{
-                // Square is empty.
-                if(inRange(pieceLocation - 17) == true){
-                    legalMovesArr[currArrPos] = (pieceLocation - 17);
-                    currArrPos++;
-                }
-            }
-
             // Up right
-            if(piecePresent(pieceLocation - 15) == true){
-                if(capturablePiece(pieceLocation - 15, pieceType) == true){
-                    if(inRange(pieceLocation - 15) == true){
-                        legalMovesArr[currArrPos] = (pieceLocation -15);
-                        currArrPos++;
+            if (col != 7){
+                if(piecePresent(pieceLocation - 15) == true){
+                    if(capturablePiece(pieceLocation - 15, pieceType) == true){
+                        if(inRange(pieceLocation - 15) == true){
+                            legalMovesArr[currArrPos] = (pieceLocation -15);
+                            currArrPos++;
+                        }
+                    }
+                    else{
+                        // Cannot move here as there is already a piece of the same color present.
                     }
                 }
                 else{
-                    // Cannot move here as there is already a piece of the same color present.
-                }
-            }
-            else{
-                // Square is empty.
-                if(inRange(pieceLocation - 15) == true){
-                    legalMovesArr[currArrPos] = (pieceLocation - 15);
-                    currArrPos++;
+                    // Square is empty.
+                    if(inRange(pieceLocation - 15) == true){
+                        legalMovesArr[currArrPos] = (pieceLocation - 15);
+                        currArrPos++;
+                    }
                 }
             }
     }
@@ -588,42 +598,46 @@ void knightGen(int pieceLocation, int pieceType){
     // 4. Down moves if legal.
     if(row != 6 && row != 7){
     // Down left.
+        if (col != 0) {
             if(piecePresent(pieceLocation + 15) == true){
-                if(capturablePiece(pieceLocation + 15, pieceType) == true){
+                    if(capturablePiece(pieceLocation + 15, pieceType) == true){
+                        if(inRange(pieceLocation + 15) == true){
+                            legalMovesArr[currArrPos] = (pieceLocation + 15);
+                            currArrPos++;
+                        }
+                    }
+                    else{
+                        // Cannot move here as there is already a piece of the same color present.
+                    }
+                }
+                else{
+                    // Square is empty.
                     if(inRange(pieceLocation + 15) == true){
                         legalMovesArr[currArrPos] = (pieceLocation + 15);
                         currArrPos++;
                     }
                 }
-                else{
-                    // Cannot move here as there is already a piece of the same color present.
-                }
-            }
-            else{
-                // Square is empty.
-                if(inRange(pieceLocation + 15) == true){
-                    legalMovesArr[currArrPos] = (pieceLocation + 15);
-                    currArrPos++;
-                }
             }
 
             // Down right
-            if(piecePresent(pieceLocation + 17) == true){
-                if(capturablePiece(pieceLocation + 17, pieceType) == true){
+            if (col != 7) {
+                if(piecePresent(pieceLocation + 17) == true){
+                    if(capturablePiece(pieceLocation + 17, pieceType) == true){
+                        if(inRange(pieceLocation + 17) == true){
+                            legalMovesArr[currArrPos] = (pieceLocation + 17);
+                            currArrPos++;
+                        }
+                    }
+                    else{
+                        // Cannot move here as there is already a piece of the same color present.
+                    }
+                }
+                else{
+                    // Square is empty.
                     if(inRange(pieceLocation + 17) == true){
                         legalMovesArr[currArrPos] = (pieceLocation + 17);
                         currArrPos++;
                     }
-                }
-                else{
-                    // Cannot move here as there is already a piece of the same color present.
-                }
-            }
-            else{
-                // Square is empty.
-                if(inRange(pieceLocation + 17) == true){
-                    legalMovesArr[currArrPos] = (pieceLocation + 17);
-                    currArrPos++;
                 }
             }
     }
